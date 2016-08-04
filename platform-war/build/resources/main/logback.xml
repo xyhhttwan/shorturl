@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="false" scanPeriod="60 seconds" debug="false">
+    <!-- 不允许修改 -->
+    <contextName>platform</contextName>
+
+    <property name="logPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] [%level] [%logger{20}] - [%msg]%n"/>
+
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+
+        <!-- encoder 默认配置为PatternLayoutEncoder -->
+        <encoder>
+            <pattern>${logPattern}</pattern>
+        </encoder>
+    </appender>
+    <root level="error">
+        <appender-ref ref="stdout"/>
+    </root>
+    <!-- web请求日志 -->
+    <appender name="PLATFORM-WEB-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>../logs/platform-web.log</file>
+        <append>true</append>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 翻滚的日志文件名字 -->
+            <fileNamePattern>../logs/platform-web.%d.log</fileNamePattern>
+            <!-- 日志最多保留7天 -->
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>${logPattern}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 错误日志 -->
+    <appender name="PLATFORM-ERROR-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>../logs/platform-error.log</file>
+        <append>true</append>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 翻滚的日志文件名字 -->
+            <fileNamePattern>../logs/platform-error.%d.log</fileNamePattern>
+            <!-- 日志最多保留7天 -->
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>${logPattern}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 性能日志 -->
+    <appender name="PLATFORM-DIGEST-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>../logs/platform-digest.log</file>
+        <append>true</append>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 翻滚的日志文件名字 -->
+            <fileNamePattern>../logs/platform-digest.%d.log</fileNamePattern>
+            <!-- 日志最多保留7天 -->
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>${logPattern}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="PLATFORM-BUSINESS-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>../logs/platform-business.log</file>
+        <append>true</append>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 翻滚的日志文件名字 -->
+            <fileNamePattern>../logs/platform-business.%d.log</fileNamePattern>
+            <!-- 日志最多保留7天 -->
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>${logPattern}</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="PLATFORM-DIGEST" level="info">
+        <appender-ref ref="PLATFORM-DIGEST-APPENDER"/>
+    </logger>
+    <logger name="cn.thinkjoy.ttraining.dao" level="DEBUG" >
+        <appender-ref ref="PLATFORM-BUSINESS-APPENDER"/>
+    </logger>
+
+    <!-- 业务服务日志 -->
+    <appender name="PLATFORM-SERVICE-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>../logs/platform-service.log</file>
+        <append>true</append>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 翻滚的日志文件名字 -->
+            <fileNamePattern>../logs/platform-service.%d.log</fileNamePattern>
+            <!-- 日志最多保留7天 -->
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>${logPattern}</pattern>
+        </encoder>
+    </appender>
+
+</configuration>

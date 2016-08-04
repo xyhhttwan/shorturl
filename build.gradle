@@ -1,0 +1,128 @@
+group 'com.platform.soft'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile 'org.apache.commons:commons-lang3:3.3.2'
+    compile 'commons-collections:commons-collections:3.2.1'
+
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+//拷贝根目录下的所有test到各自子module下
+task "copytest" << {
+    def fromPath
+    def toPath
+    subprojects.each {
+        fromPath = "${project.buildDir}/classes/test/${it.name}"
+        toPath = "${it.buildDir}/classes/test"
+
+        copy {
+            from fromPath
+            into toPath
+        }
+
+    }
+}
+
+task createREADME() {
+    file("README.md").createNewFile()
+}
+
+ext {
+    slf4jVersion = '1.7.5'
+    mysqlConnectorVersion = "5.1.26"
+   // dubboVersion = "2.5.3"
+    //dubboZKClientVersion = "0.4"
+    freemarkerVersion = "2.3.20"
+    springVersion = "4.1.0.RELEASE"
+}
+
+subprojects {
+
+    task "createJavaProject" << {
+        sourceSets*.java.srcDirs*.each { it.mkdirs() }
+        sourceSets*.resources.srcDirs*.each { it.mkdirs() }
+
+        /** 可选生成子文件夹 */
+        file("src/main/filters").mkdirs()
+        file("src/main/assembly").mkdirs()
+        file("src/main/config").mkdirs()
+        file("src/main/scripts").mkdirs()
+
+        /** 填充文件，便于git提交 */
+        file("src/main/java/com/platform/soft").mkdirs()
+        file("src/main/java/com/platform/package-info.java").createNewFile()
+        file("src/main/resources").mkdirs()
+        file("src/main/resources/spring.xml").createNewFile()
+
+        file("src/test/java/com/platform").mkdirs()
+        file("src/test/java/com/platform/package-info.java").createNewFile()
+        file("src/test/resources/spring.xml").createNewFile()
+    }
+
+    /** 有时候会报错，但需要执行 */
+//    task createREADME(){
+//        file("README.md").createNewFile()
+//    }
+
+
+    configurations {
+        provided
+        compile.extendsFrom provided
+
+        all*.exclude group: 'org.springframework', module: 'spring'
+        all*.exclude group: 'asm', module: 'asm'
+        all*.exclude group: 'com.easypoi', module: 'easypoi-base'
+        all*.exclude group: 'com.easypoi', module: 'easypoi-web'
+        //排除log4j桥接，只允许使用logback
+        all*.exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+    }
+
+    dependencies {
+        compile 'joda-time:joda-time:2.9.4'
+        compile project(':platform-common')
+        //一个工具类
+        compile 'com.xiaoleilu:hutool:2.15.5'
+
+    }
+
+}
+
+
+configure(subprojects.findAll { it.name.contains('-service') }) {
+    task createServiceProject(dependsOn: 'createJavaProject') << {
+        /** 配置生成 */
+        file("src/main/resources/config").mkdirs()
+        //file("src/main/resources/config/main-conf.properties").createNewFile()
+        //file("src/main/resources/config/metadata.properties").createNewFile()
+    }
+
+}
+
+configure(subprojects.findAll { it.name.contains('war') }) {
+    apply plugin: 'war'
+
+    task createWebProject(dependsOn: 'createJavaProject') << {
+        def webAppDir = file("$webAppDirName")
+        webAppDir.mkdirs()
+
+        file("src/main/resources/config").mkdirs()
+        //file("src/main/resources/config/main-conf.properties").createNewFile()
+        //file("src/main/resources/config/metadata.properties").createNewFile()
+    }
+
+}
+
+configurations.all {
+    // check for updates every build
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}

@@ -1,0 +1,776 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.platform.soft.dao.IUserDAO">
+<!--
+insert
+update
+updateNull
+deleteById
+deleteByCondition
+deleteByProperty
+fetch
+findOne
+findList
+findAll
+queryPage
+like
+queryList
+queryOne
+count
+selectMaxId
+updateOrSave
+selectOne
+selectList
+-->
+    <sql id="Base_Column_List">
+        id,
+        ucUserId,
+        schoolId,
+        schoolName,
+        location,
+        address,
+        masterName,
+        phone,
+        createDate,
+        creator,
+        lastModifier,
+        lastModDate,
+        status,
+        mqMsgId,
+        mac,
+        isActivated
+    </sql>
+    <insert id="insert" parameterType="User">
+        INSERT INTO t_user (
+        ucUserId,
+        schoolId,
+        schoolName,
+        location,
+        address,
+        masterName,
+        phone,
+        createDate,
+        creator,
+        lastModifier,
+        lastModDate,
+        status,
+        mqMsgId,
+        mac,
+        isActivated
+        ) VALUES (
+        #{ucUserId},
+        #{schoolId},
+        #{schoolName},
+        #{location},
+        #{address},
+        #{masterName},
+        #{phone},
+        #{createDate},
+        #{creator},
+        #{lastModifier},
+        #{lastModDate},
+        #{status},
+        #{mqMsgId},
+        #{mac},
+        #{isActivated}
+        )
+        <selectKey resultType="java.lang.Long" keyProperty="id">
+        SELECT LAST_INSERT_ID() AS ID
+        </selectKey>
+    </insert>
+
+    <!-- 更新 -->
+    <update id="update" parameterType="User">
+        UPDATE t_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="ucUserId!=null">
+                ucUserId = #{ucUserId},
+            </if>
+            <if test="schoolId!=null">
+                schoolId = #{schoolId},
+            </if>
+            <if test="schoolName!=null">
+                schoolName = #{schoolName},
+            </if>
+            <if test="location!=null">
+                location = #{location},
+            </if>
+            <if test="address!=null">
+                address = #{address},
+            </if>
+            <if test="masterName!=null">
+                masterName = #{masterName},
+            </if>
+            <if test="phone!=null">
+                phone = #{phone},
+            </if>
+            <if test="createDate!=null">
+                createDate = #{createDate},
+            </if>
+            <if test="creator!=null">
+                creator = #{creator},
+            </if>
+            <if test="lastModifier!=null">
+                lastModifier = #{lastModifier},
+            </if>
+            <if test="lastModDate!=null">
+                lastModDate = #{lastModDate},
+            </if>
+            <if test="status!=null">
+                status = #{status},
+            </if>
+            <if test="mqMsgId!=null">
+                mqMsgId = #{mqMsgId},
+            </if>
+            <if test="mac!=null">
+                mac = #{mac},
+            </if>
+            <if test="isActivated!=null">
+                isActivated = #{isActivated},
+            </if>
+        </trim>
+        WHERE
+        id = #{id}
+    </update>
+
+    <update id="updateMap">
+        UPDATE t_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="map.ucUserId!=null">
+                ucUserId = #{map.ucUserId},
+            </if>
+            <if test="map.schoolId!=null">
+                schoolId = #{map.schoolId},
+            </if>
+            <if test="map.schoolName!=null">
+                schoolName = #{map.schoolName},
+            </if>
+            <if test="map.location!=null">
+                location = #{map.location},
+            </if>
+            <if test="map.address!=null">
+                address = #{map.address},
+            </if>
+            <if test="map.masterName!=null">
+                masterName = #{map.masterName},
+            </if>
+            <if test="map.phone!=null">
+                phone = #{map.phone},
+            </if>
+            <if test="map.createDate!=null">
+                createDate = #{map.createDate},
+            </if>
+            <if test="map.creator!=null">
+                creator = #{map.creator},
+            </if>
+            <if test="map.lastModifier!=null">
+                lastModifier = #{map.lastModifier},
+            </if>
+            <if test="map.lastModDate!=null">
+                lastModDate = #{map.lastModDate},
+            </if>
+            <if test="map.status!=null">
+                status = #{map.status},
+            </if>
+            <if test="map.mqMsgId!=null">
+                mqMsgId = #{map.mqMsgId},
+            </if>
+            <if test="map.mac!=null">
+                mac = #{map.mac},
+            </if>
+            <if test="map.isActivated!=null">
+                isActivated = #{map.isActivated},
+            </if>
+        </trim>
+        WHERE
+        id = #{map.id}
+    </update>
+
+    <update id="updateByCondition">
+        UPDATE t_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="update.ucUserId!=null">
+                ucUserId = #{update.ucUserId},
+            </if>
+            <if test="update.schoolId!=null">
+                schoolId = #{update.schoolId},
+            </if>
+            <if test="update.schoolName!=null">
+                schoolName = #{update.schoolName},
+            </if>
+            <if test="update.location!=null">
+                location = #{update.location},
+            </if>
+            <if test="update.address!=null">
+                address = #{update.address},
+            </if>
+            <if test="update.masterName!=null">
+                masterName = #{update.masterName},
+            </if>
+            <if test="update.phone!=null">
+                phone = #{update.phone},
+            </if>
+            <if test="update.createDate!=null">
+                createDate = #{update.createDate},
+            </if>
+            <if test="update.creator!=null">
+                creator = #{update.creator},
+            </if>
+            <if test="update.lastModifier!=null">
+                lastModifier = #{update.lastModifier},
+            </if>
+            <if test="update.lastModDate!=null">
+                lastModDate = #{update.lastModDate},
+            </if>
+            <if test="update.status!=null">
+                status = #{update.status},
+            </if>
+            <if test="update.mqMsgId!=null">
+                mqMsgId = #{update.mqMsgId},
+            </if>
+            <if test="update.mac!=null">
+                mac = #{update.mac},
+            </if>
+            <if test="update.isActivated!=null">
+                isActivated = #{update.isActivated},
+            </if>
+        </trim>
+
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.ucUserId!=null">
+                AND ucUserId = #{condition.ucUserId}
+            </if>
+            <if test="condition.schoolId!=null">
+                AND schoolId = #{condition.schoolId}
+            </if>
+            <if test="condition.schoolName!=null">
+                AND schoolName = #{condition.schoolName}
+            </if>
+            <if test="condition.location!=null">
+                AND location = #{condition.location}
+            </if>
+            <if test="condition.address!=null">
+                AND address = #{condition.address}
+            </if>
+            <if test="condition.masterName!=null">
+                AND masterName = #{condition.masterName}
+            </if>
+            <if test="condition.phone!=null">
+                AND phone = #{condition.phone}
+            </if>
+            <if test="condition.createDate!=null">
+                AND createDate = #{condition.createDate}
+            </if>
+            <if test="condition.creator!=null">
+                AND creator = #{condition.creator}
+            </if>
+            <if test="condition.lastModifier!=null">
+                AND lastModifier = #{condition.lastModifier}
+            </if>
+            <if test="condition.lastModDate!=null">
+                AND lastModDate = #{condition.lastModDate}
+            </if>
+            <if test="condition.status!=null">
+                AND status = #{condition.status}
+            </if>
+            <if test="condition.mqMsgId!=null">
+                AND mqMsgId = #{condition.mqMsgId}
+            </if>
+            <if test="condition.mac!=null">
+                AND mac = #{condition.mac}
+            </if>
+            <if test="condition.isActivated!=null">
+                AND isActivated = #{condition.isActivated}
+            </if>
+        </trim>
+    </update>
+
+    <insert id="insertMap" >
+        INSERT INTO t_user (
+                ucUserId,
+                schoolId,
+                schoolName,
+                location,
+                address,
+                masterName,
+                phone,
+                createDate,
+                creator,
+                lastModifier,
+                lastModDate,
+                status,
+                mqMsgId,
+                mac,
+                isActivated
+        ) VALUES (
+                    #{map.ucUserId},
+                    #{map.schoolId},
+                    #{map.schoolName},
+                    #{map.location},
+                    #{map.address},
+                    #{map.masterName},
+                    #{map.phone},
+                    #{map.createDate},
+                    #{map.creator},
+                    #{map.lastModifier},
+                    #{map.lastModDate},
+                    #{map.status},
+                    #{map.mqMsgId},
+                    #{map.mac},
+                    #{map.isActivated}
+        )
+    </insert>
+
+
+    <update id="updateNull" parameterType="User">
+        UPDATE t_user
+        <trim prefix="SET" suffixOverrides=",">
+            ucUserId = #{ucUserId},
+            schoolId = #{schoolId},
+            schoolName = #{schoolName},
+            location = #{location},
+            address = #{address},
+            masterName = #{masterName},
+            phone = #{phone},
+            createDate = #{createDate},
+            creator = #{creator},
+            lastModifier = #{lastModifier},
+            lastModDate = #{lastModDate},
+            status = #{status},
+            mqMsgId = #{mqMsgId},
+            mac = #{mac},
+            isActivated = #{isActivated},
+        </trim>
+        WHERE
+        id = #{id} 
+    </update>
+
+    <!-- 按Id删除 -->
+    <delete id="deleteById" parameterType="java.lang.Long">
+        DELETE FROM t_user
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id = #{id}
+        </trim>
+    </delete>
+
+
+    <delete id="deleteByCondition" parameterType="java.util.Map">
+        DELETE FROM t_user
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id = #{id}
+            </if>
+            <if test="ucUserId!=null">
+                AND ucUserId = #{ucUserId}
+            </if>
+            <if test="schoolId!=null">
+                AND schoolId = #{schoolId}
+            </if>
+            <if test="schoolName!=null">
+                AND schoolName = #{schoolName}
+            </if>
+            <if test="location!=null">
+                AND location = #{location}
+            </if>
+            <if test="address!=null">
+                AND address = #{address}
+            </if>
+            <if test="masterName!=null">
+                AND masterName = #{masterName}
+            </if>
+            <if test="phone!=null">
+                AND phone = #{phone}
+            </if>
+            <if test="createDate!=null">
+                AND createDate = #{createDate}
+            </if>
+            <if test="creator!=null">
+                AND creator = #{creator}
+            </if>
+            <if test="lastModifier!=null">
+                AND lastModifier = #{lastModifier}
+            </if>
+            <if test="lastModDate!=null">
+                AND lastModDate = #{lastModDate}
+            </if>
+            <if test="status!=null">
+                AND status = #{status}
+            </if>
+            <if test="mqMsgId!=null">
+                AND mqMsgId = #{mqMsgId}
+            </if>
+            <if test="mac!=null">
+                AND mac = #{mac}
+            </if>
+            <if test="isActivated!=null">
+                AND isActivated = #{isActivated}
+            </if>
+        </trim>
+    </delete>
+
+    <delete id="deleteByProperty" parameterType="java.util.Map">
+        DELETE FROM t_user WHERE
+        ${property} = #{value}
+    </delete>
+
+    <select id="fetch" parameterType="java.lang.Long" resultType="User">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM t_user
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id = #{id}
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="findOne" parameterType="java.util.Map" resultType="User">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM t_user WHERE
+        ${property} = #{value}
+        <if test="orderBy!=null">
+            ORDER BY ${orderBy} ${sortBy}
+        </if>
+        LIMIT 0,1
+    </select>
+
+    <select id="findList" parameterType="java.util.Map" resultType="User">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM t_user WHERE
+        ${property} = #{value}
+        <if test="orderBy!=null">
+            ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="findAll" resultType="User">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM t_user
+        <if test="orderBy!=null">
+            ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="queryPage" resultType="User">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM t_user
+        <where>
+
+            <if test="condition.whereSql != null">
+                and id in (#{condition.whereSql})
+            </if>
+
+            <if test="condition.id!=null">
+                ${condition.groupOp}   id  ${condition.id.op}  #{condition.id.data}
+            </if>
+            <if test="condition.ucUserId!=null">
+                ${condition.groupOp}   ucUserId  ${condition.ucUserId.op}  #{condition.ucUserId.data}
+            </if>
+            <if test="condition.schoolId!=null">
+                ${condition.groupOp}   schoolId  ${condition.schoolId.op}  #{condition.schoolId.data}
+            </if>
+            <if test="condition.schoolName!=null">
+                ${condition.groupOp}   schoolName  ${condition.schoolName.op}  #{condition.schoolName.data}
+            </if>
+            <if test="condition.location!=null">
+                ${condition.groupOp}   location  ${condition.location.op}  #{condition.location.data}
+            </if>
+            <if test="condition.address!=null">
+                ${condition.groupOp}   address  ${condition.address.op}  #{condition.address.data}
+            </if>
+            <if test="condition.masterName!=null">
+                ${condition.groupOp}   masterName  ${condition.masterName.op}  #{condition.masterName.data}
+            </if>
+            <if test="condition.phone!=null">
+                ${condition.groupOp}   phone  ${condition.phone.op}  #{condition.phone.data}
+            </if>
+            <if test="condition.createDate!=null">
+                ${condition.groupOp}   createDate  ${condition.createDate.op}  #{condition.createDate.data}
+            </if>
+            <if test="condition.creator!=null">
+                ${condition.groupOp}   creator  ${condition.creator.op}  #{condition.creator.data}
+            </if>
+            <if test="condition.lastModifier!=null">
+                ${condition.groupOp}   lastModifier  ${condition.lastModifier.op}  #{condition.lastModifier.data}
+            </if>
+            <if test="condition.lastModDate!=null">
+                ${condition.groupOp}   lastModDate  ${condition.lastModDate.op}  #{condition.lastModDate.data}
+            </if>
+            <if test="condition.status!=null">
+                ${condition.groupOp}   status  ${condition.status.op}  #{condition.status.data}
+            </if>
+            <if test="condition.mqMsgId!=null">
+                ${condition.groupOp}   mqMsgId  ${condition.mqMsgId.op}  #{condition.mqMsgId.data}
+            </if>
+            <if test="condition.mac!=null">
+                ${condition.groupOp}   mac  ${condition.mac.op}  #{condition.mac.data}
+            </if>
+            <if test="condition.isActivated!=null">
+                ${condition.groupOp}   isActivated  ${condition.isActivated.op}  #{condition.isActivated.data}
+            </if>
+
+
+    </where>
+
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+        <if test="offset != null">
+            limit ${offset}, ${rows}
+        </if>
+    </select>
+
+    <select id="like" parameterType="java.util.Map" resultType="User">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM t_user
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id like CONCAT('%', #{id} , '%')
+            </if>
+            <if test="ucUserId!=null">
+                AND ucUserId like CONCAT('%', #{ucUserId} , '%')
+            </if>
+            <if test="schoolId!=null">
+                AND schoolId like CONCAT('%', #{schoolId} , '%')
+            </if>
+            <if test="schoolName!=null">
+                AND schoolName like CONCAT('%', #{schoolName} , '%')
+            </if>
+            <if test="location!=null">
+                AND location like CONCAT('%', #{location} , '%')
+            </if>
+            <if test="address!=null">
+                AND address like CONCAT('%', #{address} , '%')
+            </if>
+            <if test="masterName!=null">
+                AND masterName like CONCAT('%', #{masterName} , '%')
+            </if>
+            <if test="phone!=null">
+                AND phone like CONCAT('%', #{phone} , '%')
+            </if>
+            <if test="createDate!=null">
+                AND createDate like CONCAT('%', #{createDate} , '%')
+            </if>
+            <if test="creator!=null">
+                AND creator like CONCAT('%', #{creator} , '%')
+            </if>
+            <if test="lastModifier!=null">
+                AND lastModifier like CONCAT('%', #{lastModifier} , '%')
+            </if>
+            <if test="lastModDate!=null">
+                AND lastModDate like CONCAT('%', #{lastModDate} , '%')
+            </if>
+            <if test="status!=null">
+                AND status like CONCAT('%', #{status} , '%')
+            </if>
+            <if test="mqMsgId!=null">
+                AND mqMsgId like CONCAT('%', #{mqMsgId} , '%')
+            </if>
+            <if test="mac!=null">
+                AND mac like CONCAT('%', #{mac} , '%')
+            </if>
+            <if test="isActivated!=null">
+                AND isActivated like CONCAT('%', #{isActivated} , '%')
+            </if>
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+
+    <select id="queryList" parameterType="java.util.Map" resultType="User">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM t_user
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.ucUserId!=null">
+                AND ucUserId = #{condition.ucUserId}
+            </if>
+            <if test="condition.schoolId!=null">
+                AND schoolId = #{condition.schoolId}
+            </if>
+            <if test="condition.schoolName!=null">
+                AND schoolName = #{condition.schoolName}
+            </if>
+            <if test="condition.location!=null">
+                AND location = #{condition.location}
+            </if>
+            <if test="condition.address!=null">
+                AND address = #{condition.address}
+            </if>
+            <if test="condition.masterName!=null">
+                AND masterName = #{condition.masterName}
+            </if>
+            <if test="condition.phone!=null">
+                AND phone = #{condition.phone}
+            </if>
+            <if test="condition.createDate!=null">
+                AND createDate = #{condition.createDate}
+            </if>
+            <if test="condition.creator!=null">
+                AND creator = #{condition.creator}
+            </if>
+            <if test="condition.lastModifier!=null">
+                AND lastModifier = #{condition.lastModifier}
+            </if>
+            <if test="condition.lastModDate!=null">
+                AND lastModDate = #{condition.lastModDate}
+            </if>
+            <if test="condition.status!=null">
+                AND status = #{condition.status}
+            </if>
+            <if test="condition.mqMsgId!=null">
+                AND mqMsgId = #{condition.mqMsgId}
+            </if>
+            <if test="condition.mac!=null">
+                AND mac = #{condition.mac}
+            </if>
+            <if test="condition.isActivated!=null">
+                AND isActivated = #{condition.isActivated}
+            </if>
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="queryOne" parameterType="java.util.Map" resultType="User">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM t_user
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.ucUserId!=null">
+                AND ucUserId = #{condition.ucUserId}
+            </if>
+            <if test="condition.schoolId!=null">
+                AND schoolId = #{condition.schoolId}
+            </if>
+            <if test="condition.schoolName!=null">
+                AND schoolName = #{condition.schoolName}
+            </if>
+            <if test="condition.location!=null">
+                AND location = #{condition.location}
+            </if>
+            <if test="condition.address!=null">
+                AND address = #{condition.address}
+            </if>
+            <if test="condition.masterName!=null">
+                AND masterName = #{condition.masterName}
+            </if>
+            <if test="condition.phone!=null">
+                AND phone = #{condition.phone}
+            </if>
+            <if test="condition.createDate!=null">
+                AND createDate = #{condition.createDate}
+            </if>
+            <if test="condition.creator!=null">
+                AND creator = #{condition.creator}
+            </if>
+            <if test="condition.lastModifier!=null">
+                AND lastModifier = #{condition.lastModifier}
+            </if>
+            <if test="condition.lastModDate!=null">
+                AND lastModDate = #{condition.lastModDate}
+            </if>
+            <if test="condition.status!=null">
+                AND status = #{condition.status}
+            </if>
+            <if test="condition.mqMsgId!=null">
+                AND mqMsgId = #{condition.mqMsgId}
+            </if>
+            <if test="condition.mac!=null">
+                AND mac = #{condition.mac}
+            </if>
+            <if test="condition.isActivated!=null">
+                AND isActivated = #{condition.isActivated}
+            </if>
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+        limit 0,1
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+        SELECT count(id) FROM t_user
+       <where>
+           <if test="id!=null">
+               ${groupOp} id ${id.op}  #{id.data}
+           </if>
+           <if test="ucUserId!=null">
+               ${groupOp} ucUserId ${ucUserId.op}  #{ucUserId.data}
+           </if>
+           <if test="schoolId!=null">
+               ${groupOp} schoolId ${schoolId.op}  #{schoolId.data}
+           </if>
+           <if test="schoolName!=null">
+               ${groupOp} schoolName ${schoolName.op}  #{schoolName.data}
+           </if>
+           <if test="location!=null">
+               ${groupOp} location ${location.op}  #{location.data}
+           </if>
+           <if test="address!=null">
+               ${groupOp} address ${address.op}  #{address.data}
+           </if>
+           <if test="masterName!=null">
+               ${groupOp} masterName ${masterName.op}  #{masterName.data}
+           </if>
+           <if test="phone!=null">
+               ${groupOp} phone ${phone.op}  #{phone.data}
+           </if>
+           <if test="createDate!=null">
+               ${groupOp} createDate ${createDate.op}  #{createDate.data}
+           </if>
+           <if test="creator!=null">
+               ${groupOp} creator ${creator.op}  #{creator.data}
+           </if>
+           <if test="lastModifier!=null">
+               ${groupOp} lastModifier ${lastModifier.op}  #{lastModifier.data}
+           </if>
+           <if test="lastModDate!=null">
+               ${groupOp} lastModDate ${lastModDate.op}  #{lastModDate.data}
+           </if>
+           <if test="status!=null">
+               ${groupOp} status ${status.op}  #{status.data}
+           </if>
+           <if test="mqMsgId!=null">
+               ${groupOp} mqMsgId ${mqMsgId.op}  #{mqMsgId.data}
+           </if>
+           <if test="mac!=null">
+               ${groupOp} mac ${mac.op}  #{mac.data}
+           </if>
+           <if test="isActivated!=null">
+               ${groupOp} isActivated ${isActivated.op}  #{isActivated.data}
+           </if>
+
+       </where>
+    <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+    </if>
+    </select>
+
+    <select id="selectMaxId" resultType="java.lang.Long">
+        SELECT
+        MAX(id)
+        FROM t_user
+    </select>
+
+</mapper>
+
