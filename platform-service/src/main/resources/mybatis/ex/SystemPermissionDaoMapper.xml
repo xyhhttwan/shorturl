@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.platform.soft.service.dao.backstage.ex.IPermissionDAO">
+    <!--
+         符号转义说明
+    &lt;          <
+    &gt;          >
+    &lt;&gt;     <>
+    &amp;        &
+    &apos;       '
+    &quot;       "
+  <![CDATA[ 这里写你的SQL或者符号 ]]>
+ -->
+    <!-- 对象映射 -->
+    <resultMap type="com.platform.soft.domain.backstage.ex.Permission" id="permissionMap"/>
+
+    <!-- tbaleColumns  所有列 -->
+    <sql id="tbaleColumns">
+        id,permissionName,permissionCode,parentId,status
+    </sql>
+    <!-- tbaleColumns  所有列 -->
+    <sql id="columns">
+       permissionName,permissionCode,parentId,status
+    </sql>
+    <!-- tbaleColumns  所有列 -->
+    <sql id="insertColumns">
+        #{permissionName},#{permissionCode},#{parentId},#{status}
+    </sql>
+
+    <!-- where 条件  -->
+    <sql id="where">
+        WHERE 1=1
+    </sql>
+
+    <!--分页查询权限信息-->
+    <select id="getPermissionPageList" resultMap="permissionMap">
+        SELECT
+        <include refid="tbaleColumns"/>
+        FROM
+        Permission
+        ORDER by id
+    </select>
+    <!--新增权限-->
+    <insert id="addPermission" parameterType="Permission">
+        INSERT INTO Permission
+        (<include refid="columns"/>)
+        VALUES
+        (<include refid="insertColumns"/>)
+    </insert>
+    <!--删除权限-->
+    <delete id="delPermissionById" parameterType="int">
+        DELETE
+        FROM Permission
+        WHERE ID=#{id}
+    </delete>
+    <!--修改权限-->
+    <update id="updatePermission" parameterType="map">
+        UPDATE  Permission
+        SET
+        permissionName=#{permissionName},
+        permissionCode=#{permissionCode},
+        parentId=#{parentId}
+        WHERE  id=#{id}
+    </update>
+
+    <!--根据觉得id查询权限信息-->
+    <select id="getPermissionById" parameterType="int" resultMap="permissionMap">
+        SELECT
+        <include refid="tbaleColumns"/>
+        from Permission
+        WHERE
+        id=#{id}
+    </select>
+
+    <!--根据编码查询权限信息-->
+    <select id="getPermissionByCode" parameterType="java.lang.String" resultMap="permissionMap">
+        SELECT
+        <include refid="tbaleColumns"/>
+        from Permission
+        WHERE
+        permissionCode=#{code}
+    </select>
+
+
+    <!--查询权限的id 和name-->
+    <select id="getPermissionAll" resultType="PermissionHelper">
+      SELECT  id as id, permissionName as text,parentId
+      FROM
+      permission
+    </select>
+
+    <!--查询该id是否存在子类-->
+    <select id="ifHasChildren" resultType="map" parameterType="int">
+      select id from permission where parentId = #{id}
+
+    </select>
+
+    <!--根据用户id获取该用户的权限信息-->
+    <select id="getPermissionByUserId" resultMap="permissionMap" parameterType="int">
+        select distinct aa.id ,aa.permissionName,aa.permissionCode
+        from permission aa,rolePermission bb,
+        role cc,
+        userRole dd,
+        systemUser ee
+        where aa.id = bb.permissionId
+        and bb.roleId = cc.id
+        and cc.id = dd.roleId
+        and dd.userId = ee.id
+        and  ee.id=#{userId}
+    </select>
+</mapper>

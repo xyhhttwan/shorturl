@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.platform.soft.service.dao.backstage.ex.IMenuDAO">
+    <!--
+         符号转义说明
+    &lt;          <
+    &gt;          >
+    &lt;&gt;     <>
+    &amp;        &
+    &apos;       '
+    &quot;       "
+  <![CDATA[ 这里写你的SQL或者符号 ]]>
+ -->
+    <!-- 对象映射 -->
+    <resultMap type="com.platform.soft.domain.backstage.ex.Menu" id="menuMap" />
+
+
+    <!--获取当前登录用户菜单-->
+   <select id="getMenuList" parameterType="int" resultMap="menuMap" >
+       SELECT
+          distinct
+          aa.id id,
+          aa.menuName menuName,
+          aa.url url,
+          aa.parentId parentId,
+          aa.icon icon,
+          aa.menuSort menuSort,
+          aa.status status
+       FROM
+       menu aa
+       INNER JOIN roleMenu bb ON aa.id = bb.menuId
+       INNER JOIN role cc ON bb.roleId = cc.id
+       INNER JOIN userRole dd ON dd.roleId = cc.id
+       INNER JOIN systemUser ee ON ee.id = dd.userId
+       WHERE  ee.id=#{systemUserId}
+       ORDER BY menuSort ASC
+   </select>
+
+    <!--新增菜单-->
+    <insert id="addMenu" parameterType="Menu">
+        INSERT  INTO
+        MENU
+        (menuName,url,parentId,icon,menuSort,status)
+        VALUES
+        (#{menuName},#{url},#{parentId},#{icon},#{menuSort},#{status})
+    </insert>
+    <!--修改菜单-->
+    <update id="updateMenu" parameterType="Menu">
+      UPDATE  menu
+      SET
+      menuName =#{menuName},url = #{url},parentId=#{parentId},icon=#{icon},menuSort=#{menuSort},status=#{status}
+      WHERE
+      id=#{id}
+    </update>
+    <!---删除菜单-->
+    <delete id="delMenu" parameterType="int" >
+
+        DELETE  from menu
+        WHERE
+        id =#{menuId}
+    </delete>
+
+    <!--查询全部菜单-->
+    <select id="getAllMenuList" resultMap="menuMap">
+      select id,menuName,url,parentId,icon,menuSort,status from menu
+    </select>
+    <!--下拉菜单-->
+    <select id="getMenuBySelect" resultType="MenuHelper" >
+      SELECT  id as id, menuName as text,parentId as parentId
+      FROM
+      MENU
+    </select>
+
+    <!--改菜单是否有子类-->
+    <select id="ifMenuHasChildren" resultType="map" parameterType="int" >
+        SELECT  id
+        FROM
+        MENU
+        where
+        parentId=#{menuId}
+    </select>
+
+    <!--根据id查询菜单信息-->
+    <select id="getMenuById" parameterType="int" resultMap="menuMap">
+        select id,menuName,url,parentId,icon,menuSort,status from menu where id =#{id}
+    </select>
+</mapper>

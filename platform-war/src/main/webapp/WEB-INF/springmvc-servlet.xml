@@ -23,7 +23,7 @@
     </mvc:annotation-driven>
 
     <!-- @Controller, etc. -->
-    <context:component-scan base-package="com.platform.*.controller"/>
+    <context:component-scan base-package="com.platform.soft"/>
 
     <bean
             class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping">
@@ -37,6 +37,17 @@
                 <ref bean="fastJsonHttpMessageConverter"/><!-- json转换器 -->
             </list>
         </property>
+    </bean>
+
+    <!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+    <!-- 开启Shiro的注解(如@RequiresRoles,@RequiresPermissions),需借助SpringAOP扫描使用Shiro注解的类,并在必要时进行安全逻辑验证 -->
+    <!-- 配置以下两个bean即可实现此功能 -->
+    <!-- Enable Shiro Annotations for Spring-configured beans. Only run after the lifecycleBeanProcessor has run -->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+          depends-on="lifecycleBeanPostProcessor"/>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
     </bean>
 
     <bean id="fastJsonHttpMessageConverter"
