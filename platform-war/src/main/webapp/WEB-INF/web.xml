@@ -18,6 +18,12 @@
         </listener-class>
     </listener>
 
+    <!-- Spring 刷新Introspector防止内存泄露 -->
+    <listener>
+        <listener-class>
+            org.springframework.web.util.IntrospectorCleanupListener
+        </listener-class>
+    </listener>
     <filter>
         <filter-name>requestDigestFilter</filter-name>
         <filter-class>com.platform.soft.filter.RequestDigestFilter</filter-class>
@@ -38,6 +44,19 @@
     </filter>
     <filter-mapping>
         <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!--shiro 权限控制-->
+    <filter>
+        <filter-name>shiroFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+        <init-param>
+            <param-name>targetFilterLifecycle</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>shiroFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
