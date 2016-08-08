@@ -89,7 +89,6 @@ subprojects {
 
     dependencies {
         compile 'joda-time:joda-time:2.9.4'
-        compile project(':platform-common')
         //一个工具类
         compile 'com.xiaoleilu:hutool:2.15.5'
 
