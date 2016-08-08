@@ -9,18 +9,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="bookmark"  type="image/x-icon"  href="<%=basePath%>images/front/logo_title.jpg"/>
-    <link rel="shortcut icon" href="<%=basePath%>images/front/logo_title.jpg">
-    <title>农信网后台管理系统</title>
+    <title>platform后台管理系统</title>
     <link href="<%=basePath%>jqueryeasyui/css/default.css" rel="stylesheet" type="text/css" />
-
     <link rel="stylesheet" id="easyuiTheme" type="text/css" href="<%=basePath%>jqueryeasyui/js/themes/default/easyui.css" />
     <link rel="stylesheet" type="text/css" href="<%=basePath%>jqueryeasyui/js/themes/icon.css" />
     <link rel="stylesheet" type="text/css" href="<%=basePath%>jqueryeasyui/js/themes/color.css" />
     <script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>jqueryeasyui/js/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="<%=basePath%>jqueryeasyui/js/XiuCai.index.js"> </script>
-
     <script type="text/javascript">
         var _menus="";
         var baseUrl="<%=basePath%>";
@@ -29,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             $.ajax({
                 type: "POST",
                 dataType: "json",
-                url: "<%=basePath%>background/system/menuManage/menuList.do",
+                url: "<%=basePath%>backstage/system/menuManage/menuList.do",
                 success: function (data) {
                     _menus=data;
                     InitLeftMenu();
@@ -93,7 +89,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 return false;
             }
 
-            $.post('<%=basePath%>background/system/userManage/updateUserPassword.do?newPassword=' + $newpass.val()+'&oldPassword='+$oldPass.val(),
+            $.post('<%=basePath%>backstage/system/userManage/updateUserPassword.do?newPassword=' + $newpass.val()+'&oldPassword='+$oldPass.val(),
                     function(msg)
                     {
                         if(msg.result=="true"){
@@ -101,7 +97,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             $newpass.val('');
                             $rePass.val('');
                             $oldPass.val('');
-                            close();
+                            closePwd();
                         }else{
                             msgShow('系统提示',msg.message, 'info');
                             return ;
@@ -172,30 +168,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div></noscript>
 
 <div id="loading-mask" style="position:absolute;top:0px; left:0px; width:100%; height:100%; background:#D2E0F2; z-index:20000">
-<div id="pageloading" style="position:absolute; top:50%; left:50%; margin:-120px 0px 0px -120px; text-align:center;  border:2px solid #8DB2E3; width:200px; height:40px;  font-size:14px;padding:10px; font-weight:bold; background:#fff; color:#15428B;"> 
+<div id="pageloading" style="position:absolute; top:50%; left:50%; margin:-120px 0px 0px -120px; text-align:center;  border:2px solid #8DB2E3; width:200px; height:40px;  font-size:14px;padding:10px; font-weight:bold; background:#fff; color:#15428B;">
     <img src="<%=basePath%>jqueryeasyui/images/loading.gif" align="absmiddle" /> 正在加载中,请稍候...</div>
 </div>
 
     <div region="north" split="true" border="false" style="overflow: hidden; height: 30px;
-        background: url(<%=basePath%>jqueryeasyui/images/layout-browser-hd-bg.gif) #7f99be repeat-x center 50%;
+            background: url(<%=basePath%>jqueryeasyui/images/layout-browser-hd-bg.gif) #7f99be repeat-x center 50%;
         line-height: 20px;color: #fff; font-family: Verdana, 微软雅黑,黑体">
         <span style="float:right; padding-right:20px;" class="head">欢迎 ${currentUser.realName}
-           <%-- <a href="javascript:void(0);" class="easyui-menubutton" data-options="menu:'#layout_north_Menu_0'">更换皮肤</a>
-		    <div id="layout_north_Menu_0">
-                <div>black</div>
-                <div>bootstrap</div>
-                <div>default</div>
-                <div>gray</div>
-                <div>metro</div>
-                <div>cupertino</div>
-            </div>--%>
+           <%--<a href="javascript:void(0);" class="easyui-menubutton" data-options="menu:'#layout_north_Menu_0'">更换皮肤</a>--%>
+		    <%--<div id="layout_north_Menu_0">--%>
+                <%--<div>black</div>--%>
+                <%--<div>bootstrap</div>--%>
+                <%--<div>default</div>--%>
+                <%--<div>gray</div>--%>
+                <%--<div>metro</div>--%>
+                <%--<div>cupertino</div>--%>
+            <%--</div>--%>
             <a href="#" id="editpass">修改密码</a> <a href="#" id="loginOut">安全退出</a></span>
-        <span style="padding-left:10px; font-size: 16px; "><img src="<%=basePath%>jqueryeasyui/images/blocks.gif" width="20" height="20" align="absmiddle" /> 农信网后台管理系统V1.0</span>
+        <span style="padding-left:10px; font-size: 16px; "><img src="<%=basePath%>jqueryeasyui/images/blocks.gif" width="20" height="20" align="absmiddle" /> platform后台管理系统V1.0</span>
     </div>
     <div region="south" split="true" style="height: 30px; background: #D2E0F2; ">
-        <div class="footer">农信网后台管理系统(2016-2016)</div>
+        <div class="footer">platform后台管理系统(2016-2017)</div>
     </div>
-    <div region="west" split="true"  title="农信网后台管理系统" style="width:180px;" id="west">
+    <div region="west" split="true"  title="platform后台管理系统" style="width:180px;" id="west">
 			<div id="nav">
 		<!--  导航内容 -->
 				
@@ -205,9 +201,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div id="mainPanle" region="center" style="background: #eee; overflow-y:hidden">
         <div id="tabs" class="easyui-tabs"  fit="true" border="false" >
 			<div title="欢迎使用" style="padding:20px;overflow:hidden; color:red; " >
-				<h1 style="font-size:24px;">* 欢迎使用农信网后台系统</h1>
+				<h1 style="font-size:24px;">* 欢迎使用platform后台系统</h1>
 <h1 style="font-size:24px;">* 版本: <a style="font-size:24px;color:green;">V1.0</a></h1>
-<h1 style="font-size:24px;">* 技术支持：西安致达信息科技有限公司</h1>
+<h1 style="font-size:24px;">* 技术支持：小兵@xyhhttwan@163.com</h1>
 
 			</div>
 		</div>

@@ -20,7 +20,7 @@
                 <td>
                     <select id="menuIds" name="menuIds" class="easyui-combotree"
                             data-options="
-						url:'<%=basePath2%>background/system/menuManage/getAllMenus.do',
+						url:'<%=basePath2%>backstage/system/menuManage/getAllMenus.do',
 						method:'get',
 						checkbox :true,
 						multiple:true,

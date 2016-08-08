@@ -24,7 +24,7 @@
 				textField: 'roleName',
 				loadMsg:'正在加载角色信息...',
 				mode:'remote',
-				url: '<%=basePath2%>background/system/roleManage/getAllRoles.do',
+				url: '<%=basePath2%>backstage/system/roleManage/getAllRoles.do',
 				method: 'get',
 				columns: [[
 					{field:'ck',checkbox:true},

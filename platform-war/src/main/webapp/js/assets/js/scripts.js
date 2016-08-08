@@ -46,7 +46,7 @@ jQuery(document).ready(function() {
                 if(data.result=="true"){
                     $("#submit_button").html("登录成功");
                     $("#submit_button").attr("disabled",false);
-                    window.location=BASE_URL+"background/main.do";
+                    window.location=BASE_URL+"backstage/main";
                     return;
                 }else{
                     $("#submit_button").attr("disabled",false);

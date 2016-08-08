@@ -28,7 +28,7 @@ import java.util.Map;
 
 @Controller
 @Scope("prototype")
-@RequestMapping("/backstate/system/roleManage")
+@RequestMapping("/backstage/system/roleManage")
 public class RoleController extends BackStageController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RoleController.class);

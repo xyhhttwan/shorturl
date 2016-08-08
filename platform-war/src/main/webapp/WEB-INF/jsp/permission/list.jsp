@@ -25,10 +25,10 @@
 			oprateUser
 			(
 					"新增权限",
-					"<%=basePath%>background/system/permissionManage/addPermissionView.do",
+					"<%=basePath%>backstage/system/permissionManage/addPermissionView.do",
 					0,
 					"add_user",
-					"<%=basePath%>background/system/permissionManage/addPermission.do",
+					"<%=basePath%>backstage/system/permissionManage/addPermission.do",
 					500,
 					"tt",
 					"treegrid"
@@ -39,10 +39,10 @@
 			 oprateUser
 			 (
 			       "修改用户",
-					 "<%=basePath%>background/system/permissionManage/updatePermissionView.do",
+					 "<%=basePath%>backstage/system/permissionManage/updatePermissionView.do",
 					 1,
 					 "add_user",
-					 "<%=basePath%>background/system/permissionManage/updatePermission.do",
+					 "<%=basePath%>backstage/system/permissionManage/updatePermission.do",
 					 500,
 					 "tt",
 					 "treegrid"
@@ -55,13 +55,13 @@
 		  */
 		 function destroyItem(){
 			 var rows = $('#tt').treegrid('getSelections');
-			 var url = "<%=basePath%>background/system/permissionManage/ifHasChildren.do?id="+rows[0].id;
+			 var url = "<%=basePath%>backstage/system/permissionManage/ifHasChildren.do?id="+rows[0].id;
 			 $.get(url, function(data){
 				 if (data.result=="true"){
 					 $.messager.alert('Error',  "<br/>"+data.message, 'Error');
 
 				 } else {
-					 del("tt","<%=basePath%>background/system/permissionManage/delPermission.do","treegrid");
+					 del("tt","<%=basePath%>backstage/system/permissionManage/delPermission.do","treegrid");
 
 				 }
 			 }, 'json');
@@ -78,7 +78,7 @@
 <form name="myform" id="myform" method="post">
 	<div id="toolbar">
 
-		<div style="margin: 5px;background: #F4F4F4" >
+		<div style="margin: 5px;backstage: #F4F4F4" >
 			<shiro:hasPermission name="permission-add">
 			<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newItem()">新增权限</a>
 			</shiro:hasPermission>
@@ -94,7 +94,7 @@
 	</div>
 
 	<table id="tt" class="easyui-treegrid" height="550px"
-		   url="<%=basePath%>background/system/permissionManage/list.do"
+		   url="<%=basePath%>backstage/system/permissionManage/list.do"
 		   title="权限列表"
 		   border="true"
 		   toolbar="#toolbar"

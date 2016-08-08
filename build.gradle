@@ -43,7 +43,7 @@ ext {
    // dubboVersion = "2.5.3"
     //dubboZKClientVersion = "0.4"
     freemarkerVersion = "2.3.20"
-    springVersion = "4.1.0.RELEASE"
+    springVersion = "4.1.6.RELEASE"
 }
 
 subprojects {

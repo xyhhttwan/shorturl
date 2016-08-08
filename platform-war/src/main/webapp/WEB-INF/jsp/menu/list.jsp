@@ -25,10 +25,10 @@
 			oprateUser
 			(
 					"新增菜单",
-					"<%=basePath%>background/system/menuManage/addMenuView.do",
+					"<%=basePath%>backstage/system/menuManage/addMenuView.do",
 					0,
 					"add_user",
-					"<%=basePath%>background/system/menuManage/addMenu.do",
+					"<%=basePath%>backstage/system/menuManage/addMenu.do",
 					500,
 					"tt",
 					"treegrid"
@@ -39,10 +39,10 @@
 			 oprateUser
 			 (
 			       "修改用户",
-					 "<%=basePath%>background/system/menuManage/updateMenuView.do",
+					 "<%=basePath%>backstage/system/menuManage/updateMenuView.do",
 					 1,
 					 "add_user",
-					 "<%=basePath%>background/system/menuManage/updateMenu.do",
+					 "<%=basePath%>backstage/system/menuManage/updateMenu.do",
 					 500,
 					 "tt",
 					 "treegrid"
@@ -55,13 +55,13 @@
 		  */
 		 function destroyItem(){
 			 var rows = $('#tt').treegrid('getSelections');
-			 var url = "<%=basePath%>background/system/menuManage/ifHasChildren.do?id="+rows[0].id;
+			 var url = "<%=basePath%>backstage/system/menuManage/ifHasChildren.do?id="+rows[0].id;
 			 $.get(url, function(data){
 				 if (data.result=="true"){
 					 $.messager.alert('Error',  "<br/>"+data.message, 'Error');
 
 				 } else {
-					 del("tt","<%=basePath%>background/system/menuManage/delMenu.do","treegrid");
+					 del("tt","<%=basePath%>backstage/system/menuManage/delMenu.do","treegrid");
 
 				 }
 			 }, 'json');
@@ -76,7 +76,7 @@
 <form name="myform" id="myform" method="post">
 	<div id="toolbar">
 
-		<div style="margin: 5px;background: #F4F4F4" >
+		<div style="margin: 5px;backstage: #F4F4F4" >
 			<shiro:hasPermission name="menu-add">
 			<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newItem()">新增菜单</a>
 			</shiro:hasPermission>
@@ -92,7 +92,7 @@
 	</div>
 
 	<table id="tt" class="easyui-treegrid" height="450px"
-		   url="<%=basePath%>background/system/menuManage/list.do"
+		   url="<%=basePath%>backstage/system/menuManage/list.do"
 		   title="菜单列表"
 		   border="true"
 		   toolbar="#toolbar"

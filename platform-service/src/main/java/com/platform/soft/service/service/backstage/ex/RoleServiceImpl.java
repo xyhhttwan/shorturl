@@ -6,8 +6,10 @@ import com.platform.soft.service.dao.backstage.ex.IRoleDAO;
 import com.platform.soft.domain.backstage.ex.Role;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -119,8 +121,20 @@ public class RoleServiceImpl implements IRoleService {
      * @throws SQLException
      */
     @Override
+    @Transactional
     public int addRoleMenu(int roleId, int[] menuIds) throws SQLException {
-        return roleDao.addRoleMenu(roleId, menuIds);
+
+        int counts = 0;
+        if(null!=menuIds && menuIds.length>0){
+            for (int i : menuIds) {
+                Map<String, Object> map = new HashMap<String, Object>();
+                map.put("menuId", i);
+                map.put("roleId", roleId);
+                int result = roleDao.addRoleMenu(map);
+                counts += result;
+            }
+        }
+        return counts;
     }
 
     /**
@@ -143,8 +157,21 @@ public class RoleServiceImpl implements IRoleService {
      * @throws SQLException
      */
     @Override
+    @Transactional
     public int addRolePermission(int roleId, int[] permissionIds) throws SQLException {
-        return roleDao.addRolePermission(roleId, permissionIds);
+
+        int counts = 0;
+        if(null!=permissionIds && permissionIds.length>0){
+            for (int i : permissionIds) {
+                Map<String, Object> map = new HashMap<String, Object>();
+                map.put("roleId", roleId);
+                map.put("permissionId", i);
+                int result = roleDao.addRolePermission(map);
+                counts += result;
+            }
+        }
+        return counts;
+
     }
 
     /**
@@ -161,7 +188,7 @@ public class RoleServiceImpl implements IRoleService {
 
     @Override
     public boolean checkExist(Role role) {
-        return roleDao.checkExist(role) > 0;
+        return roleDao.queryRoleNameExist(role) > 0;
     }
 
     /**

@@ -24,10 +24,10 @@
 			oprateUser
 			(
 					"新增角色",
-					"<%=basePath%>background/system/roleManage/addRoleView.do",
+					"<%=basePath%>backstage/system/roleManage/addRoleView.do",
 					0,
 					"add_role",
-					"<%=basePath%>background/system/roleManage/addRole.do",
+					"<%=basePath%>backstage/system/roleManage/addRole.do",
 					500,
 					"tt"
 			)
@@ -36,10 +36,10 @@
 			 oprateUser
 			 (
 			       "修改角色",
-					 "<%=basePath%>background/system/roleManage/updateRoleView.do",
+					 "<%=basePath%>backstage/system/roleManage/updateRoleView.do",
 					 1,
 					 "add_role",
-					 "<%=basePath%>background/system/roleManage/updateRole.do",
+					 "<%=basePath%>backstage/system/roleManage/updateRole.do",
 					 500,
 					 "tt"
 			 )
@@ -56,12 +56,12 @@
 		 *删除用户
 		 */
 		 function destroyRole(){
-			 del("tt","<%=basePath%>background/system/roleManage/deleteRole.do");
+			 del("tt","<%=basePath%>backstage/system/roleManage/deleteRole.do");
 		 }
 
 		function setMenu(){
-			var url="<%=basePath%>background/system/roleManage/setMenuView.do";
-			var addurl ="<%=basePath%>background/system/roleManage/setMenu.do";
+			var url="<%=basePath%>backstage/system/roleManage/setMenuView.do";
+			var addurl ="<%=basePath%>backstage/system/roleManage/setMenu.do";
 			set(url,addurl,"维护角色菜单关系",1);
 		}
 
@@ -138,8 +138,8 @@
 		 }
 
 		function setPermission(){
-			var url ="<%=basePath%>background/system/roleManage/setPermissionView.do";
-			var addUrl="<%=basePath%>background/system/roleManage/setPermission.do";
+			var url ="<%=basePath%>backstage/system/roleManage/setPermissionView.do";
+			var addUrl="<%=basePath%>backstage/system/roleManage/setPermission.do";
 			set(url,addUrl,"维护角色权限关系",0);
 		}
 
@@ -187,13 +187,13 @@
 <body>
 <form name="myform" id="myform" method="post">
 	<div id="toolbar">
-		<div style="border-bottom: 1px solid #95B8E7; margin: 5px;  background: #F4F4F4" >
+		<div style="border-bottom: 1px solid #95B8E7; margin: 5px;  backstage: #F4F4F4" >
 			<p>查询条件  &nbsp;角色名称:<input  class="easyui-textbox" type="text" name="roleName" id="roleName">
 
 				<span class="btn_1"> <input type="button" value="查找" name="search" onclick="doSearch()" id="search"/></span>
 			</p>
 		</div>
-		<div style="margin: 5px;background: #F4F4F4" >
+		<div style="margin: 5px;backstage: #F4F4F4" >
 			<shiro:hasPermission name="role-add">
 			<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true"  onclick="newRole()">新增角色</a>
 			</shiro:hasPermission>
@@ -216,7 +216,7 @@
 
 
 	<table id="tt" class="easyui-datagrid" height="450px"
-		   url="<%=basePath%>background/system/roleManage/list.do"
+		   url="<%=basePath%>backstage/system/roleManage/list.do"
 		   title="角色列表"
 		   border="true"
 		   toolbar="#toolbar"

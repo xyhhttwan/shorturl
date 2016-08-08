@@ -19,7 +19,7 @@ public interface ISystemUserService {
      * @param password
      * @return SystemUser
      */
-    SystemUser Login(String userName, String password);
+    SystemUser login(String userName, String password);
 
     /**
      * 根据调价查询用户列表

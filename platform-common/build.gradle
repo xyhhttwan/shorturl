@@ -1,7 +1,9 @@
-group 'com.platform.soft'
+group 'zl-platform'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
+
+sourceCompatibility = 1.7
 repositories {
     mavenCentral()
 }

@@ -20,7 +20,7 @@
 				<td>
 				<select id="permissionIds" name="permissionIds" class="easyui-combotree"
 						data-options="
-						url:'<%=basePath2%>background/system/permissionManage/getPermissionAll.do',
+						url:'<%=basePath2%>backstage/system/permissionManage/getPermissionAll.do',
 						method:'get',
 						checkbox :true,
 						multiple:true,

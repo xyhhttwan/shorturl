@@ -84,7 +84,7 @@
         ORDER BY  entryDate asc
     </sql>
     <!--用户登录-->
-   <select id="login" parameterType="map" resultMap="userMap">
+   <select id="login" resultMap="userMap">
        SELECT
        <include refid="tbaleAllColumns"/>
        FROM

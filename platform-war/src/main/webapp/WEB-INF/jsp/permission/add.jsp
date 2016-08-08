@@ -29,12 +29,12 @@
 			<tr>
 				<td><label> 父权限:</label></td>
 				<td>
-					<input class="easyui-combotree" id="parentId" name="parentId"  editable="false"
+					<input class="easyui-combotree" id="parentId" name="parentId"  editable="false" required="true"
 						   data-options="
 						   valueField:'id',
 						   textField:'text',
 						   value:'<c:if test="${not empty permission}">${permission.parentId}</c:if><c:if test="${ empty permission}">${id}</c:if>',
-						   url:'<%=basePath2%>background/system/permissionManage/getPermissionAll.do',
+						   url:'<%=basePath2%>backstage/system/permissionManage/getPermissionAll.do',
 					       method:'get',
 					        onLoadSuccess: function (node, data) {
                    			 $('#parentId').combotree('tree').tree('collapseAll');

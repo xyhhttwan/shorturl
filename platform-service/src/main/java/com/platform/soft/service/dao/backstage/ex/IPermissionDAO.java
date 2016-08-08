@@ -4,6 +4,7 @@ package com.platform.soft.service.dao.backstage.ex;
 
 import com.platform.soft.domain.backstage.ex.Permission;
 import com.platform.soft.domain.backstage.ex.PermissionHelper;
+import org.apache.ibatis.annotations.Param;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -42,7 +43,7 @@ public interface IPermissionDAO {
      * @return int 受影响的行数
      * @throws SQLException
      */
-    int delPermissionById(int id) throws SQLException;
+    int delPermissionById(@Param("id")int id) throws SQLException;
 
     /**
      * 查询权限信息分页
@@ -58,7 +59,7 @@ public interface IPermissionDAO {
      * @param id
      * @return Permission
      */
-    Permission getPermissionById(int id);
+    Permission getPermissionById(@Param("id")int id);
 
     /**
      * 下拉框用到 只查询id和name
@@ -74,7 +75,7 @@ public interface IPermissionDAO {
      * @param id
      * @return boolean
      */
-    List<?> ifHasChildren(int id);
+    List<?> ifHasChildren(@Param("id")int id);
 
     /**
      * 根据用户id查找该用户的权限信息
@@ -82,7 +83,7 @@ public interface IPermissionDAO {
      * @param userId
      * @return List
      */
-    List<Permission> getPermissionByUserId(int userId);
+    List<Permission> getPermissionByUserId(@Param("userId")int userId);
 
     /**
      * 根据编码查询权限
@@ -90,5 +91,5 @@ public interface IPermissionDAO {
      * @param code
      * @return
      */
-    Permission getPermissionByCode(String code);
+    Permission getPermissionByCode(@Param("code")String code);
 }

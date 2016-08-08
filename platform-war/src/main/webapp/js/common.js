@@ -91,6 +91,7 @@ function dataSubmit(url, openId, reloadId, datatype) {
             $('#dataform').form('submit', {
                 url: url,
                 dataType: 'json',
+                
                 ajax: 'true',
                 onSubmit: function () {
                     var validator = $(this).form('validate');

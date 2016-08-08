@@ -44,7 +44,7 @@
 						   valueField:'id',
 						   textField:'text',
 						   value:'<c:if test="${not empty menu}">${menu.parentId}</c:if><c:if test="${ empty menu}">${id}</c:if>',
-						   url:'<%=basePath2%>background/system/menuManage/getMenuAll.do',
+						   url:'<%=basePath2%>backstage/system/menuManage/getMenuAll.do',
 					       method:'get',
 					       panelHeight:'auto'">
                 </td>

@@ -25,10 +25,10 @@
 			oprateUser
 			(
 					"新增用户",
-					"<%=basePath%>background/system/userManage/addUserView.do",
+					"<%=basePath%>backstage/system/userManage/addUserView.do",
 					0,
 					"add_user",
-					"<%=basePath%>background/system/userManage/addUser.do",
+					"<%=basePath%>backstage/system/userManage/addUser.do",
 					500,
 					"tt"
 			);
@@ -37,10 +37,10 @@
 			 oprateUser
 			 (
 			       "修改用户",
-					 "<%=basePath%>background/system/userManage/updateUserView.do",
+					 "<%=basePath%>backstage/system/userManage/updateUserView.do",
 					 1,
 					 "add_user",
-					 "<%=basePath%>background/system/userManage/updateUser.do",
+					 "<%=basePath%>backstage/system/userManage/updateUser.do",
 					 500,
 					 "tt"
 			 )
@@ -58,14 +58,14 @@
 		 *删除用户
 		  */
 		 function destroyUser(){
-			 del("tt","<%=basePath%>background/system/userManage/delUser.do");
+			 del("tt","<%=basePath%>backstage/system/userManage/delUser.do");
 	     }
 
 		 var role_dialogParent="";
 		 var role_dialogOwn="";
 		function setRole()
 		{
-			var url="<%=basePath%>background/system/userManage/setRoleView.do";
+			var url="<%=basePath%>backstage/system/userManage/setRoleView.do";
 			var	rows = $('#tt').datagrid('getSelections')
 			if (rows.length != 1) {
 					$.messager.alert('消息', '<br/>请选择一行数据!', 'info');
@@ -91,7 +91,7 @@
 					iconCls : 'icon-ok',
 					handler : function() {
 						//dialogOwn.appendTo(dialogParent);
-						addRole("<%=basePath%>background/system/userManage/setRole.do");
+						addRole("<%=basePath%>backstage/system/userManage/setRole.do");
 					}
 				}, {
 					text : '取消',
@@ -153,13 +153,13 @@
 <body>
 <form name="myform" id="myform" method="post">
 	<div id="toolbar">
-		<div style="border-bottom: 1px solid #95B8E7; margin: 5px;  background: #F4F4F4" >
+		<div style="border-bottom: 1px solid #95B8E7; margin: 5px;  backstage: #F4F4F4" >
 			<p>查询条件  &nbsp;姓名:<input  class="easyui-textbox" type="text" name="userName" id="userName">
 				联系电话:<input  class="easyui-textbox" type="text" name="phone" id="phone">
 				<span class="btn_1"> <input type="button" value="查找" name="search" onclick="doSearch()" id="search"></input></span>
 			</p>
 		</div>
-		<div style="margin: 5px;background: #F4F4F4" >
+		<div style="margin: 5px;backstage: #F4F4F4" >
 			<shiro:hasPermission name="user-add">
 			<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUser()">新增用户</a>
 			</shiro:hasPermission>
@@ -179,7 +179,7 @@
 	</div>
 
 	<table id="tt" class="easyui-datagrid" height="650px"
-		   url="<%=basePath%>background/system/userManage/list.do"
+		   url="<%=basePath%>backstage/system/userManage/list.do"
 		   title="用户列表"
 		   border="true"
 		   toolbar="#toolbar"

@@ -2,6 +2,7 @@ package com.platform.soft.service.dao.backstage.ex;
 
 
 import com.platform.soft.domain.backstage.ex.Role;
+import org.apache.ibatis.annotations.Param;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -41,7 +42,7 @@ public interface IRoleDAO {
      * @return int 受影响的行数
      * @throws SQLException
      */
-    int delRole(int id) throws SQLException;
+    int delRole(@Param("id")int id) throws SQLException;
 
     /**
      * 更新角色
@@ -58,7 +59,7 @@ public interface IRoleDAO {
      * @param id
      * @return Role
      */
-    Role getRoleById(int id);
+    Role getRoleById(@Param("id")int id);
 
     /**
      * 根据角色i的查询菜单信息
@@ -66,7 +67,7 @@ public interface IRoleDAO {
      * @param roleId
      * @return List
      */
-    List<Map<String, Object>> getMenuByRoleId(int roleId);
+    List<Map<String, Object>> getMenuByRoleId(@Param("roleId")int roleId);
 
     /**
      * 删除角色菜单
@@ -75,17 +76,16 @@ public interface IRoleDAO {
      * @return int 受影响的行数
      * @throws SQLException
      */
-    int delRoleMenuByRoleId(int roleId) throws SQLException;
+    int delRoleMenuByRoleId(@Param("roleId")int roleId) throws SQLException;
 
     /**
      * 新增角色菜单
      *
-     * @param roleId
-     * @param menuIds
+     * @param map
      * @return int 受影响的行数
      * @throws SQLException
      */
-    int addRoleMenu(int roleId, int[] menuIds) throws SQLException;
+    int addRoleMenu(Map<String,Object> map) throws SQLException;
 
     /**
      * 根据角色id查询权限信息
@@ -93,17 +93,16 @@ public interface IRoleDAO {
      * @param roleId
      * @return List
      */
-    List<Map<String, Object>> getPermissionByRoleId(int roleId);
+    List<Map<String, Object>> getPermissionByRoleId(@Param("roleId")int roleId);
 
     /**
      * 新增角色权限信息
      *
-     * @param roleId
-     * @param permissionIds
+     * @param map
      * @return int 影响的行数
      * @throws SQLException
      */
-    int addRolePermission(int roleId, int[] permissionIds) throws SQLException;
+    int addRolePermission(Map<String,Object> map) throws SQLException;
 
     /**
      * 根据角色id删除权限信息
@@ -112,9 +111,9 @@ public interface IRoleDAO {
      * @return int 受影响的行数
      * @throws SQLException
      */
-    int delRolePermissionByRoleId(int roleId) throws SQLException;
+    int delRolePermissionByRoleId(@Param("roleId")int roleId) throws SQLException;
 
-    int checkExist(Role role);
+    int queryRoleNameExist(Role role);
 
     /**
      * 查询全部的角色信息

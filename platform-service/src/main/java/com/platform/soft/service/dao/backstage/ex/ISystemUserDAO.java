@@ -2,6 +2,7 @@ package com.platform.soft.service.dao.backstage.ex;
 
 
 import com.platform.soft.domain.backstage.ex.SystemUser;
+import org.apache.ibatis.annotations.Param;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -22,7 +23,7 @@ public interface ISystemUserDAO {
      * @param password
      * @return SystemUser
      */
-    SystemUser Login(String userName, String password);
+    SystemUser login(@Param("userName") String userName, @Param("password") String password);
 
     /**
      * 根据调价查询用户列表
@@ -52,14 +53,14 @@ public interface ISystemUserDAO {
      * @param id
      * @return SystemUser
      */
-    SystemUser getUserById(int id);
+    SystemUser getUserById(@Param("id")int id);
 
     /**
      * 根据主键id删除该条信息
      * @param id
      * @return int 受影响的行数
      */
-    int delUser(int id)throws SQLException;
+    int delUser(@Param("id")int id)throws SQLException;
 
     /**
      * 根据用户id跟新密码
@@ -74,7 +75,7 @@ public interface ISystemUserDAO {
      * @param userId
      * @return List
      */
-    List<Map<String,Object>> getRoleListByUserId(int userId);
+    List<Map<String,Object>> getRoleListByUserId(@Param("userId")int userId);
 
     /**
      * 删除该用户的角色
@@ -91,14 +92,14 @@ public interface ISystemUserDAO {
      * @return int 返回收影响的行数
      * @throws SQLException
      */
-    int addUserRole(int userId, int roleId)throws  SQLException;
+    int addUserRole(@Param("userId")int userId, @Param("roleId")int roleId)throws  SQLException;
 
     /**
      * 检查该用户名是否存在
-     * @param userName
+     * @param systemName
      * @return true 存在 false 不存在
      */
-    List<Object> checkUserName(String userName);
+    List<Object> checkUserName(@Param("systemName")String systemName);
 
 
 }

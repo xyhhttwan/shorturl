@@ -38,7 +38,7 @@ import java.util.Map;
 
 @Controller
 @Scope("prototype")
-@RequestMapping("background/system/")
+@RequestMapping("backstage/system/")
 public class SystemUserController extends BackStageController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SystemUserController.class);

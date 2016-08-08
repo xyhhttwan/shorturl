@@ -24,9 +24,9 @@ public class SystemUserServiceImpl implements ISystemUserService {
     @Autowired
     private ISystemUserDAO systemUserLoginDao;
     @Override
-    public SystemUser Login(String userName, String password) {
+    public SystemUser login(String userName, String password) {
 
-        return systemUserLoginDao.Login(userName,password);
+        return systemUserLoginDao.login(userName,password);
     }
 
     /**

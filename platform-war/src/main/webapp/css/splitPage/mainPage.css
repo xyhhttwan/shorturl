@@ -1,0 +1,353 @@
+#agriculturalPager{
+	clear:both;
+	color:#999;
+	padding:5px 0px 5px 0px;
+	font-size:14px;
+}
+#agriculturalPager a{
+	float: left;
+	border: 1px solid #ccc;
+	display: inline;
+	padding: 3px 10px 3px 10px;
+	margin-right: 5px;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	cursor: pointer;
+	background: #fff;
+	text-decoration:none;
+	color:#999;
+}
+
+#agriculturalPager span.disabled{
+	float: left;
+	display: inline;
+	padding: 3px 10px 3px 10px;
+	margin-right: 5px;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border:1px solid #DFDFDF;
+	background-color:#FFF;
+	color:#DFDFDF;
+}
+#agriculturalPager span.curr{
+	float: left;
+	border: 1px solid #23ac38;
+	display: inline;
+	padding: 3px 10px 3px 10px;
+	margin-right: 5px;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	background: #fff;
+	color: #23ac38;
+}
+#agriculturalPager a:hover{
+	border:1px solid #23ac38;
+	background-color:#23ac38;
+	color:#fff;
+}
+#agriculturalPager span.normalsize{
+}
+#agriculturalPager_gopage_wrap{
+	position:relative;
+	left:0px;
+	top:0px;
+}
+#agriculturalPager_btn_go {
+	width:44px;
+	height:18px;
+	border:0px;
+	overflow:hidden;
+	line-height:140%;
+	padding:0px;
+	margin:0px;
+	text-align:center;
+	cursor:pointer;
+	background-color:#23ac38;
+	color:#FFF;
+	position:absolute;
+	left:0px;
+	top:-2px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	display:none;
+}
+#agriculturalPager_btn_go_input{
+	width:36px;
+	height:20px;
+	color:#999;
+	text-align:center;
+	margin-left:1px;
+	margin-right:1px;
+	border:1px solid #DFDFDF;
+	position:relative;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	left:0px;
+	top:0px;
+	outline:none;
+}
+
+#agriculturalPager_btn_go_input.focus{
+	border-color:#23ac38;
+}
+
+#agriculturalPager .pageBtnWrap{
+	float:left;
+}
+#agriculturalPager .infoTextAndGoPageBtnWrap{
+	float:right;
+    margin-right:50px
+}
+#agriculturalPager .spanDot{
+	float:left;
+	margin-right:5px;
+}
+
+#agriculturalPager .currPageNum{
+	color:#23ac38;
+}
+
+#agriculturalPager .infoTextAndGoPageBtnWrap{
+	padding-top:5px;
+}
+/*
+
+农机
+*/
+#machineryPager{
+    clear:both;
+    color:#999;
+    padding:5px 0px 5px 0px;
+    font-size:14px;
+}
+#machineryPager a{
+    float: left;
+    border: 1px solid #ccc;
+    display: inline;
+    padding: 3px 10px 3px 10px;
+    margin-right: 5px;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    cursor: pointer;
+    background: #fff;
+    text-decoration:none;
+    color:#999;
+}
+
+#machineryPager span.disabled{
+    float: left;
+    display: inline;
+    padding: 3px 10px 3px 10px;
+    margin-right: 5px;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border:1px solid #DFDFDF;
+    background-color:#FFF;
+    color:#DFDFDF;
+}
+#machineryPager span.curr{
+    float: left;
+    border: 1px solid #23ac38;
+    display: inline;
+    padding: 3px 10px 3px 10px;
+    margin-right: 5px;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    background: #fff;
+    color: #23ac38;
+}
+#machineryPager a:hover{
+    border:1px solid #23ac38;
+    background-color:#23ac38;
+    color:#fff;
+}
+#machineryPager span.normalsize{
+}
+#machineryPager_gopage_wrap{
+    position:relative;
+    left:0px;
+    top:0px;
+}
+#machineryPager_btn_go {
+    width:44px;
+    height:18px;
+    border:0px;
+    overflow:hidden;
+    line-height:140%;
+    padding:0px;
+    margin:0px;
+    text-align:center;
+    cursor:pointer;
+    background-color:#23ac38;
+    color:#FFF;
+    position:absolute;
+    left:0px;
+    top:-2px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    display:none;
+}
+#machineryPager_btn_go_input{
+    width:36px;
+    height:20px;
+    color:#999;
+    text-align:center;
+    margin-left:1px;
+    margin-right:1px;
+    border:1px solid #DFDFDF;
+    position:relative;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    left:0px;
+    top:0px;
+    outline:none;
+}
+
+#machineryPager_btn_go_input.focus{
+    border-color:#23ac38;
+}
+
+#machineryPager .pageBtnWrap{
+    float:left;
+}
+#machineryPager .infoTextAndGoPageBtnWrap{
+    float:right;
+    margin-right:50px
+}
+#machineryPager .spanDot{
+    float:left;
+    margin-right:5px;
+}
+
+#machineryPager .currPageNum{
+    color:#23ac38;
+}
+
+#machineryPager .infoTextAndGoPageBtnWrap{
+    padding-top:5px;
+}
+/*
+
+土地
+*/
+#landPager{
+    clear:both;
+    color:#999;
+    padding:5px 0px 5px 0px;
+    font-size:14px;
+}
+#landPager a{
+    float: left;
+    border: 1px solid #ccc;
+    display: inline;
+    padding: 3px 10px 3px 10px;
+    margin-right: 5px;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    cursor: pointer;
+    background: #fff;
+    text-decoration:none;
+    color:#999;
+}
+
+#landPager span.disabled{
+    float: left;
+    display: inline;
+    padding: 3px 10px 3px 10px;
+    margin-right: 5px;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border:1px solid #DFDFDF;
+    background-color:#FFF;
+    color:#DFDFDF;
+}
+#landPager span.curr{
+    float: left;
+    border: 1px solid #23ac38;
+    display: inline;
+    padding: 3px 10px 3px 10px;
+    margin-right: 5px;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    background: #fff;
+    color: #23ac38;
+}
+#landPager a:hover{
+    border:1px solid #23ac38;
+    background-color:#23ac38;
+    color:#fff;
+}
+#landPager span.normalsize{
+}
+#landPager_gopage_wrap{
+    position:relative;
+    left:0px;
+    top:0px;
+}
+#landPager_btn_go {
+    width:44px;
+    height:18px;
+    border:0px;
+    overflow:hidden;
+    line-height:140%;
+    padding:0px;
+    margin:0px;
+    text-align:center;
+    cursor:pointer;
+    background-color:#23ac38;
+    color:#FFF;
+    position:absolute;
+    left:0px;
+    top:-2px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    display:none;
+}
+#landPager_btn_go_input{
+    width:36px;
+    height:20px;
+    color:#999;
+    text-align:center;
+    margin-left:1px;
+    margin-right:1px;
+    border:1px solid #DFDFDF;
+    position:relative;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    left:0px;
+    top:0px;
+    outline:none;
+}
+
+#landPager_btn_go_input.focus{
+    border-color:#23ac38;
+}
+
+#landPager .pageBtnWrap{
+    float:left;
+}
+#landPager .infoTextAndGoPageBtnWrap{
+    float:right;
+    margin-right:50px
+}
+#landPager .spanDot{
+    float:left;
+    margin-right:5px;
+}
+
+#landPager .currPageNum{
+    color:#23ac38;
+}
+
+#landPager .infoTextAndGoPageBtnWrap{
+    padding-top:5px;
+}

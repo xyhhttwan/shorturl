@@ -21,7 +21,7 @@
         <!-- Shiro的核心安全接口,这个属性是必须的 -->  
         <property name="securityManager" ref="securityManager"/>  
         <!-- 要求登录时的链接(可根据项目的URL进行替换),非必须的属性,默认会自动寻找Web工程根目录下的"/login.jsp"页面 -->  
-        <property name="loginUrl" value="/loginJump"/>
+        <property name="loginUrl" value="/index.jsp"/>
       	<!-- 没有权限时候跳转到登录页面 -->
         <property name="unauthorizedUrl" value="/403.jsp"/>
         <!-- anon：不用验证就可以访问-->

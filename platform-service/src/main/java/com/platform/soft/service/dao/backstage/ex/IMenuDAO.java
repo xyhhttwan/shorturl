@@ -4,6 +4,7 @@ package com.platform.soft.service.dao.backstage.ex;
 
 import com.platform.soft.domain.backstage.ex.Menu;
 import com.platform.soft.domain.backstage.ex.MenuHelper;
+import org.apache.ibatis.annotations.Param;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -21,7 +22,7 @@ public interface IMenuDAO {
      * @param systemUserId
      * @return List<Menu>
      */
-     List<Menu> getMenuList(int systemUserId);
+     List<Menu> getMenuList(@Param("systemUserId")int systemUserId);
 
     /**
      * 新增菜单
@@ -45,7 +46,7 @@ public interface IMenuDAO {
      * @return int 受影响的行数
      * @throws SQLException
      */
-     int  delMenu(int id)throws SQLException;
+     int  delMenu(@Param("menuId")int id)throws SQLException;
 
     /**
      * 查询全部的菜单
@@ -64,14 +65,14 @@ public interface IMenuDAO {
      * @param id
      * @return List
      */
-     List<?> ifMenuHasChildren(int id);
+     List<?> ifMenuHasChildren(@Param("menuId")int id);
 
     /**
      * 根据id查询菜单
      * @param id
      * @return List
      */
-    Menu getMenuById(int id);
+    Menu getMenuById(@Param("id")int id);
 
 
 }

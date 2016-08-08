@@ -71,7 +71,7 @@
                             <LI id=list3>单击<A
                                     href="javascript:history.back(1)">后退</A>按钮，尝试其他链接。 </LI></UL>
                         <DIV align=right><BR>
-                            农信网 </DIV></TD></TR>
+                            platform </DIV></TD></TR>
                 <TR>
                     <TD align=left background="<%=basePath%>images/front/500/rbox_7.gif"
                         height=20></TD>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration scan="false" scanPeriod="60 seconds" debug="false">
+<configuration scan="false" scanPeriod="60 seconds" debug="true" name="com.platform.soft">
     <!-- 不允许修改 -->
     <contextName>platform</contextName>
 
@@ -12,7 +12,7 @@
             <pattern>${logPattern}</pattern>
         </encoder>
     </appender>
-    <root level="error">
+    <root level="DEBUG">
         <appender-ref ref="stdout"/>
     </root>
     <!-- web请求日志 -->
@@ -85,7 +85,7 @@
     <logger name="PLATFORM-DIGEST" level="info">
         <appender-ref ref="PLATFORM-DIGEST-APPENDER"/>
     </logger>
-    <logger name="cn.thinkjoy.ttraining.dao" level="DEBUG" >
+    <logger name="cn.thinkjoy.ttraining.dao" level="DEBUG">
         <appender-ref ref="PLATFORM-BUSINESS-APPENDER"/>
     </logger>
 

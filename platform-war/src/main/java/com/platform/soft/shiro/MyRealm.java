@@ -90,7 +90,7 @@ public class MyRealm  extends AuthorizingRealm {
         //两个token的引用都是一样的,本例中是org.apache.shiro.authc.UsernamePasswordToken@33799a1e
         UsernamePasswordToken token = (UsernamePasswordToken)authcToken;
         System.out.println("验证当前Subject时获取到token为" + ReflectionToStringBuilder.toString(token, ToStringStyle.MULTI_LINE_STYLE));
-        SystemUser user = systemUserService.Login(token.getUsername(), new String(token.getPassword()));
+        SystemUser user = systemUserService.login(token.getUsername(), new String(token.getPassword()));
         if(null != user){
             AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(user.getSystemName(), user.getPassword(), user.getRealName());
             this.setSession("currentUser", user);

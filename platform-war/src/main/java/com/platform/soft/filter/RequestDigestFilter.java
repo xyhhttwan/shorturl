@@ -44,7 +44,7 @@ public class RequestDigestFilter extends RequestContextFilter {
 
 			filterChain.doFilter(request, response);
 		} catch (Exception e) {
-			logger.error("请求错误,{}",e);
+			LOGGER.error(e.getMessage(),e);
 			hasError = true;
 		} finally {
 			if (LOGGER.isInfoEnabled()) {
