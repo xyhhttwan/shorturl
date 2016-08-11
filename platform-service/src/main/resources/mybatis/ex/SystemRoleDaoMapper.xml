@@ -59,32 +59,32 @@
     <select id="getAllRoles" resultMap="roleMap">
          SELECT id,roleName ,status
           from
-          Role
+          role
     </select>
     <!--分页查询角色信息-->
     <select id="getRolePageList" resultMap="roleMap">
         SELECT id,roleName ,status
         from
-        Role
+        sys_role
         <include refid="where"/>
         <include refid="andOther"/>
         ORDER by id
     </select>
     <!--新增角色-->
     <insert id="addRole" parameterType="Role">
-        INSERT INTO ROLE
+        INSERT INTO sys_role
         (<include refid="columns"/>)
         VALUES
         (<include refid="insertColumns"/>)
     </insert>
     <!--删除角色-->
     <delete id="delRole" parameterType="int">
-        DELETE  FROM ROLE
+        DELETE  FROM sys_role
         WHERE ID=#{id}
     </delete>
     <!--修改角色名称-->
     <update id="updateRole" parameterType="map">
-        UPDATE  role
+        UPDATE  sys_role
         SET
         roleName=#{roleName}
         WHERE  id=#{id}
@@ -94,7 +94,7 @@
     <select id="getRoleById" parameterType="int" resultMap="roleMap">
         SELECT
         *
-        from role
+        from sys_role
         WHERE
         id=#{id}
     </select>
@@ -103,7 +103,7 @@
     <!--根据角色id查询菜单信息-->
     <select id="getMenuByRoleId" parameterType="int" resultType="map">
         SELECT bb.* ,aa.id as roleId,aa.roleName
-        FROM  role aa ,menu bb,roleMenu cc
+        FROM  sys_role aa ,sys_menu bb,sys_role_menu cc
         WHERE
         aa.id = cc.roleId
         AND bb.id = cc.menuId
@@ -112,12 +112,12 @@
     </select>
     <!--根据角色id删除角色菜单-->
     <delete id="delRoleMenuByRoleId" parameterType="int">
-        DELETE FROM roleMenu
+        DELETE FROM sys_role_menu
         WHERE  roleId=#{roelId}
     </delete>
     <!--新增角色菜单-->
     <insert id="addRoleMenu" parameterType="map">
-        INSERT INTO roleMenu
+        INSERT INTO sys_role_menu
         (roleId,menuId)
         VALUES
         (#{roleId},#{menuId})
@@ -131,7 +131,7 @@
         SELECT
          aa.permissionName,aa.permissionCode,aa.id,aa.parentId,aa.status,bb.id as roleId,bb.roleName
         FROM
-        permission aa,role bb,rolePermission cc
+        sys_permission aa,sys_role bb,sys_role_permission cc
         WHERE
         aa.id= cc.permissionId
         AND
@@ -145,7 +145,7 @@
 
         INSERT
         INTO
-         rolePermission
+         sys_role_permission
         (roleId,permissionId)
         VALUES
         (#{roleId},#{permissionId})
@@ -154,7 +154,7 @@
     <!--删除角色权限-->
     <delete id="delRolePermissionByRoleId" parameterType="int">
         DELETE  FROM
-        rolePermission
+        sys_role_permission
         WHERE
         roleId=#{roleId}
     </delete>
@@ -163,7 +163,7 @@
     <select id="queryRoleNameExist" parameterType="Role"
             resultType="java.lang.Integer">
         SELECT COUNT(id)
-        FROM role
+        FROM sys_role
         WHERE roleName = #{roleName}
         <include refid="andId"/>
     </select>

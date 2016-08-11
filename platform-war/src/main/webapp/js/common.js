@@ -179,6 +179,84 @@ function del(dataId, url, datatype) {
 }
 
 
+
+function doPost(dataId, url, datatype,data) {
+    var rows = "";
+    if (datatype == "treegrid") {
+        rows = $('#' + dataId).treegrid('getSelections');
+    } else {
+        rows = $('#' + dataId).datagrid('getSelections');
+    }
+    if (rows.length != 1) {
+        $.messager.alert('消息', '<br/>请选择一行数据!', 'info');
+        return;
+    }
+
+    if (rows.length > 0) {
+        var ids = '';
+        for (var i = 0; i < rows.length; i++) {
+            ids += 'ids=' + rows[i].id + '&';
+        }
+        ids = ids.substring(0, ids.length - 1);
+        url = url + '?' + ids;
+
+        var data =data;
+
+        $.messager.confirm('Confirm', '确定要操作选择的数据吗?', function (r) {
+            if (r) {
+                var win = $.messager.progress({
+                    title: 'Please waiting',
+                    msg: '正在提交请求...'
+                });
+
+                debugger;
+                $.ajax( {
+                    url:url,// 跳转到 action
+                    data:data,
+                    type:'post',
+                    cache:false,
+                    dataType:'json',
+                    success:function(data) {
+                        if(data.result == "true"){
+                            debugger;
+                            $.messager.show({title: 'Success', msg: data.message});
+                            reload(dataId, datatype);
+                        }else if (data.result == "false") {
+                            $.messager.alert('Error', "<br/>" + data.message, 'Error');
+                        } else {
+                            $.messager.alert('Error', "<br/>" + data, 'Error');
+                        }
+                    },
+                    error : function() {
+                        // view("异常！");
+                        $.messager.alert('Error', "<br/>系统异常" , 'Error');
+                    }
+                });
+
+
+
+
+                $.get(url, function (data) {
+                    close_process();
+                    var data = eval('(' + data + ')');
+                    if (data.result == "true") {
+                        $.messager.show({title: 'Success', msg: data.message});
+                        reload(dataId, datatype);
+
+                    } else if (data.result == "false") {
+                        $.messager.alert('Error', "<br/>" + data.message, 'Error');
+                    } else {
+                        $.messager.alert('Error', "<br/>" + data, 'Error');
+                    }
+                });
+
+            }
+        });
+    } else {
+        $.messager.alert('消息', '<br/>请选择要操作的数据!', 'info');
+    }
+}
+
 /**
  *
  * @param title 标题

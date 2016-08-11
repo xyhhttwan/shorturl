@@ -27,11 +27,11 @@
           aa.menuSort menuSort,
           aa.status status
        FROM
-       menu aa
-       INNER JOIN roleMenu bb ON aa.id = bb.menuId
-       INNER JOIN role cc ON bb.roleId = cc.id
-       INNER JOIN userRole dd ON dd.roleId = cc.id
-       INNER JOIN systemUser ee ON ee.id = dd.userId
+       sys_menu aa
+       INNER JOIN sys_role_menu bb ON aa.id = bb.menuId
+       INNER JOIN sys_role cc ON bb.roleId = cc.id
+       INNER JOIN sys_user_role dd ON dd.roleId = cc.id
+       INNER JOIN sys_system_user ee ON ee.id = dd.userId
        WHERE  ee.id=#{systemUserId}
        ORDER BY menuSort ASC
    </select>
@@ -39,14 +39,14 @@
     <!--新增菜单-->
     <insert id="addMenu" parameterType="Menu">
         INSERT  INTO
-        MENU
+        sys_menu
         (menuName,url,parentId,icon,menuSort,status)
         VALUES
         (#{menuName},#{url},#{parentId},#{icon},#{menuSort},#{status})
     </insert>
     <!--修改菜单-->
     <update id="updateMenu" parameterType="Menu">
-      UPDATE  menu
+      UPDATE  sys_menu
       SET
       menuName =#{menuName},url = #{url},parentId=#{parentId},icon=#{icon},menuSort=#{menuSort},status=#{status}
       WHERE
@@ -55,33 +55,33 @@
     <!---删除菜单-->
     <delete id="delMenu" parameterType="int" >
 
-        DELETE  from menu
+        DELETE  from sys_menu
         WHERE
         id =#{menuId}
     </delete>
 
     <!--查询全部菜单-->
     <select id="getAllMenuList" resultMap="menuMap">
-      select id,menuName,url,parentId,icon,menuSort,status from menu
+      select id,menuName,url,parentId,icon,menuSort,status from sys_menu
     </select>
     <!--下拉菜单-->
     <select id="getMenuBySelect" resultType="MenuHelper" >
       SELECT  id as id, menuName as text,parentId as parentId
       FROM
-      MENU
+      sys_menu
     </select>
 
     <!--改菜单是否有子类-->
     <select id="ifMenuHasChildren" resultType="map" parameterType="int" >
         SELECT  id
         FROM
-        MENU
+        sys_menu
         where
         parentId=#{menuId}
     </select>
 
     <!--根据id查询菜单信息-->
     <select id="getMenuById" parameterType="int" resultMap="menuMap">
-        select id,menuName,url,parentId,icon,menuSort,status from menu where id =#{id}
+        select id,menuName,url,parentId,icon,menuSort,status from sys_menu where id =#{id}
     </select>
 </mapper>

@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.platform.soft.service.dao.backstage.ISDistrictDAO">
+<!--
+insert
+update
+updateNull
+deleteById
+deleteByCondition
+deleteByProperty
+fetch
+findOne
+findList
+findAll
+queryPage
+like
+queryList
+queryOne
+count
+selectMaxId
+updateOrSave
+selectOne
+selectList
+-->
+    <sql id="Base_Column_List">
+        DistrictID,
+        DistrictName,
+        CityID,
+        DateCreated,
+        DateUpdated
+    </sql>
+    <insert id="insert" parameterType="SDistrict">
+        INSERT INTO tbl_s_district (
+        DistrictID,
+        DistrictName,
+        CityID,
+        DateCreated,
+        DateUpdated
+        ) VALUES (
+        #{districtId},
+        #{districtName},
+        #{cityId},
+        #{dateCreated},
+        #{dateUpdated}
+        )
+        <selectKey resultType="java.lang.Long" keyProperty="id">
+        SELECT LAST_INSERT_ID() AS ID
+        </selectKey>
+    </insert>
+
+    <!-- 更新 -->
+    <update id="update" parameterType="SDistrict">
+        UPDATE tbl_s_district
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="districtName!=null">
+                DistrictName = #{districtName},
+            </if>
+            <if test="cityId!=null">
+                CityID = #{cityId},
+            </if>
+            <if test="dateCreated!=null">
+                DateCreated = #{dateCreated},
+            </if>
+            <if test="dateUpdated!=null">
+                DateUpdated = #{dateUpdated},
+            </if>
+        </trim>
+        WHERE
+        DistrictID = #{districtId}
+    </update>
+
+    <update id="updateMap">
+        UPDATE tbl_s_district
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="map.districtName!=null">
+                DistrictName = #{map.districtName},
+            </if>
+            <if test="map.cityId!=null">
+                CityID = #{map.cityId},
+            </if>
+            <if test="map.dateCreated!=null">
+                DateCreated = #{map.dateCreated},
+            </if>
+            <if test="map.dateUpdated!=null">
+                DateUpdated = #{map.dateUpdated},
+            </if>
+        </trim>
+        WHERE
+        id = #{map.id}
+    </update>
+
+    <update id="updateByCondition">
+        UPDATE tbl_s_district
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="update.districtName!=null">
+                DistrictName = #{update.districtName},
+            </if>
+            <if test="update.cityId!=null">
+                CityID = #{update.cityId},
+            </if>
+            <if test="update.dateCreated!=null">
+                DateCreated = #{update.dateCreated},
+            </if>
+            <if test="update.dateUpdated!=null">
+                DateUpdated = #{update.dateUpdated},
+            </if>
+        </trim>
+
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.districtId!=null">
+                AND DistrictID = #{condition.districtId}
+            </if>
+            <if test="condition.districtName!=null">
+                AND DistrictName = #{condition.districtName}
+            </if>
+            <if test="condition.cityId!=null">
+                AND CityID = #{condition.cityId}
+            </if>
+            <if test="condition.dateCreated!=null">
+                AND DateCreated = #{condition.dateCreated}
+            </if>
+            <if test="condition.dateUpdated!=null">
+                AND DateUpdated = #{condition.dateUpdated}
+            </if>
+        </trim>
+    </update>
+
+    <insert id="insertMap" >
+        INSERT INTO tbl_s_district (
+                DistrictID,
+                DistrictName,
+                CityID,
+                DateCreated,
+                DateUpdated
+        ) VALUES (
+                    #{map.districtId},
+                    #{map.districtName},
+                    #{map.cityId},
+                    #{map.dateCreated},
+                    #{map.dateUpdated}
+        )
+    </insert>
+
+
+    <update id="updateNull" parameterType="SDistrict">
+        UPDATE tbl_s_district
+        <trim prefix="SET" suffixOverrides=",">
+            DistrictName = #{districtName},
+            CityID = #{cityId},
+            DateCreated = #{dateCreated},
+            DateUpdated = #{dateUpdated},
+        </trim>
+        WHERE
+        DistrictID = #{districtId} 
+    </update>
+
+    <!-- 按Id删除 -->
+    <delete id="deleteById" parameterType="java.lang.Long">
+        DELETE FROM tbl_s_district
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND DistrictID = #{id}
+        </trim>
+    </delete>
+
+
+    <delete id="deleteByCondition" parameterType="java.util.Map">
+        DELETE FROM tbl_s_district
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="districtId!=null">
+                AND DistrictID = #{districtId}
+            </if>
+            <if test="districtName!=null">
+                AND DistrictName = #{districtName}
+            </if>
+            <if test="cityId!=null">
+                AND CityID = #{cityId}
+            </if>
+            <if test="dateCreated!=null">
+                AND DateCreated = #{dateCreated}
+            </if>
+            <if test="dateUpdated!=null">
+                AND DateUpdated = #{dateUpdated}
+            </if>
+        </trim>
+    </delete>
+
+    <delete id="deleteByProperty" parameterType="java.util.Map">
+        DELETE FROM tbl_s_district WHERE
+        ${property} = #{value}
+    </delete>
+
+    <select id="fetch" parameterType="java.lang.Long" resultType="SDistrict">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tbl_s_district
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND DistrictID = #{id}
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="findOne" parameterType="java.util.Map" resultType="SDistrict">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tbl_s_district WHERE
+        ${property} = #{value}
+        <if test="orderBy!=null">
+            ORDER BY ${orderBy} ${sortBy}
+        </if>
+        LIMIT 0,1
+    </select>
+
+    <select id="findList" parameterType="java.util.Map" resultType="SDistrict">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tbl_s_district WHERE
+        ${property} = #{value}
+        <if test="orderBy!=null">
+            ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="findAll" resultType="SDistrict">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tbl_s_district
+        <if test="orderBy!=null">
+            ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="queryPage" resultType="SDistrict">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tbl_s_district
+        <where>
+
+            <if test="condition.whereSql != null">
+                and id in (#{condition.whereSql})
+            </if>
+
+            <if test="condition.districtId!=null">
+                ${condition.groupOp}   DistrictID  ${condition.DistrictID.op}  #{condition.DistrictID.data}
+            </if>
+            <if test="condition.districtName!=null">
+                ${condition.groupOp}   DistrictName  ${condition.DistrictName.op}  #{condition.DistrictName.data}
+            </if>
+            <if test="condition.cityId!=null">
+                ${condition.groupOp}   CityID  ${condition.CityID.op}  #{condition.CityID.data}
+            </if>
+            <if test="condition.dateCreated!=null">
+                ${condition.groupOp}   DateCreated  ${condition.DateCreated.op}  #{condition.DateCreated.data}
+            </if>
+            <if test="condition.dateUpdated!=null">
+                ${condition.groupOp}   DateUpdated  ${condition.DateUpdated.op}  #{condition.DateUpdated.data}
+            </if>
+
+
+    </where>
+
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+        <if test="offset != null">
+            limit ${offset}, ${rows}
+        </if>
+    </select>
+
+    <select id="like" parameterType="java.util.Map" resultType="SDistrict">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tbl_s_district
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="districtId!=null">
+                AND DistrictID like CONCAT('%', #{districtId} , '%')
+            </if>
+            <if test="districtName!=null">
+                AND DistrictName like CONCAT('%', #{districtName} , '%')
+            </if>
+            <if test="cityId!=null">
+                AND CityID like CONCAT('%', #{cityId} , '%')
+            </if>
+            <if test="dateCreated!=null">
+                AND DateCreated like CONCAT('%', #{dateCreated} , '%')
+            </if>
+            <if test="dateUpdated!=null">
+                AND DateUpdated like CONCAT('%', #{dateUpdated} , '%')
+            </if>
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+
+    <select id="queryList" parameterType="java.util.Map" resultType="SDistrict">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tbl_s_district
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.districtId!=null">
+                AND DistrictID = #{condition.districtId}
+            </if>
+            <if test="condition.districtName!=null">
+                AND DistrictName = #{condition.districtName}
+            </if>
+            <if test="condition.cityId!=null">
+                AND CityID = #{condition.cityId}
+            </if>
+            <if test="condition.dateCreated!=null">
+                AND DateCreated = #{condition.dateCreated}
+            </if>
+            <if test="condition.dateUpdated!=null">
+                AND DateUpdated = #{condition.dateUpdated}
+            </if>
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="queryOne" parameterType="java.util.Map" resultType="SDistrict">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tbl_s_district
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.districtId!=null">
+                AND DistrictID = #{condition.districtId}
+            </if>
+            <if test="condition.districtName!=null">
+                AND DistrictName = #{condition.districtName}
+            </if>
+            <if test="condition.cityId!=null">
+                AND CityID = #{condition.cityId}
+            </if>
+            <if test="condition.dateCreated!=null">
+                AND DateCreated = #{condition.dateCreated}
+            </if>
+            <if test="condition.dateUpdated!=null">
+                AND DateUpdated = #{condition.dateUpdated}
+            </if>
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+        limit 0,1
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+        SELECT count(DistrictID) FROM tbl_s_district
+       <where>
+           <if test="districtId!=null">
+               ${groupOp} DistrictID ${DistrictID.op}  #{DistrictID.data}
+           </if>
+           <if test="districtName!=null">
+               ${groupOp} DistrictName ${DistrictName.op}  #{DistrictName.data}
+           </if>
+           <if test="cityId!=null">
+               ${groupOp} CityID ${CityID.op}  #{CityID.data}
+           </if>
+           <if test="dateCreated!=null">
+               ${groupOp} DateCreated ${DateCreated.op}  #{DateCreated.data}
+           </if>
+           <if test="dateUpdated!=null">
+               ${groupOp} DateUpdated ${DateUpdated.op}  #{DateUpdated.data}
+           </if>
+
+       </where>
+    <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+    </if>
+    </select>
+
+    <select id="selectMaxId" resultType="java.lang.Long">
+        SELECT
+        MAX(id)
+        FROM tbl_s_district
+    </select>
+
+</mapper>
+

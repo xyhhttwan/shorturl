@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.platform.soft.service.dao.backstage.IFreightDAO">
+<!--
+insert
+update
+updateNull
+deleteById
+deleteByCondition
+deleteByProperty
+fetch
+findOne
+findList
+findAll
+queryPage
+like
+queryList
+queryOne
+count
+selectMaxId
+updateOrSave
+selectOne
+selectList
+-->
+    <sql id="Base_Column_List">
+        id,
+        from,
+        to,
+        des,
+        price
+    </sql>
+    <insert id="insert" parameterType="Freight">
+        INSERT INTO tbl_freight (
+        from,
+        to,
+        des,
+        price
+        ) VALUES (
+        #{from},
+        #{to},
+        #{des},
+        #{price}
+        )
+        <selectKey resultType="java.lang.Long" keyProperty="id">
+        SELECT LAST_INSERT_ID() AS ID
+        </selectKey>
+    </insert>
+
+    <!-- 更新 -->
+    <update id="update" parameterType="Freight">
+        UPDATE tbl_freight
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="from!=null">
+                from = #{from},
+            </if>
+            <if test="to!=null">
+                to = #{to},
+            </if>
+            <if test="des!=null">
+                des = #{des},
+            </if>
+            <if test="price!=null">
+                price = #{price},
+            </if>
+        </trim>
+        WHERE
+        id = #{id}
+    </update>
+
+    <update id="updateMap">
+        UPDATE tbl_freight
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="map.from!=null">
+                from = #{map.from},
+            </if>
+            <if test="map.to!=null">
+                to = #{map.to},
+            </if>
+            <if test="map.des!=null">
+                des = #{map.des},
+            </if>
+            <if test="map.price!=null">
+                price = #{map.price},
+            </if>
+        </trim>
+        WHERE
+        id = #{map.id}
+    </update>
+
+    <update id="updateByCondition">
+        UPDATE tbl_freight
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="update.from!=null">
+                from = #{update.from},
+            </if>
+            <if test="update.to!=null">
+                to = #{update.to},
+            </if>
+            <if test="update.des!=null">
+                des = #{update.des},
+            </if>
+            <if test="update.price!=null">
+                price = #{update.price},
+            </if>
+        </trim>
+
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.from!=null">
+                AND from = #{condition.from}
+            </if>
+            <if test="condition.to!=null">
+                AND to = #{condition.to}
+            </if>
+            <if test="condition.des!=null">
+                AND des = #{condition.des}
+            </if>
+            <if test="condition.price!=null">
+                AND price = #{condition.price}
+            </if>
+        </trim>
+    </update>
+
+    <insert id="insertMap" >
+        INSERT INTO tbl_freight (
+                from,
+                to,
+                des,
+                price
+        ) VALUES (
+                    #{map.from},
+                    #{map.to},
+                    #{map.des},
+                    #{map.price}
+        )
+    </insert>
+
+
+    <update id="updateNull" parameterType="Freight">
+        UPDATE tbl_freight
+        <trim prefix="SET" suffixOverrides=",">
+            from = #{from},
+            to = #{to},
+            des = #{des},
+            price = #{price},
+        </trim>
+        WHERE
+        id = #{id} 
+    </update>
+
+    <!-- 按Id删除 -->
+    <delete id="deleteById" parameterType="java.lang.Long">
+        DELETE FROM tbl_freight
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id = #{id}
+        </trim>
+    </delete>
+
+
+    <delete id="deleteByCondition" parameterType="java.util.Map">
+        DELETE FROM tbl_freight
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id = #{id}
+            </if>
+            <if test="from!=null">
+                AND from = #{from}
+            </if>
+            <if test="to!=null">
+                AND to = #{to}
+            </if>
+            <if test="des!=null">
+                AND des = #{des}
+            </if>
+            <if test="price!=null">
+                AND price = #{price}
+            </if>
+        </trim>
+    </delete>
+
+    <delete id="deleteByProperty" parameterType="java.util.Map">
+        DELETE FROM tbl_freight WHERE
+        ${property} = #{value}
+    </delete>
+
+    <select id="fetch" parameterType="java.lang.Long" resultType="Freight">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tbl_freight
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id = #{id}
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="findOne" parameterType="java.util.Map" resultType="Freight">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tbl_freight WHERE
+        ${property} = #{value}
+        <if test="orderBy!=null">
+            ORDER BY ${orderBy} ${sortBy}
+        </if>
+        LIMIT 0,1
+    </select>
+
+    <select id="findList" parameterType="java.util.Map" resultType="Freight">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tbl_freight WHERE
+        ${property} = #{value}
+        <if test="orderBy!=null">
+            ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="findAll" resultType="Freight">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tbl_freight
+        <if test="orderBy!=null">
+            ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="queryPage" resultType="Freight">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tbl_freight
+        <where>
+
+            <if test="condition.whereSql != null">
+                and id in (#{condition.whereSql})
+            </if>
+
+            <if test="condition.id!=null">
+                ${condition.groupOp}   id  ${condition.id.op}  #{condition.id.data}
+            </if>
+            <if test="condition.from!=null">
+                ${condition.groupOp}   from  ${condition.from.op}  #{condition.from.data}
+            </if>
+            <if test="condition.to!=null">
+                ${condition.groupOp}   to  ${condition.to.op}  #{condition.to.data}
+            </if>
+            <if test="condition.des!=null">
+                ${condition.groupOp}   des  ${condition.des.op}  #{condition.des.data}
+            </if>
+            <if test="condition.price!=null">
+                ${condition.groupOp}   price  ${condition.price.op}  #{condition.price.data}
+            </if>
+
+
+    </where>
+
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+        <if test="offset != null">
+            limit ${offset}, ${rows}
+        </if>
+    </select>
+
+    <select id="like" parameterType="java.util.Map" resultType="Freight">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tbl_freight
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id like CONCAT('%', #{id} , '%')
+            </if>
+            <if test="from!=null">
+                AND from like CONCAT('%', #{from} , '%')
+            </if>
+            <if test="to!=null">
+                AND to like CONCAT('%', #{to} , '%')
+            </if>
+            <if test="des!=null">
+                AND des like CONCAT('%', #{des} , '%')
+            </if>
+            <if test="price!=null">
+                AND price like CONCAT('%', #{price} , '%')
+            </if>
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+
+    <select id="queryList" parameterType="java.util.Map" resultType="Freight">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tbl_freight
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.from!=null">
+                AND from = #{condition.from}
+            </if>
+            <if test="condition.to!=null">
+                AND to = #{condition.to}
+            </if>
+            <if test="condition.des!=null">
+                AND des = #{condition.des}
+            </if>
+            <if test="condition.price!=null">
+                AND price = #{condition.price}
+            </if>
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="queryOne" parameterType="java.util.Map" resultType="Freight">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tbl_freight
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.from!=null">
+                AND from = #{condition.from}
+            </if>
+            <if test="condition.to!=null">
+                AND to = #{condition.to}
+            </if>
+            <if test="condition.des!=null">
+                AND des = #{condition.des}
+            </if>
+            <if test="condition.price!=null">
+                AND price = #{condition.price}
+            </if>
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+        limit 0,1
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+        SELECT count(id) FROM tbl_freight
+       <where>
+           <if test="id!=null">
+               ${groupOp} id ${id.op}  #{id.data}
+           </if>
+           <if test="from!=null">
+               ${groupOp} from ${from.op}  #{from.data}
+           </if>
+           <if test="to!=null">
+               ${groupOp} to ${to.op}  #{to.data}
+           </if>
+           <if test="des!=null">
+               ${groupOp} des ${des.op}  #{des.data}
+           </if>
+           <if test="price!=null">
+               ${groupOp} price ${price.op}  #{price.data}
+           </if>
+
+       </where>
+    <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+    </if>
+    </select>
+
+    <select id="selectMaxId" resultType="java.lang.Long">
+        SELECT
+        MAX(id)
+        FROM tbl_freight
+    </select>
+
+</mapper>
+

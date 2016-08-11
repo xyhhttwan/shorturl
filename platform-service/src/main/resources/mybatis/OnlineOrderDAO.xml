@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.platform.soft.service.dao.backstage.IOnlineOrderDAO">
+<!--
+insert
+update
+updateNull
+deleteById
+deleteByCondition
+deleteByProperty
+fetch
+findOne
+findList
+findAll
+queryPage
+like
+queryList
+queryOne
+count
+selectMaxId
+updateOrSave
+selectOne
+selectList
+-->
+    <sql id="Base_Column_List">
+        id,
+        mFrom,
+        mTo,
+        linKMan,
+        phoneNum,
+        remark,
+        content,
+        createDate,
+        isLink,
+        linkResult
+    </sql>
+    <insert id="insert" parameterType="OnlineOrder">
+        INSERT INTO tbl_online_order (
+        mFrom,
+        mTo,
+        linKMan,
+        phoneNum,
+        remark,
+        content,
+        createDate,
+        isLink,
+        linkResult
+        ) VALUES (
+        #{mfrom},
+        #{mto},
+        #{linKman},
+        #{phoneNum},
+        #{remark},
+        #{content},
+        #{createDate},
+        #{isLink},
+        #{linkResult}
+        )
+        <selectKey resultType="java.lang.Long" keyProperty="id">
+        SELECT LAST_INSERT_ID() AS ID
+        </selectKey>
+    </insert>
+
+    <!-- 更新 -->
+    <update id="update" parameterType="OnlineOrder">
+        UPDATE tbl_online_order
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="mfrom!=null">
+                mFrom = #{mfrom},
+            </if>
+            <if test="mto!=null">
+                mTo = #{mto},
+            </if>
+            <if test="linKman!=null">
+                linKMan = #{linKman},
+            </if>
+            <if test="phoneNum!=null">
+                phoneNum = #{phoneNum},
+            </if>
+            <if test="remark!=null">
+                remark = #{remark},
+            </if>
+            <if test="content!=null">
+                content = #{content},
+            </if>
+            <if test="createDate!=null">
+                createDate = #{createDate},
+            </if>
+            <if test="isLink!=null">
+                isLink = #{isLink},
+            </if>
+            <if test="linkResult!=null">
+                linkResult = #{linkResult},
+            </if>
+        </trim>
+        WHERE
+        id = #{id}
+    </update>
+
+    <update id="updateMap">
+        UPDATE tbl_online_order
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="map.mfrom!=null">
+                mFrom = #{map.mfrom},
+            </if>
+            <if test="map.mto!=null">
+                mTo = #{map.mto},
+            </if>
+            <if test="map.linKman!=null">
+                linKMan = #{map.linKman},
+            </if>
+            <if test="map.phoneNum!=null">
+                phoneNum = #{map.phoneNum},
+            </if>
+            <if test="map.remark!=null">
+                remark = #{map.remark},
+            </if>
+            <if test="map.content!=null">
+                content = #{map.content},
+            </if>
+            <if test="map.createDate!=null">
+                createDate = #{map.createDate},
+            </if>
+            <if test="map.isLink!=null">
+                isLink = #{map.isLink},
+            </if>
+            <if test="map.linkResult!=null">
+                linkResult = #{map.linkResult},
+            </if>
+        </trim>
+        WHERE
+        id = #{map.id}
+    </update>
+
+    <update id="updateByCondition">
+        UPDATE tbl_online_order
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="update.mfrom!=null">
+                mFrom = #{update.mfrom},
+            </if>
+            <if test="update.mto!=null">
+                mTo = #{update.mto},
+            </if>
+            <if test="update.linKman!=null">
+                linKMan = #{update.linKman},
+            </if>
+            <if test="update.phoneNum!=null">
+                phoneNum = #{update.phoneNum},
+            </if>
+            <if test="update.remark!=null">
+                remark = #{update.remark},
+            </if>
+            <if test="update.content!=null">
+                content = #{update.content},
+            </if>
+            <if test="update.createDate!=null">
+                createDate = #{update.createDate},
+            </if>
+            <if test="update.isLink!=null">
+                isLink = #{update.isLink},
+            </if>
+            <if test="update.linkResult!=null">
+                linkResult = #{update.linkResult},
+            </if>
+        </trim>
+
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.mfrom!=null">
+                AND mFrom = #{condition.mfrom}
+            </if>
+            <if test="condition.mto!=null">
+                AND mTo = #{condition.mto}
+            </if>
+            <if test="condition.linKman!=null">
+                AND linKMan = #{condition.linKman}
+            </if>
+            <if test="condition.phoneNum!=null">
+                AND phoneNum = #{condition.phoneNum}
+            </if>
+            <if test="condition.remark!=null">
+                AND remark = #{condition.remark}
+            </if>
+            <if test="condition.content!=null">
+                AND content = #{condition.content}
+            </if>
+            <if test="condition.createDate!=null">
+                AND createDate = #{condition.createDate}
+            </if>
+            <if test="condition.isLink!=null">
+                AND isLink = #{condition.isLink}
+            </if>
+            <if test="condition.linkResult!=null">
+                AND linkResult = #{condition.linkResult}
+            </if>
+        </trim>
+    </update>
+
+    <insert id="insertMap" >
+        INSERT INTO tbl_online_order (
+                mFrom,
+                mTo,
+                linKMan,
+                phoneNum,
+                remark,
+                content,
+                createDate,
+                isLink,
+                linkResult
+        ) VALUES (
+                    #{map.mfrom},
+                    #{map.mto},
+                    #{map.linKman},
+                    #{map.phoneNum},
+                    #{map.remark},
+                    #{map.content},
+                    #{map.createDate},
+                    #{map.isLink},
+                    #{map.linkResult}
+        )
+    </insert>
+
+
+    <update id="updateNull" parameterType="OnlineOrder">
+        UPDATE tbl_online_order
+        <trim prefix="SET" suffixOverrides=",">
+            mFrom = #{mfrom},
+            mTo = #{mto},
+            linKMan = #{linKman},
+            phoneNum = #{phoneNum},
+            remark = #{remark},
+            content = #{content},
+            createDate = #{createDate},
+            isLink = #{isLink},
+            linkResult = #{linkResult},
+        </trim>
+        WHERE
+        id = #{id} 
+    </update>
+
+    <!-- 按Id删除 -->
+    <delete id="deleteById" parameterType="java.lang.Long">
+        DELETE FROM tbl_online_order
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id = #{id}
+        </trim>
+    </delete>
+
+
+    <delete id="deleteByCondition" parameterType="java.util.Map">
+        DELETE FROM tbl_online_order
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id = #{id}
+            </if>
+            <if test="mfrom!=null">
+                AND mFrom = #{mfrom}
+            </if>
+            <if test="mto!=null">
+                AND mTo = #{mto}
+            </if>
+            <if test="linKman!=null">
+                AND linKMan = #{linKman}
+            </if>
+            <if test="phoneNum!=null">
+                AND phoneNum = #{phoneNum}
+            </if>
+            <if test="remark!=null">
+                AND remark = #{remark}
+            </if>
+            <if test="content!=null">
+                AND content = #{content}
+            </if>
+            <if test="createDate!=null">
+                AND createDate = #{createDate}
+            </if>
+            <if test="isLink!=null">
+                AND isLink = #{isLink}
+            </if>
+            <if test="linkResult!=null">
+                AND linkResult = #{linkResult}
+            </if>
+        </trim>
+    </delete>
+
+    <delete id="deleteByProperty" parameterType="java.util.Map">
+        DELETE FROM tbl_online_order WHERE
+        ${property} = #{value}
+    </delete>
+
+    <select id="fetch" parameterType="java.lang.Long" resultType="OnlineOrder">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tbl_online_order
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id = #{id}
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="findOne" parameterType="java.util.Map" resultType="OnlineOrder">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tbl_online_order WHERE
+        ${property} = #{value}
+        <if test="orderBy!=null">
+            ORDER BY ${orderBy} ${sortBy}
+        </if>
+        LIMIT 0,1
+    </select>
+
+    <select id="findList" parameterType="java.util.Map" resultType="OnlineOrder">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tbl_online_order WHERE
+        ${property} = #{value}
+        <if test="orderBy!=null">
+            ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="findAll" resultType="OnlineOrder">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tbl_online_order
+        <if test="orderBy!=null">
+            ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="queryPage" resultType="OnlineOrder">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tbl_online_order
+        <where>
+
+            <if test="condition.whereSql != null">
+                and id in (#{condition.whereSql})
+            </if>
+
+            <if test="condition.id!=null">
+                ${condition.groupOp}   id  ${condition.id.op}  #{condition.id.data}
+            </if>
+            <if test="condition.mfrom!=null">
+                ${condition.groupOp}   mFrom  ${condition.mFrom.op}  #{condition.mFrom.data}
+            </if>
+            <if test="condition.mto!=null">
+                ${condition.groupOp}   mTo  ${condition.mTo.op}  #{condition.mTo.data}
+            </if>
+            <if test="condition.linKman!=null">
+                ${condition.groupOp}   linKMan  ${condition.linKMan.op}  #{condition.linKMan.data}
+            </if>
+            <if test="condition.phoneNum!=null">
+                ${condition.groupOp}   phoneNum  ${condition.phoneNum.op}  #{condition.phoneNum.data}
+            </if>
+            <if test="condition.remark!=null">
+                ${condition.groupOp}   remark  ${condition.remark.op}  #{condition.remark.data}
+            </if>
+            <if test="condition.content!=null">
+                ${condition.groupOp}   content  ${condition.content.op}  #{condition.content.data}
+            </if>
+            <if test="condition.createDate!=null">
+                ${condition.groupOp}   createDate  ${condition.createDate.op}  #{condition.createDate.data}
+            </if>
+            <if test="condition.isLink!=null">
+                ${condition.groupOp}   isLink  ${condition.isLink.op}  #{condition.isLink.data}
+            </if>
+            <if test="condition.linkResult!=null">
+                ${condition.groupOp}   linkResult  ${condition.linkResult.op}  #{condition.linkResult.data}
+            </if>
+
+
+    </where>
+
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+        <if test="offset != null">
+            limit ${offset}, ${rows}
+        </if>
+    </select>
+
+    <select id="like" parameterType="java.util.Map" resultType="OnlineOrder">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tbl_online_order
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id like CONCAT('%', #{id} , '%')
+            </if>
+            <if test="mfrom!=null">
+                AND mFrom like CONCAT('%', #{mfrom} , '%')
+            </if>
+            <if test="mto!=null">
+                AND mTo like CONCAT('%', #{mto} , '%')
+            </if>
+            <if test="linKman!=null">
+                AND linKMan like CONCAT('%', #{linKman} , '%')
+            </if>
+            <if test="phoneNum!=null">
+                AND phoneNum like CONCAT('%', #{phoneNum} , '%')
+            </if>
+            <if test="remark!=null">
+                AND remark like CONCAT('%', #{remark} , '%')
+            </if>
+            <if test="content!=null">
+                AND content like CONCAT('%', #{content} , '%')
+            </if>
+            <if test="createDate!=null">
+                AND createDate like CONCAT('%', #{createDate} , '%')
+            </if>
+            <if test="isLink!=null">
+                AND isLink like CONCAT('%', #{isLink} , '%')
+            </if>
+            <if test="linkResult!=null">
+                AND linkResult like CONCAT('%', #{linkResult} , '%')
+            </if>
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+
+    <select id="queryList" parameterType="java.util.Map" resultType="OnlineOrder">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tbl_online_order
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.mfrom!=null">
+                AND mFrom = #{condition.mfrom}
+            </if>
+            <if test="condition.mto!=null">
+                AND mTo = #{condition.mto}
+            </if>
+            <if test="condition.linKman!=null">
+                AND linKMan = #{condition.linKman}
+            </if>
+            <if test="condition.phoneNum!=null">
+                AND phoneNum = #{condition.phoneNum}
+            </if>
+            <if test="condition.remark!=null">
+                AND remark = #{condition.remark}
+            </if>
+            <if test="condition.content!=null">
+                AND content = #{condition.content}
+            </if>
+            <if test="condition.createDate!=null">
+                AND createDate = #{condition.createDate}
+            </if>
+            <if test="condition.isLink!=null">
+                AND isLink = #{condition.isLink}
+            </if>
+            <if test="condition.linkResult!=null">
+                AND linkResult = #{condition.linkResult}
+            </if>
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="queryOne" parameterType="java.util.Map" resultType="OnlineOrder">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tbl_online_order
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.mfrom!=null">
+                AND mFrom = #{condition.mfrom}
+            </if>
+            <if test="condition.mto!=null">
+                AND mTo = #{condition.mto}
+            </if>
+            <if test="condition.linKman!=null">
+                AND linKMan = #{condition.linKman}
+            </if>
+            <if test="condition.phoneNum!=null">
+                AND phoneNum = #{condition.phoneNum}
+            </if>
+            <if test="condition.remark!=null">
+                AND remark = #{condition.remark}
+            </if>
+            <if test="condition.content!=null">
+                AND content = #{condition.content}
+            </if>
+            <if test="condition.createDate!=null">
+                AND createDate = #{condition.createDate}
+            </if>
+            <if test="condition.isLink!=null">
+                AND isLink = #{condition.isLink}
+            </if>
+            <if test="condition.linkResult!=null">
+                AND linkResult = #{condition.linkResult}
+            </if>
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+        limit 0,1
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+        SELECT count(id) FROM tbl_online_order
+       <where>
+           <if test="id!=null">
+               ${groupOp} id ${id.op}  #{id.data}
+           </if>
+           <if test="mfrom!=null">
+               ${groupOp} mFrom ${mFrom.op}  #{mFrom.data}
+           </if>
+           <if test="mto!=null">
+               ${groupOp} mTo ${mTo.op}  #{mTo.data}
+           </if>
+           <if test="linKman!=null">
+               ${groupOp} linKMan ${linKMan.op}  #{linKMan.data}
+           </if>
+           <if test="phoneNum!=null">
+               ${groupOp} phoneNum ${phoneNum.op}  #{phoneNum.data}
+           </if>
+           <if test="remark!=null">
+               ${groupOp} remark ${remark.op}  #{remark.data}
+           </if>
+           <if test="content!=null">
+               ${groupOp} content ${content.op}  #{content.data}
+           </if>
+           <if test="createDate!=null">
+               ${groupOp} createDate ${createDate.op}  #{createDate.data}
+           </if>
+           <if test="isLink!=null">
+               ${groupOp} isLink ${isLink.op}  #{isLink.data}
+           </if>
+           <if test="linkResult!=null">
+               ${groupOp} linkResult ${linkResult.op}  #{linkResult.data}
+           </if>
+
+       </where>
+    <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+    </if>
+    </select>
+
+    <select id="selectMaxId" resultType="java.lang.Long">
+        SELECT
+        MAX(id)
+        FROM tbl_online_order
+    </select>
+
+</mapper>
+

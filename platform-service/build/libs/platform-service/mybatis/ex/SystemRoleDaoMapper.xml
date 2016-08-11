@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.platform.soft.service.dao.backstage.ex.IRoleDAO">
+    <!--
+         符号转义说明
+    &lt;          <
+    &gt;          >
+    &lt;&gt;     <>
+    &amp;        &
+    &apos;       '
+    &quot;       "
+  <![CDATA[ 这里写你的SQL或者符号 ]]>
+ -->
+    <!-- 对象映射 -->
+    <resultMap type="com.platform.soft.domain.backstage.ex.Role" id="roleMap"/>
+
+    <!-- tbaleColumns  所有列 -->
+    <sql id="tbaleColumns">
+        id,roleName,status
+    </sql>
+    <!-- tbaleColumns  所有列 -->
+    <sql id="columns">
+        roleName,status
+    </sql>
+    <!-- tbaleColumns  所有列 -->
+    <sql id="insertColumns">
+        #{roleName},${status}
+    </sql>
+
+    <!-- where 条件  -->
+    <sql id="where">
+        WHERE 1=1
+    </sql>
+
+    <!-- 条件 查询  , 去掉主键列-->
+    <sql id="andOther">
+        <trim suffixOverrides=",">
+
+            <if test="roleName != null and roleName !='' ">
+                and roleName = #{roleName}
+            </if>
+            <if test="status != null and status !='' ">
+                and status = #{status}
+            </if>
+
+        </trim>
+    </sql>
+
+    <sql id="andId">
+        <trim suffixOverrides=",">
+
+            <if test="id != null and id !='' ">
+                and id != #{id}
+            </if>
+
+        </trim>
+    </sql>
+
+    <select id="getAllRoles" resultMap="roleMap">
+         SELECT id,roleName ,status
+          from
+          role
+    </select>
+    <!--分页查询角色信息-->
+    <select id="getRolePageList" resultMap="roleMap">
+        SELECT id,roleName ,status
+        from
+        sys_role
+        <include refid="where"/>
+        <include refid="andOther"/>
+        ORDER by id
+    </select>
+    <!--新增角色-->
+    <insert id="addRole" parameterType="Role">
+        INSERT INTO sys_role
+        (<include refid="columns"/>)
+        VALUES
+        (<include refid="insertColumns"/>)
+    </insert>
+    <!--删除角色-->
+    <delete id="delRole" parameterType="int">
+        DELETE  FROM sys_role
+        WHERE ID=#{id}
+    </delete>
+    <!--修改角色名称-->
+    <update id="updateRole" parameterType="map">
+        UPDATE  sys_role
+        SET
+        roleName=#{roleName}
+        WHERE  id=#{id}
+    </update>
+
+    <!--根据觉得id查询角色信息-->
+    <select id="getRoleById" parameterType="int" resultMap="roleMap">
+        SELECT
+        *
+        from sys_role
+        WHERE
+        id=#{id}
+    </select>
+
+    <!--角色菜单操作开始-->
+    <!--根据角色id查询菜单信息-->
+    <select id="getMenuByRoleId" parameterType="int" resultType="map">
+        SELECT bb.* ,aa.id as roleId,aa.roleName
+        FROM  sys_role aa ,sys_menu bb,roleMenu cc
+        WHERE
+        aa.id = cc.roleId
+        AND bb.id = cc.menuId
+        AND aa.id = #{roleId}
+
+    </select>
+    <!--根据角色id删除角色菜单-->
+    <delete id="delRoleMenuByRoleId" parameterType="int">
+        DELETE FROM sys_role_menu
+        WHERE  roleId=#{roelId}
+    </delete>
+    <!--新增角色菜单-->
+    <insert id="addRoleMenu" parameterType="map">
+        INSERT INTO sys_role_menu
+        (roleId,menuId)
+        VALUES
+        (#{roleId},#{menuId})
+    </insert>
+    <!--角色菜单操作end-->
+
+    <!--维护角色和权限的关系-->
+
+    <!--根据角色查询该角色拥有的权限-->
+    <select id="getPermissionByRoleId" parameterType="int" resultType="map">
+        SELECT
+         aa.permissionName,aa.permissionCode,aa.id,aa.parentId,aa.status,bb.id as roleId,bb.roleName
+        FROM
+        sys_permission aa,role bb,sys_role_permission cc
+        WHERE
+        aa.id= cc.permissionId
+        AND
+        bb.id = cc.roleId
+        AND
+        bb.id=#{roleId}
+    </select>
+
+    <!--新增角色权限-->
+    <insert id="addRolePermission" parameterType="map">
+
+        INSERT
+        INTO
+         sys_role_permission
+        (roleId,permissionId)
+        VALUES
+        (#{roleId},#{permissionId})
+    </insert>
+
+    <!--删除角色权限-->
+    <delete id="delRolePermissionByRoleId" parameterType="int">
+        DELETE  FROM
+        sys_role_permission
+        WHERE
+        roleId=#{roleId}
+    </delete>
+    <!--维护角色和权限的end-->
+
+    <select id="queryRoleNameExist" parameterType="Role"
+            resultType="java.lang.Integer">
+        SELECT COUNT(id)
+        FROM sys_role
+        WHERE roleName = #{roleName}
+        <include refid="andId"/>
+    </select>
+</mapper>

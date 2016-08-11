@@ -88,7 +88,7 @@
        SELECT
        <include refid="tbaleAllColumns"/>
        FROM
-        systemUser
+       sys_system_user
        <include refid="where"/>
        <include refid="params"/>
    </select>
@@ -98,7 +98,7 @@
         SELECT
         <include refid="tbaleAllColumns"/>
         FROM
-        systemUser
+        sys_system_user
         <include refid="where"/>
         <include refid="andOther"/>
         <include refid="orderBy"/>
@@ -107,7 +107,7 @@
 
     <!-- 新增用户 -->
     <insert id="addSystemUser" parameterType="SystemUser">
-        INSERT INTO systemUser
+        INSERT INTO sys_system_user
         (<include refid="tbaleColumns"/>)
         VALUES
         (<include refid="insertParams"/>);
@@ -115,7 +115,7 @@
 
     <!-- 更新用户 -->
     <update id="updateUser" parameterType="SystemUser">
-        UPDATE systemUser SET
+        UPDATE sys_system_user SET
         <include refid="updateParams"/>
         <include refid="where"/>
         <include refid="columnKey"/>
@@ -125,24 +125,24 @@
     <select id="getUserById" parameterType="int" resultMap="userMap">
         SELECT
         <include refid="tbaleAllColumns"/>
-        FROM systemUser
+        FROM sys_system_user
         <include refid="where"/>
         <include refid="columnKey"/>
     </select>
 
     <!--根据用户名查找该用户是否存在-->
     <select id="checkUserName" parameterType="String" resultType="map">
-      SELECT  systemName from systemUser where systemName=#{systemName}
+      SELECT  systemName from sys_system_user where systemName=#{systemName}
     </select>
     <!-- 根据id删除用户 -->
     <delete id="delUser" parameterType="int">
-        DELETE FROM systemUser
+        DELETE FROM sys_system_user
         <include refid="where"/>
         <include refid="columnKey"/>
     </delete>
     <!--修改密码-->
     <update id="updateUserPwd" parameterType="map" >
-        UPDATE systemUser SET password=#{password}
+        UPDATE sys_system_user SET password=#{password}
         <include refid="where"/>
         <include refid="columnKey"/>
     </update>
@@ -154,7 +154,7 @@
         SELECT
         bb.id as roleId,bb.roleName,aa.id as userId
         FROM
-        systemUser aa ,role bb,userRole cc
+        sys_system_user aa ,sys_role bb,sys_user_role cc
         WHERE
         aa.id=cc.userId
         AND  bb.id=cc.roleId
@@ -164,13 +164,13 @@
     <!--根据用户id删除该用户的角色信息-->
     <delete id="delUserRole" parameterType="int">
          DELETE
-         FROM userRole
+         FROM sys_user_role
          where userId=#{userId}
     </delete>
 
     <!--新增角色-->
     <insert id="addUserRole" parameterType="map">
-        INSERT  INTO userRole
+        INSERT  INTO sys_user_role
         (roleId,userId)
         VALUES (#{roleId},#{userId})
     </insert>

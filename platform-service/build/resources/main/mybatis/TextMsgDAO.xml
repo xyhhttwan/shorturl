@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.platform.soft.service.dao.backstage.ITextMsgDAO">
+<!--
+insert
+update
+updateNull
+deleteById
+deleteByCondition
+deleteByProperty
+fetch
+findOne
+findList
+findAll
+queryPage
+like
+queryList
+queryOne
+count
+selectMaxId
+updateOrSave
+selectOne
+selectList
+-->
+    <sql id="Base_Column_List">
+        id,
+        msgId,
+        msgType,
+        toUserName,
+        fromUserName,
+        content,
+        createTime
+    </sql>
+    <insert id="insert" parameterType="TextMsg">
+        INSERT INTO tbl_text_msg (
+        msgId,
+        msgType,
+        toUserName,
+        fromUserName,
+        content,
+        createTime
+        ) VALUES (
+        #{msgId},
+        #{msgType},
+        #{toUserName},
+        #{fromUserName},
+        #{content},
+        #{createTime}
+        )
+        <selectKey resultType="java.lang.Long" keyProperty="id">
+        SELECT LAST_INSERT_ID() AS ID
+        </selectKey>
+    </insert>
+
+    <!-- 更新 -->
+    <update id="update" parameterType="TextMsg">
+        UPDATE tbl_text_msg
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="msgId!=null">
+                msgId = #{msgId},
+            </if>
+            <if test="msgType!=null">
+                msgType = #{msgType},
+            </if>
+            <if test="toUserName!=null">
+                toUserName = #{toUserName},
+            </if>
+            <if test="fromUserName!=null">
+                fromUserName = #{fromUserName},
+            </if>
+            <if test="content!=null">
+                content = #{content},
+            </if>
+            <if test="createTime!=null">
+                createTime = #{createTime},
+            </if>
+        </trim>
+        WHERE
+        id = #{id}
+    </update>
+
+    <update id="updateMap">
+        UPDATE tbl_text_msg
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="map.msgId!=null">
+                msgId = #{map.msgId},
+            </if>
+            <if test="map.msgType!=null">
+                msgType = #{map.msgType},
+            </if>
+            <if test="map.toUserName!=null">
+                toUserName = #{map.toUserName},
+            </if>
+            <if test="map.fromUserName!=null">
+                fromUserName = #{map.fromUserName},
+            </if>
+            <if test="map.content!=null">
+                content = #{map.content},
+            </if>
+            <if test="map.createTime!=null">
+                createTime = #{map.createTime},
+            </if>
+        </trim>
+        WHERE
+        id = #{map.id}
+    </update>
+
+    <update id="updateByCondition">
+        UPDATE tbl_text_msg
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="update.msgId!=null">
+                msgId = #{update.msgId},
+            </if>
+            <if test="update.msgType!=null">
+                msgType = #{update.msgType},
+            </if>
+            <if test="update.toUserName!=null">
+                toUserName = #{update.toUserName},
+            </if>
+            <if test="update.fromUserName!=null">
+                fromUserName = #{update.fromUserName},
+            </if>
+            <if test="update.content!=null">
+                content = #{update.content},
+            </if>
+            <if test="update.createTime!=null">
+                createTime = #{update.createTime},
+            </if>
+        </trim>
+
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.msgId!=null">
+                AND msgId = #{condition.msgId}
+            </if>
+            <if test="condition.msgType!=null">
+                AND msgType = #{condition.msgType}
+            </if>
+            <if test="condition.toUserName!=null">
+                AND toUserName = #{condition.toUserName}
+            </if>
+            <if test="condition.fromUserName!=null">
+                AND fromUserName = #{condition.fromUserName}
+            </if>
+            <if test="condition.content!=null">
+                AND content = #{condition.content}
+            </if>
+            <if test="condition.createTime!=null">
+                AND createTime = #{condition.createTime}
+            </if>
+        </trim>
+    </update>
+
+    <insert id="insertMap" >
+        INSERT INTO tbl_text_msg (
+                msgId,
+                msgType,
+                toUserName,
+                fromUserName,
+                content,
+                createTime
+        ) VALUES (
+                    #{map.msgId},
+                    #{map.msgType},
+                    #{map.toUserName},
+                    #{map.fromUserName},
+                    #{map.content},
+                    #{map.createTime}
+        )
+    </insert>
+
+
+    <update id="updateNull" parameterType="TextMsg">
+        UPDATE tbl_text_msg
+        <trim prefix="SET" suffixOverrides=",">
+            msgId = #{msgId},
+            msgType = #{msgType},
+            toUserName = #{toUserName},
+            fromUserName = #{fromUserName},
+            content = #{content},
+            createTime = #{createTime},
+        </trim>
+        WHERE
+        id = #{id} 
+    </update>
+
+    <!-- 按Id删除 -->
+    <delete id="deleteById" parameterType="java.lang.Long">
+        DELETE FROM tbl_text_msg
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id = #{id}
+        </trim>
+    </delete>
+
+
+    <delete id="deleteByCondition" parameterType="java.util.Map">
+        DELETE FROM tbl_text_msg
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id = #{id}
+            </if>
+            <if test="msgId!=null">
+                AND msgId = #{msgId}
+            </if>
+            <if test="msgType!=null">
+                AND msgType = #{msgType}
+            </if>
+            <if test="toUserName!=null">
+                AND toUserName = #{toUserName}
+            </if>
+            <if test="fromUserName!=null">
+                AND fromUserName = #{fromUserName}
+            </if>
+            <if test="content!=null">
+                AND content = #{content}
+            </if>
+            <if test="createTime!=null">
+                AND createTime = #{createTime}
+            </if>
+        </trim>
+    </delete>
+
+    <delete id="deleteByProperty" parameterType="java.util.Map">
+        DELETE FROM tbl_text_msg WHERE
+        ${property} = #{value}
+    </delete>
+
+    <select id="fetch" parameterType="java.lang.Long" resultType="TextMsg">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tbl_text_msg
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id = #{id}
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="findOne" parameterType="java.util.Map" resultType="TextMsg">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tbl_text_msg WHERE
+        ${property} = #{value}
+        <if test="orderBy!=null">
+            ORDER BY ${orderBy} ${sortBy}
+        </if>
+        LIMIT 0,1
+    </select>
+
+    <select id="findList" parameterType="java.util.Map" resultType="TextMsg">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tbl_text_msg WHERE
+        ${property} = #{value}
+        <if test="orderBy!=null">
+            ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="findAll" resultType="TextMsg">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tbl_text_msg
+        <if test="orderBy!=null">
+            ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="queryPage" resultType="TextMsg">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tbl_text_msg
+        <where>
+
+            <if test="condition.whereSql != null">
+                and id in (#{condition.whereSql})
+            </if>
+
+            <if test="condition.id!=null">
+                ${condition.groupOp}   id  ${condition.id.op}  #{condition.id.data}
+            </if>
+            <if test="condition.msgId!=null">
+                ${condition.groupOp}   msgId  ${condition.msgId.op}  #{condition.msgId.data}
+            </if>
+            <if test="condition.msgType!=null">
+                ${condition.groupOp}   msgType  ${condition.msgType.op}  #{condition.msgType.data}
+            </if>
+            <if test="condition.toUserName!=null">
+                ${condition.groupOp}   toUserName  ${condition.toUserName.op}  #{condition.toUserName.data}
+            </if>
+            <if test="condition.fromUserName!=null">
+                ${condition.groupOp}   fromUserName  ${condition.fromUserName.op}  #{condition.fromUserName.data}
+            </if>
+            <if test="condition.content!=null">
+                ${condition.groupOp}   content  ${condition.content.op}  #{condition.content.data}
+            </if>
+            <if test="condition.createTime!=null">
+                ${condition.groupOp}   createTime  ${condition.createTime.op}  #{condition.createTime.data}
+            </if>
+
+
+    </where>
+
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+        <if test="offset != null">
+            limit ${offset}, ${rows}
+        </if>
+    </select>
+
+    <select id="like" parameterType="java.util.Map" resultType="TextMsg">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tbl_text_msg
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id like CONCAT('%', #{id} , '%')
+            </if>
+            <if test="msgId!=null">
+                AND msgId like CONCAT('%', #{msgId} , '%')
+            </if>
+            <if test="msgType!=null">
+                AND msgType like CONCAT('%', #{msgType} , '%')
+            </if>
+            <if test="toUserName!=null">
+                AND toUserName like CONCAT('%', #{toUserName} , '%')
+            </if>
+            <if test="fromUserName!=null">
+                AND fromUserName like CONCAT('%', #{fromUserName} , '%')
+            </if>
+            <if test="content!=null">
+                AND content like CONCAT('%', #{content} , '%')
+            </if>
+            <if test="createTime!=null">
+                AND createTime like CONCAT('%', #{createTime} , '%')
+            </if>
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+
+    <select id="queryList" parameterType="java.util.Map" resultType="TextMsg">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tbl_text_msg
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.msgId!=null">
+                AND msgId = #{condition.msgId}
+            </if>
+            <if test="condition.msgType!=null">
+                AND msgType = #{condition.msgType}
+            </if>
+            <if test="condition.toUserName!=null">
+                AND toUserName = #{condition.toUserName}
+            </if>
+            <if test="condition.fromUserName!=null">
+                AND fromUserName = #{condition.fromUserName}
+            </if>
+            <if test="condition.content!=null">
+                AND content = #{condition.content}
+            </if>
+            <if test="condition.createTime!=null">
+                AND createTime = #{condition.createTime}
+            </if>
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="queryOne" parameterType="java.util.Map" resultType="TextMsg">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tbl_text_msg
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.msgId!=null">
+                AND msgId = #{condition.msgId}
+            </if>
+            <if test="condition.msgType!=null">
+                AND msgType = #{condition.msgType}
+            </if>
+            <if test="condition.toUserName!=null">
+                AND toUserName = #{condition.toUserName}
+            </if>
+            <if test="condition.fromUserName!=null">
+                AND fromUserName = #{condition.fromUserName}
+            </if>
+            <if test="condition.content!=null">
+                AND content = #{condition.content}
+            </if>
+            <if test="condition.createTime!=null">
+                AND createTime = #{condition.createTime}
+            </if>
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+        limit 0,1
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+        SELECT count(id) FROM tbl_text_msg
+       <where>
+           <if test="id!=null">
+               ${groupOp} id ${id.op}  #{id.data}
+           </if>
+           <if test="msgId!=null">
+               ${groupOp} msgId ${msgId.op}  #{msgId.data}
+           </if>
+           <if test="msgType!=null">
+               ${groupOp} msgType ${msgType.op}  #{msgType.data}
+           </if>
+           <if test="toUserName!=null">
+               ${groupOp} toUserName ${toUserName.op}  #{toUserName.data}
+           </if>
+           <if test="fromUserName!=null">
+               ${groupOp} fromUserName ${fromUserName.op}  #{fromUserName.data}
+           </if>
+           <if test="content!=null">
+               ${groupOp} content ${content.op}  #{content.data}
+           </if>
+           <if test="createTime!=null">
+               ${groupOp} createTime ${createTime.op}  #{createTime.data}
+           </if>
+
+       </where>
+    <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+    </if>
+    </select>
+
+    <select id="selectMaxId" resultType="java.lang.Long">
+        SELECT
+        MAX(id)
+        FROM tbl_text_msg
+    </select>
+
+</mapper>
+

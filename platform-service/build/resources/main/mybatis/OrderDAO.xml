@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.platform.soft.service.dao.backstage.IOrderDAO">
+<!--
+insert
+update
+updateNull
+deleteById
+deleteByCondition
+deleteByProperty
+fetch
+findOne
+findList
+findAll
+queryPage
+like
+queryList
+queryOne
+count
+selectMaxId
+updateOrSave
+selectOne
+selectList
+-->
+    <sql id="Base_Column_List">
+        id,
+        orderId,
+        createDate,
+        mFrom,
+        mTo,
+        content,
+        price,
+        carrier,
+        linkPhone,
+        status
+    </sql>
+    <insert id="insert" parameterType="Order">
+        INSERT INTO tbl_order (
+        orderId,
+        createDate,
+        mFrom,
+        mTo,
+        content,
+        price,
+        carrier,
+        linkPhone,
+        status
+        ) VALUES (
+        #{orderId},
+        #{createDate},
+        #{mfrom},
+        #{mto},
+        #{content},
+        #{price},
+        #{carrier},
+        #{linkPhone},
+        #{status}
+        )
+        <selectKey resultType="java.lang.Long" keyProperty="id">
+        SELECT LAST_INSERT_ID() AS ID
+        </selectKey>
+    </insert>
+
+    <!-- 更新 -->
+    <update id="update" parameterType="Order">
+        UPDATE tbl_order
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orderId!=null">
+                orderId = #{orderId},
+            </if>
+            <if test="createDate!=null">
+                createDate = #{createDate},
+            </if>
+            <if test="mfrom!=null">
+                mFrom = #{mfrom},
+            </if>
+            <if test="mto!=null">
+                mTo = #{mto},
+            </if>
+            <if test="content!=null">
+                content = #{content},
+            </if>
+            <if test="price!=null">
+                price = #{price},
+            </if>
+            <if test="carrier!=null">
+                carrier = #{carrier},
+            </if>
+            <if test="linkPhone!=null">
+                linkPhone = #{linkPhone},
+            </if>
+            <if test="status!=null">
+                status = #{status},
+            </if>
+        </trim>
+        WHERE
+        id = #{id}
+    </update>
+
+    <update id="updateMap">
+        UPDATE tbl_order
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="map.orderId!=null">
+                orderId = #{map.orderId},
+            </if>
+            <if test="map.createDate!=null">
+                createDate = #{map.createDate},
+            </if>
+            <if test="map.mfrom!=null">
+                mFrom = #{map.mfrom},
+            </if>
+            <if test="map.mto!=null">
+                mTo = #{map.mto},
+            </if>
+            <if test="map.content!=null">
+                content = #{map.content},
+            </if>
+            <if test="map.price!=null">
+                price = #{map.price},
+            </if>
+            <if test="map.carrier!=null">
+                carrier = #{map.carrier},
+            </if>
+            <if test="map.linkPhone!=null">
+                linkPhone = #{map.linkPhone},
+            </if>
+            <if test="map.status!=null">
+                status = #{map.status},
+            </if>
+        </trim>
+        WHERE
+        id = #{map.id}
+    </update>
+
+    <update id="updateByCondition">
+        UPDATE tbl_order
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="update.orderId!=null">
+                orderId = #{update.orderId},
+            </if>
+            <if test="update.createDate!=null">
+                createDate = #{update.createDate},
+            </if>
+            <if test="update.mfrom!=null">
+                mFrom = #{update.mfrom},
+            </if>
+            <if test="update.mto!=null">
+                mTo = #{update.mto},
+            </if>
+            <if test="update.content!=null">
+                content = #{update.content},
+            </if>
+            <if test="update.price!=null">
+                price = #{update.price},
+            </if>
+            <if test="update.carrier!=null">
+                carrier = #{update.carrier},
+            </if>
+            <if test="update.linkPhone!=null">
+                linkPhone = #{update.linkPhone},
+            </if>
+            <if test="update.status!=null">
+                status = #{update.status},
+            </if>
+        </trim>
+
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.orderId!=null">
+                AND orderId = #{condition.orderId}
+            </if>
+            <if test="condition.createDate!=null">
+                AND createDate = #{condition.createDate}
+            </if>
+            <if test="condition.mfrom!=null">
+                AND mFrom = #{condition.mfrom}
+            </if>
+            <if test="condition.mto!=null">
+                AND mTo = #{condition.mto}
+            </if>
+            <if test="condition.content!=null">
+                AND content = #{condition.content}
+            </if>
+            <if test="condition.price!=null">
+                AND price = #{condition.price}
+            </if>
+            <if test="condition.carrier!=null">
+                AND carrier = #{condition.carrier}
+            </if>
+            <if test="condition.linkPhone!=null">
+                AND linkPhone = #{condition.linkPhone}
+            </if>
+            <if test="condition.status!=null">
+                AND status = #{condition.status}
+            </if>
+        </trim>
+    </update>
+
+    <insert id="insertMap" >
+        INSERT INTO tbl_order (
+                orderId,
+                createDate,
+                mFrom,
+                mTo,
+                content,
+                price,
+                carrier,
+                linkPhone,
+                status
+        ) VALUES (
+                    #{map.orderId},
+                    #{map.createDate},
+                    #{map.mfrom},
+                    #{map.mto},
+                    #{map.content},
+                    #{map.price},
+                    #{map.carrier},
+                    #{map.linkPhone},
+                    #{map.status}
+        )
+    </insert>
+
+
+    <update id="updateNull" parameterType="Order">
+        UPDATE tbl_order
+        <trim prefix="SET" suffixOverrides=",">
+            orderId = #{orderId},
+            createDate = #{createDate},
+            mFrom = #{mfrom},
+            mTo = #{mto},
+            content = #{content},
+            price = #{price},
+            carrier = #{carrier},
+            linkPhone = #{linkPhone},
+            status = #{status},
+        </trim>
+        WHERE
+        id = #{id} 
+    </update>
+
+    <!-- 按Id删除 -->
+    <delete id="deleteById" parameterType="java.lang.Long">
+        DELETE FROM tbl_order
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id = #{id}
+        </trim>
+    </delete>
+
+
+    <delete id="deleteByCondition" parameterType="java.util.Map">
+        DELETE FROM tbl_order
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id = #{id}
+            </if>
+            <if test="orderId!=null">
+                AND orderId = #{orderId}
+            </if>
+            <if test="createDate!=null">
+                AND createDate = #{createDate}
+            </if>
+            <if test="mfrom!=null">
+                AND mFrom = #{mfrom}
+            </if>
+            <if test="mto!=null">
+                AND mTo = #{mto}
+            </if>
+            <if test="content!=null">
+                AND content = #{content}
+            </if>
+            <if test="price!=null">
+                AND price = #{price}
+            </if>
+            <if test="carrier!=null">
+                AND carrier = #{carrier}
+            </if>
+            <if test="linkPhone!=null">
+                AND linkPhone = #{linkPhone}
+            </if>
+            <if test="status!=null">
+                AND status = #{status}
+            </if>
+        </trim>
+    </delete>
+
+    <delete id="deleteByProperty" parameterType="java.util.Map">
+        DELETE FROM tbl_order WHERE
+        ${property} = #{value}
+    </delete>
+
+    <select id="fetch" parameterType="java.lang.Long" resultType="Order">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tbl_order
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id = #{id}
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="findOne" parameterType="java.util.Map" resultType="Order">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tbl_order WHERE
+        ${property} = #{value}
+        <if test="orderBy!=null">
+            ORDER BY ${orderBy} ${sortBy}
+        </if>
+        LIMIT 0,1
+    </select>
+
+    <select id="findList" parameterType="java.util.Map" resultType="Order">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tbl_order WHERE
+        ${property} = #{value}
+        <if test="orderBy!=null">
+            ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="findAll" resultType="Order">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tbl_order
+        <if test="orderBy!=null">
+            ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="queryPage" resultType="Order">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tbl_order
+        <where>
+
+            <if test="condition.whereSql != null">
+                and id in (#{condition.whereSql})
+            </if>
+
+            <if test="condition.id!=null">
+                ${condition.groupOp}   id  ${condition.id.op}  #{condition.id.data}
+            </if>
+            <if test="condition.orderId!=null">
+                ${condition.groupOp}   orderId  ${condition.orderId.op}  #{condition.orderId.data}
+            </if>
+            <if test="condition.createDate!=null">
+                ${condition.groupOp}   createDate  ${condition.createDate.op}  #{condition.createDate.data}
+            </if>
+            <if test="condition.mfrom!=null">
+                ${condition.groupOp}   mFrom  ${condition.mFrom.op}  #{condition.mFrom.data}
+            </if>
+            <if test="condition.mto!=null">
+                ${condition.groupOp}   mTo  ${condition.mTo.op}  #{condition.mTo.data}
+            </if>
+            <if test="condition.content!=null">
+                ${condition.groupOp}   content  ${condition.content.op}  #{condition.content.data}
+            </if>
+            <if test="condition.price!=null">
+                ${condition.groupOp}   price  ${condition.price.op}  #{condition.price.data}
+            </if>
+            <if test="condition.carrier!=null">
+                ${condition.groupOp}   carrier  ${condition.carrier.op}  #{condition.carrier.data}
+            </if>
+            <if test="condition.linkPhone!=null">
+                ${condition.groupOp}   linkPhone  ${condition.linkPhone.op}  #{condition.linkPhone.data}
+            </if>
+            <if test="condition.status!=null">
+                ${condition.groupOp}   status  ${condition.status.op}  #{condition.status.data}
+            </if>
+
+
+    </where>
+
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+        <if test="offset != null">
+            limit ${offset}, ${rows}
+        </if>
+    </select>
+
+    <select id="like" parameterType="java.util.Map" resultType="Order">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tbl_order
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id like CONCAT('%', #{id} , '%')
+            </if>
+            <if test="orderId!=null">
+                AND orderId like CONCAT('%', #{orderId} , '%')
+            </if>
+            <if test="createDate!=null">
+                AND createDate like CONCAT('%', #{createDate} , '%')
+            </if>
+            <if test="mfrom!=null">
+                AND mFrom like CONCAT('%', #{mfrom} , '%')
+            </if>
+            <if test="mto!=null">
+                AND mTo like CONCAT('%', #{mto} , '%')
+            </if>
+            <if test="content!=null">
+                AND content like CONCAT('%', #{content} , '%')
+            </if>
+            <if test="price!=null">
+                AND price like CONCAT('%', #{price} , '%')
+            </if>
+            <if test="carrier!=null">
+                AND carrier like CONCAT('%', #{carrier} , '%')
+            </if>
+            <if test="linkPhone!=null">
+                AND linkPhone like CONCAT('%', #{linkPhone} , '%')
+            </if>
+            <if test="status!=null">
+                AND status like CONCAT('%', #{status} , '%')
+            </if>
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+
+    <select id="queryList" parameterType="java.util.Map" resultType="Order">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tbl_order
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.orderId!=null">
+                AND orderId = #{condition.orderId}
+            </if>
+            <if test="condition.createDate!=null">
+                AND createDate = #{condition.createDate}
+            </if>
+            <if test="condition.mfrom!=null">
+                AND mFrom = #{condition.mfrom}
+            </if>
+            <if test="condition.mto!=null">
+                AND mTo = #{condition.mto}
+            </if>
+            <if test="condition.content!=null">
+                AND content = #{condition.content}
+            </if>
+            <if test="condition.price!=null">
+                AND price = #{condition.price}
+            </if>
+            <if test="condition.carrier!=null">
+                AND carrier = #{condition.carrier}
+            </if>
+            <if test="condition.linkPhone!=null">
+                AND linkPhone = #{condition.linkPhone}
+            </if>
+            <if test="condition.status!=null">
+                AND status = #{condition.status}
+            </if>
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="queryOne" parameterType="java.util.Map" resultType="Order">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tbl_order
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.orderId!=null">
+                AND orderId = #{condition.orderId}
+            </if>
+            <if test="condition.createDate!=null">
+                AND createDate = #{condition.createDate}
+            </if>
+            <if test="condition.mfrom!=null">
+                AND mFrom = #{condition.mfrom}
+            </if>
+            <if test="condition.mto!=null">
+                AND mTo = #{condition.mto}
+            </if>
+            <if test="condition.content!=null">
+                AND content = #{condition.content}
+            </if>
+            <if test="condition.price!=null">
+                AND price = #{condition.price}
+            </if>
+            <if test="condition.carrier!=null">
+                AND carrier = #{condition.carrier}
+            </if>
+            <if test="condition.linkPhone!=null">
+                AND linkPhone = #{condition.linkPhone}
+            </if>
+            <if test="condition.status!=null">
+                AND status = #{condition.status}
+            </if>
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+        limit 0,1
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+        SELECT count(id) FROM tbl_order
+       <where>
+           <if test="id!=null">
+               ${groupOp} id ${id.op}  #{id.data}
+           </if>
+           <if test="orderId!=null">
+               ${groupOp} orderId ${orderId.op}  #{orderId.data}
+           </if>
+           <if test="createDate!=null">
+               ${groupOp} createDate ${createDate.op}  #{createDate.data}
+           </if>
+           <if test="mfrom!=null">
+               ${groupOp} mFrom ${mFrom.op}  #{mFrom.data}
+           </if>
+           <if test="mto!=null">
+               ${groupOp} mTo ${mTo.op}  #{mTo.data}
+           </if>
+           <if test="content!=null">
+               ${groupOp} content ${content.op}  #{content.data}
+           </if>
+           <if test="price!=null">
+               ${groupOp} price ${price.op}  #{price.data}
+           </if>
+           <if test="carrier!=null">
+               ${groupOp} carrier ${carrier.op}  #{carrier.data}
+           </if>
+           <if test="linkPhone!=null">
+               ${groupOp} linkPhone ${linkPhone.op}  #{linkPhone.data}
+           </if>
+           <if test="status!=null">
+               ${groupOp} status ${status.op}  #{status.data}
+           </if>
+
+       </where>
+    <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+    </if>
+    </select>
+
+    <select id="selectMaxId" resultType="java.lang.Long">
+        SELECT
+        MAX(id)
+        FROM tbl_order
+    </select>
+
+</mapper>
+
