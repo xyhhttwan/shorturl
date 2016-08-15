@@ -13,6 +13,7 @@
 package com.platform.soft.domain.backstage;
 
 import com.platform.soft.common.domain.BaseDomain;
+import com.platform.soft.common.domain.CreateBaseDomain;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -20,10 +21,10 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.util.*;
 
-public class OnlineOrder extends BaseDomain<Long> {
+public class OnlineOrder extends CreateBaseDomain<Long> {
     private String mfrom;
     private String mto;
-    private String linKman;
+    private String linkMan;
     private String phoneNum;
     private String remark;
     private String content;
@@ -46,13 +47,15 @@ public class OnlineOrder extends BaseDomain<Long> {
     public String getMto() {
         return this.mto;
     }
-    public void setLinKman(String value) {
-        this.linKman = value;
+
+    public String getLinkMan() {
+        return linkMan;
     }
 
-    public String getLinKman() {
-        return this.linKman;
+    public void setLinkMan(String linkMan) {
+        this.linkMan = linkMan;
     }
+
     public void setPhoneNum(String value) {
         this.phoneNum = value;
     }
@@ -94,7 +97,7 @@ public class OnlineOrder extends BaseDomain<Long> {
 			.append("Id",getId())
 			.append("Mfrom",getMfrom())
 			.append("Mto",getMto())
-			.append("LinKman",getLinKman())
+			.append("LinKman",getLinkMan())
 			.append("PhoneNum",getPhoneNum())
 			.append("Remark",getRemark())
 			.append("Content",getContent())

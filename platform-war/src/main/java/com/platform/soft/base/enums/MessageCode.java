@@ -24,7 +24,9 @@ public enum MessageCode {
     LOGIN_ERROR_TOO_MUCH("10017", "账户错误次数过多,暂时禁止登录"),
     ACCOUNT_NAME_IS_EXIST("10018", "账户名已经存在"),
     SYSTEM_ERROR_EXCEPTION("10019", "系统异常"),
-    UNKNOWN_ERROR("10020","未知异常" );
+    UNKNOWN_ERROR("10020","未知异常" ),
+    ORDER_IS_EXIST("10021","该订单号已经存在" );
+
 
     private String code;
     private String message;

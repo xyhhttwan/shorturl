@@ -2,6 +2,7 @@ package com.platform.soft.controller.backstage;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.google.common.collect.Maps;
 import com.platform.soft.api.backstage.IOnlineOrderService;
 import com.platform.soft.base.domain.ResponseMessage;
 import com.platform.soft.base.enums.MessageCode;
@@ -23,12 +24,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *后台在线下单
+ * 后台在线下单
  */
 @Controller
 @Scope("prototype")
 @RequestMapping("/backstage/onlineOrder/onlineOrderManage")
-public class OnlineOrderController extends BackStageController{
+public class OnlineOrderController extends BackStageController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(OnlineOrderController.class);
 
@@ -43,7 +44,7 @@ public class OnlineOrderController extends BackStageController{
 
     @RequestMapping("/list")
     @ResponseBody
-    public Map<String, Object> list(@RequestParam(value = "isLink",defaultValue ="0" ,required = false) int isLink) {
+    public Map<String, Object> list(@RequestParam(value = "isLink", defaultValue = "0", required = false) int isLink) {
         initPageRows();
         PageHelper.startPage(page, rows);
         Map<String, Object> map = new HashMap<String, Object>();
@@ -59,41 +60,41 @@ public class OnlineOrderController extends BackStageController{
     }
 
 
-    /**
-     * 新增跳转
-     *
-     * @return String
-     */
-    @RequestMapping("/addView")
-    @RequiresPermissions("onlineOrder-add")
-    public String addView() {
+//    /**
+//     * 新增跳转
+//     *
+//     * @return String
+//     */
+//    @RequestMapping("/addView")
+//    @RequiresPermissions("onlineOrder-add")
+//    public String addView() {
+//
+//        return "onlineOrder/add";
+//    }
 
-        return "onlineOrder/add";
-    }
 
-
-    /**
-     * 新增
-     *
-     * @return String
-     */
-    @RequestMapping("/add")
-    @ResponseBody
-    @RequiresPermissions("onlineOrder-add")
-    public ResponseMessage add(OnlineOrder onlineOrder) {
-        ResponseMessage rsgMsg = new ResponseMessage();
-
-        try {
-            onlineOrderService.insert(onlineOrder);
-            rsgMsg.setIsSuccess(true);
-            rsgMsg.setMsgCode(MessageCode.DEFAULT_SUCCESS);
-        } catch (Exception e) {
-            LOGGER.error(e.getMessage(), e);
-            rsgMsg.setIsSuccess(false);
-            rsgMsg.setMsgCode(MessageCode.ADD_FAILED);
-        }
-        return rsgMsg;
-    }
+//    /**
+//     * 新增
+//     *
+//     * @return String
+//     */
+//    @RequestMapping("/add")
+//    @ResponseBody
+//    @RequiresPermissions("onlineOrder-add")
+//    public ResponseMessage add(OnlineOrder onlineOrder) {
+//        ResponseMessage rsgMsg = new ResponseMessage();
+//
+//        try {
+//            onlineOrderService.insert(onlineOrder);
+//            rsgMsg.setIsSuccess(true);
+//            rsgMsg.setMsgCode(MessageCode.DEFAULT_SUCCESS);
+//        } catch (Exception e) {
+//            LOGGER.error(e.getMessage(), e);
+//            rsgMsg.setIsSuccess(false);
+//            rsgMsg.setMsgCode(MessageCode.ADD_FAILED);
+//        }
+//        return rsgMsg;
+//    }
 
 
     /**
@@ -112,23 +113,23 @@ public class OnlineOrderController extends BackStageController{
         return "onlineOrder/add";
     }
 
-    @RequestMapping("/update")
-    @ResponseBody
-    @RequiresPermissions("onlineOrder-update")
-    public ResponseMessage update(OnlineOrder onlineOrder) {
-        ResponseMessage rsgMsg = new ResponseMessage();
-
-        try {
-            onlineOrderService.update(onlineOrder);
-            rsgMsg.setIsSuccess(true);
-            rsgMsg.setMsgCode(MessageCode.DEFAULT_SUCCESS);
-        } catch (Exception e) {
-            LOGGER.error(e.getMessage(), e);
-            rsgMsg.setIsSuccess(false);
-            rsgMsg.setMsgCode(MessageCode.UPDATE_FAILED);
-        }
-        return rsgMsg;
-    }
+//    @RequestMapping("/update")
+//    @ResponseBody
+//    @RequiresPermissions("onlineOrder-update")
+//    public ResponseMessage update(OnlineOrder onlineOrder) {
+//        ResponseMessage rsgMsg = new ResponseMessage();
+//
+//        try {
+//            onlineOrderService.update(onlineOrder);
+//            rsgMsg.setIsSuccess(true);
+//            rsgMsg.setMsgCode(MessageCode.DEFAULT_SUCCESS);
+//        } catch (Exception e) {
+//            LOGGER.error(e.getMessage(), e);
+//            rsgMsg.setIsSuccess(false);
+//            rsgMsg.setMsgCode(MessageCode.UPDATE_FAILED);
+//        }
+//        return rsgMsg;
+//    }
 
 
     @RequestMapping("/delete")
@@ -144,6 +145,38 @@ public class OnlineOrderController extends BackStageController{
             LOGGER.error(e.getMessage(), e);
             rsgMsg.setIsSuccess(false);
             rsgMsg.setMsgCode(MessageCode.DELETE_FAILED);
+        }
+        return rsgMsg;
+    }
+
+    @RequestMapping("/handleOrder")
+    @ResponseBody
+    @RequiresPermissions("onlineOrder-update")
+    public ResponseMessage handleOrder(String ids, @RequestParam(value = "linkResult", required = false) String linkResult) {
+        ResponseMessage rsgMsg = new ResponseMessage();
+
+        Map<String, Object> map = Maps.newHashMap();
+        map.put("id", ids);
+        OnlineOrder onlineOrder = (OnlineOrder) onlineOrderService.queryOne(map);
+
+        if (onlineOrder == null) {
+            LOGGER.error("onlineOrder is null id is :{}", ids);
+            rsgMsg.setIsSuccess(false);
+            rsgMsg.setMsgCode(MessageCode.DEFAULT_FAILED);
+            return rsgMsg;
+        }
+
+        onlineOrder.setIsLink(1);
+        onlineOrder.setLinkResult(linkResult);
+
+        try {
+            onlineOrderService.update(onlineOrder);
+            rsgMsg.setIsSuccess(true);
+            rsgMsg.setMsgCode(MessageCode.DEFAULT_SUCCESS);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
+            rsgMsg.setIsSuccess(false);
+            rsgMsg.setMsgCode(MessageCode.DEFAULT_FAILED);
         }
         return rsgMsg;
     }

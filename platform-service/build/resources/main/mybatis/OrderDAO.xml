@@ -26,39 +26,45 @@ selectList
     <sql id="Base_Column_List">
         id,
         orderId,
-        createDate,
+        orderTime,
         mFrom,
         mTo,
         content,
         price,
         carrier,
         linkPhone,
-        status
+        status,
+        createDate,
+        lastModDate
     </sql>
     <insert id="insert" parameterType="Order">
         INSERT INTO tbl_order (
         orderId,
-        createDate,
+        orderTime,
         mFrom,
         mTo,
         content,
         price,
         carrier,
         linkPhone,
-        status
+        status,
+        createDate,
+        lastModDate
         ) VALUES (
         #{orderId},
-        #{createDate},
+        #{orderTime},
         #{mfrom},
         #{mto},
         #{content},
         #{price},
         #{carrier},
         #{linkPhone},
-        #{status}
+        #{status},
+        #{createDate},
+        #{lastModDate}
         )
         <selectKey resultType="java.lang.Long" keyProperty="id">
-        SELECT LAST_INSERT_ID() AS ID
+            SELECT LAST_INSERT_ID() AS ID
         </selectKey>
     </insert>
 
@@ -69,8 +75,8 @@ selectList
             <if test="orderId!=null">
                 orderId = #{orderId},
             </if>
-            <if test="createDate!=null">
-                createDate = #{createDate},
+            <if test="orderTime!=null">
+                orderTime = #{orderTime},
             </if>
             <if test="mfrom!=null">
                 mFrom = #{mfrom},
@@ -93,6 +99,12 @@ selectList
             <if test="status!=null">
                 status = #{status},
             </if>
+            <if test="createDate!=null">
+                createDate = #{createDate},
+            </if>
+            <if test="lastModDate!=null">
+                lastModDate = #{lastModDate},
+            </if>
         </trim>
         WHERE
         id = #{id}
@@ -104,8 +116,8 @@ selectList
             <if test="map.orderId!=null">
                 orderId = #{map.orderId},
             </if>
-            <if test="map.createDate!=null">
-                createDate = #{map.createDate},
+            <if test="map.orderTime!=null">
+                orderTime = #{map.orderTime},
             </if>
             <if test="map.mfrom!=null">
                 mFrom = #{map.mfrom},
@@ -128,6 +140,12 @@ selectList
             <if test="map.status!=null">
                 status = #{map.status},
             </if>
+            <if test="map.createDate!=null">
+                createDate = #{map.createDate},
+            </if>
+            <if test="map.lastModDate!=null">
+                lastModDate = #{map.lastModDate},
+            </if>
         </trim>
         WHERE
         id = #{map.id}
@@ -139,8 +157,8 @@ selectList
             <if test="update.orderId!=null">
                 orderId = #{update.orderId},
             </if>
-            <if test="update.createDate!=null">
-                createDate = #{update.createDate},
+            <if test="update.orderTime!=null">
+                orderTime = #{update.orderTime},
             </if>
             <if test="update.mfrom!=null">
                 mFrom = #{update.mfrom},
@@ -163,6 +181,12 @@ selectList
             <if test="update.status!=null">
                 status = #{update.status},
             </if>
+            <if test="update.createDate!=null">
+                createDate = #{update.createDate},
+            </if>
+            <if test="update.lastModDate!=null">
+                lastModDate = #{update.lastModDate},
+            </if>
         </trim>
 
         <trim prefix="WHERE" prefixOverrides="AND | OR">
@@ -172,8 +196,8 @@ selectList
             <if test="condition.orderId!=null">
                 AND orderId = #{condition.orderId}
             </if>
-            <if test="condition.createDate!=null">
-                AND createDate = #{condition.createDate}
+            <if test="condition.orderTime!=null">
+                AND orderTime = #{condition.orderTime}
             </if>
             <if test="condition.mfrom!=null">
                 AND mFrom = #{condition.mfrom}
@@ -196,30 +220,40 @@ selectList
             <if test="condition.status!=null">
                 AND status = #{condition.status}
             </if>
+            <if test="condition.createDate!=null">
+                AND createDate = #{condition.createDate}
+            </if>
+            <if test="condition.lastModDate!=null">
+                AND lastModDate = #{condition.lastModDate}
+            </if>
         </trim>
     </update>
 
     <insert id="insertMap" >
         INSERT INTO tbl_order (
-                orderId,
-                createDate,
-                mFrom,
-                mTo,
-                content,
-                price,
-                carrier,
-                linkPhone,
-                status
+        orderId,
+        orderTime,
+        mFrom,
+        mTo,
+        content,
+        price,
+        carrier,
+        linkPhone,
+        status,
+        createDate,
+        lastModDate
         ) VALUES (
-                    #{map.orderId},
-                    #{map.createDate},
-                    #{map.mfrom},
-                    #{map.mto},
-                    #{map.content},
-                    #{map.price},
-                    #{map.carrier},
-                    #{map.linkPhone},
-                    #{map.status}
+        #{map.orderId},
+        #{map.orderTime},
+        #{map.mfrom},
+        #{map.mto},
+        #{map.content},
+        #{map.price},
+        #{map.carrier},
+        #{map.linkPhone},
+        #{map.status},
+        #{map.createDate},
+        #{map.lastModDate}
         )
     </insert>
 
@@ -228,7 +262,7 @@ selectList
         UPDATE tbl_order
         <trim prefix="SET" suffixOverrides=",">
             orderId = #{orderId},
-            createDate = #{createDate},
+            orderTime = #{orderTime},
             mFrom = #{mfrom},
             mTo = #{mto},
             content = #{content},
@@ -236,9 +270,11 @@ selectList
             carrier = #{carrier},
             linkPhone = #{linkPhone},
             status = #{status},
+            createDate = #{createDate},
+            lastModDate = #{lastModDate},
         </trim>
         WHERE
-        id = #{id} 
+        id = #{id}
     </update>
 
     <!-- 按Id删除 -->
@@ -259,8 +295,8 @@ selectList
             <if test="orderId!=null">
                 AND orderId = #{orderId}
             </if>
-            <if test="createDate!=null">
-                AND createDate = #{createDate}
+            <if test="orderTime!=null">
+                AND orderTime = #{orderTime}
             </if>
             <if test="mfrom!=null">
                 AND mFrom = #{mfrom}
@@ -283,6 +319,12 @@ selectList
             <if test="status!=null">
                 AND status = #{status}
             </if>
+            <if test="createDate!=null">
+                AND createDate = #{createDate}
+            </if>
+            <if test="lastModDate!=null">
+                AND lastModDate = #{lastModDate}
+            </if>
         </trim>
     </delete>
 
@@ -299,7 +341,7 @@ selectList
             AND id = #{id}
         </trim>
         <if test="orderBy!=null">
-        ORDER BY ${orderBy} ${sortBy}
+            ORDER BY ${orderBy} ${sortBy}
         </if>
     </select>
 
@@ -349,8 +391,8 @@ selectList
             <if test="condition.orderId!=null">
                 ${condition.groupOp}   orderId  ${condition.orderId.op}  #{condition.orderId.data}
             </if>
-            <if test="condition.createDate!=null">
-                ${condition.groupOp}   createDate  ${condition.createDate.op}  #{condition.createDate.data}
+            <if test="condition.orderTime!=null">
+                ${condition.groupOp}   orderTime  ${condition.orderTime.op}  #{condition.orderTime.data}
             </if>
             <if test="condition.mfrom!=null">
                 ${condition.groupOp}   mFrom  ${condition.mFrom.op}  #{condition.mFrom.data}
@@ -373,12 +415,18 @@ selectList
             <if test="condition.status!=null">
                 ${condition.groupOp}   status  ${condition.status.op}  #{condition.status.data}
             </if>
+            <if test="condition.createDate!=null">
+                ${condition.groupOp}   createDate  ${condition.createDate.op}  #{condition.createDate.data}
+            </if>
+            <if test="condition.lastModDate!=null">
+                ${condition.groupOp}   lastModDate  ${condition.lastModDate.op}  #{condition.lastModDate.data}
+            </if>
 
 
-    </where>
+        </where>
 
         <if test="orderBy!=null">
-        ORDER BY ${orderBy} ${sortBy}
+            ORDER BY ${orderBy} ${sortBy}
         </if>
         <if test="offset != null">
             limit ${offset}, ${rows}
@@ -396,8 +444,8 @@ selectList
             <if test="orderId!=null">
                 AND orderId like CONCAT('%', #{orderId} , '%')
             </if>
-            <if test="createDate!=null">
-                AND createDate like CONCAT('%', #{createDate} , '%')
+            <if test="orderTime!=null">
+                AND orderTime like CONCAT('%', #{orderTime} , '%')
             </if>
             <if test="mfrom!=null">
                 AND mFrom like CONCAT('%', #{mfrom} , '%')
@@ -420,9 +468,15 @@ selectList
             <if test="status!=null">
                 AND status like CONCAT('%', #{status} , '%')
             </if>
+            <if test="createDate!=null">
+                AND createDate like CONCAT('%', #{createDate} , '%')
+            </if>
+            <if test="lastModDate!=null">
+                AND lastModDate like CONCAT('%', #{lastModDate} , '%')
+            </if>
         </trim>
         <if test="orderBy!=null">
-        ORDER BY ${orderBy} ${sortBy}
+            ORDER BY ${orderBy} ${sortBy}
         </if>
     </select>
 
@@ -438,8 +492,8 @@ selectList
             <if test="condition.orderId!=null">
                 AND orderId = #{condition.orderId}
             </if>
-            <if test="condition.createDate!=null">
-                AND createDate = #{condition.createDate}
+            <if test="condition.orderTime!=null">
+                AND orderTime = #{condition.orderTime}
             </if>
             <if test="condition.mfrom!=null">
                 AND mFrom = #{condition.mfrom}
@@ -462,9 +516,15 @@ selectList
             <if test="condition.status!=null">
                 AND status = #{condition.status}
             </if>
+            <if test="condition.createDate!=null">
+                AND createDate = #{condition.createDate}
+            </if>
+            <if test="condition.lastModDate!=null">
+                AND lastModDate = #{condition.lastModDate}
+            </if>
         </trim>
         <if test="orderBy!=null">
-        ORDER BY ${orderBy} ${sortBy}
+            ORDER BY ${orderBy} ${sortBy}
         </if>
     </select>
 
@@ -479,8 +539,8 @@ selectList
             <if test="condition.orderId!=null">
                 AND orderId = #{condition.orderId}
             </if>
-            <if test="condition.createDate!=null">
-                AND createDate = #{condition.createDate}
+            <if test="condition.orderTime!=null">
+                AND orderTime = #{condition.orderTime}
             </if>
             <if test="condition.mfrom!=null">
                 AND mFrom = #{condition.mfrom}
@@ -503,51 +563,63 @@ selectList
             <if test="condition.status!=null">
                 AND status = #{condition.status}
             </if>
+            <if test="condition.createDate!=null">
+                AND createDate = #{condition.createDate}
+            </if>
+            <if test="condition.lastModDate!=null">
+                AND lastModDate = #{condition.lastModDate}
+            </if>
         </trim>
         <if test="orderBy!=null">
-        ORDER BY ${orderBy} ${sortBy}
+            ORDER BY ${orderBy} ${sortBy}
         </if>
         limit 0,1
     </select>
 
     <select id="count" resultType="java.lang.Integer">
         SELECT count(id) FROM tbl_order
-       <where>
-           <if test="id!=null">
-               ${groupOp} id ${id.op}  #{id.data}
-           </if>
-           <if test="orderId!=null">
-               ${groupOp} orderId ${orderId.op}  #{orderId.data}
-           </if>
-           <if test="createDate!=null">
-               ${groupOp} createDate ${createDate.op}  #{createDate.data}
-           </if>
-           <if test="mfrom!=null">
-               ${groupOp} mFrom ${mFrom.op}  #{mFrom.data}
-           </if>
-           <if test="mto!=null">
-               ${groupOp} mTo ${mTo.op}  #{mTo.data}
-           </if>
-           <if test="content!=null">
-               ${groupOp} content ${content.op}  #{content.data}
-           </if>
-           <if test="price!=null">
-               ${groupOp} price ${price.op}  #{price.data}
-           </if>
-           <if test="carrier!=null">
-               ${groupOp} carrier ${carrier.op}  #{carrier.data}
-           </if>
-           <if test="linkPhone!=null">
-               ${groupOp} linkPhone ${linkPhone.op}  #{linkPhone.data}
-           </if>
-           <if test="status!=null">
-               ${groupOp} status ${status.op}  #{status.data}
-           </if>
+        <where>
+            <if test="id!=null">
+                ${groupOp} id ${id.op}  #{id.data}
+            </if>
+            <if test="orderId!=null">
+                ${groupOp} orderId ${orderId.op}  #{orderId.data}
+            </if>
+            <if test="orderTime!=null">
+                ${groupOp} orderTime ${orderTime.op}  #{orderTime.data}
+            </if>
+            <if test="mfrom!=null">
+                ${groupOp} mFrom ${mFrom.op}  #{mFrom.data}
+            </if>
+            <if test="mto!=null">
+                ${groupOp} mTo ${mTo.op}  #{mTo.data}
+            </if>
+            <if test="content!=null">
+                ${groupOp} content ${content.op}  #{content.data}
+            </if>
+            <if test="price!=null">
+                ${groupOp} price ${price.op}  #{price.data}
+            </if>
+            <if test="carrier!=null">
+                ${groupOp} carrier ${carrier.op}  #{carrier.data}
+            </if>
+            <if test="linkPhone!=null">
+                ${groupOp} linkPhone ${linkPhone.op}  #{linkPhone.data}
+            </if>
+            <if test="status!=null">
+                ${groupOp} status ${status.op}  #{status.data}
+            </if>
+            <if test="createDate!=null">
+                ${groupOp} createDate ${createDate.op}  #{createDate.data}
+            </if>
+            <if test="lastModDate!=null">
+                ${groupOp} lastModDate ${lastModDate.op}  #{lastModDate.data}
+            </if>
 
-       </where>
-    <if test="orderBy!=null">
-        ORDER BY ${orderBy} ${sortBy}
-    </if>
+        </where>
+        <if test="orderBy!=null">
+            ORDER BY ${orderBy} ${sortBy}
+        </if>
     </select>
 
     <select id="selectMaxId" resultType="java.lang.Long">
@@ -555,6 +627,5 @@ selectList
         MAX(id)
         FROM tbl_order
     </select>
-
 </mapper>
 

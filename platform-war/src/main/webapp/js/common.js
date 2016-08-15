@@ -25,15 +25,15 @@ function oprateUser(title, url, type, openId, submitUrl, width, reloadId, dataty
     if (type == 1) { //edit
 
         if (datatype == "treegrid") {
-                rows = $('#' + reloadId).treegrid('getSelections')
-            } else {
-                rows = $('#' + reloadId).datagrid('getSelections')
-            }
-            if (rows.length != 1) {
-                $.messager.alert('消息', '<br/>请选择一行数据!', 'info');
-                return;
-            } else {
-                url = url + "?id=" + rows[0].id;
+            rows = $('#' + reloadId).treegrid('getSelections')
+        } else {
+            rows = $('#' + reloadId).datagrid('getSelections')
+        }
+        if (rows.length != 1) {
+            $.messager.alert('消息', '<br/>请选择一行数据!', 'info');
+            return;
+        } else {
+            url = url + "?id=" + rows[0].id;
         }
     }
     if (datatype == "treegrid" && type != "1") {
@@ -91,7 +91,7 @@ function dataSubmit(url, openId, reloadId, datatype) {
             $('#dataform').form('submit', {
                 url: url,
                 dataType: 'json',
-                
+
                 ajax: 'true',
                 onSubmit: function () {
                     var validator = $(this).form('validate');
@@ -179,8 +179,7 @@ function del(dataId, url, datatype) {
 }
 
 
-
-function doPost(dataId, url, datatype,data) {
+function doPost(dataId, url, datatype, data) {
     var rows = "";
     if (datatype == "treegrid") {
         rows = $('#' + dataId).treegrid('getSelections');
@@ -200,7 +199,7 @@ function doPost(dataId, url, datatype,data) {
         ids = ids.substring(0, ids.length - 1);
         url = url + '?' + ids;
 
-        var data =data;
+        var data = data;
 
         $.messager.confirm('Confirm', '确定要操作选择的数据吗?', function (r) {
             if (r) {
@@ -209,46 +208,43 @@ function doPost(dataId, url, datatype,data) {
                     msg: '正在提交请求...'
                 });
 
-                debugger;
-                $.ajax( {
-                    url:url,// 跳转到 action
-                    data:data,
-                    type:'post',
-                    cache:false,
-                    dataType:'json',
-                    success:function(data) {
-                        if(data.result == "true"){
+                $.ajax({
+                    url: url,// 跳转到 action
+                    data: data,
+                    type: 'post',
+                    cache: false,
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.result == "true") {
                             debugger;
                             $.messager.show({title: 'Success', msg: data.message});
                             reload(dataId, datatype);
-                        }else if (data.result == "false") {
+                        } else if (data.result == "false") {
                             $.messager.alert('Error', "<br/>" + data.message, 'Error');
                         } else {
                             $.messager.alert('Error', "<br/>" + data, 'Error');
                         }
                     },
-                    error : function() {
+                    error: function () {
                         // view("异常！");
-                        $.messager.alert('Error', "<br/>系统异常" , 'Error');
+                        $.messager.alert('Error', "<br/>系统异常", 'Error');
                     }
                 });
 
 
-
-
-                $.get(url, function (data) {
-                    close_process();
-                    var data = eval('(' + data + ')');
-                    if (data.result == "true") {
-                        $.messager.show({title: 'Success', msg: data.message});
-                        reload(dataId, datatype);
-
-                    } else if (data.result == "false") {
-                        $.messager.alert('Error', "<br/>" + data.message, 'Error');
-                    } else {
-                        $.messager.alert('Error', "<br/>" + data, 'Error');
-                    }
-                });
+                // $.get(url, function (data) {
+                //     close_process();
+                //     var data = eval('(' + data + ')');
+                //     if (data.result == "true") {
+                //         $.messager.show({title: 'Success', msg: data.message});
+                //         reload(dataId, datatype);
+                //
+                //     } else if (data.result == "false") {
+                //         $.messager.alert('Error', "<br/>" + data.message, 'Error');
+                //     } else {
+                //         $.messager.alert('Error', "<br/>" + data, 'Error');
+                //     }
+                // });
 
             }
         });
@@ -338,3 +334,6 @@ function formatterDateTime(val) {
         return year + "-" + month + "-" + day;
     }
 }
+
+
+

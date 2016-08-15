@@ -89,7 +89,7 @@ String basePath = request.getScheme() + "://"
 
                 <input type="text" name="userName" id="userName" class="username" placeholder="请输入您的用户名！">
                 <input type="password" id="password" name="password" class="password" placeholder="请输入您的用户密码！">
-                <input type="Captcha" class="Captcha" id="verifyCode" name="verifyCode" class="Captcha" placeholder="请输入验证码！">
+                <input type="Captcha" class="Captcha" value="" id="verifyCode" name="verifyCode" class="Captcha" placeholder="请输入验证码！">
                 <img  class="Captcha" style="margin-top: 30px; padding-left: 5px" id="verify_img"  width="95" src="<%=basePath%>verifyCode.do" href="javascript:void(0);" alt="点击更换验证码">
                 <button type="submit" id="submit_button" class="submit_button" >登录</button>
                 <div class="error"><span>+</span></div>
@@ -106,3 +106,4 @@ String basePath = request.getScheme() + "://"
 
     </body>
 </html>
+

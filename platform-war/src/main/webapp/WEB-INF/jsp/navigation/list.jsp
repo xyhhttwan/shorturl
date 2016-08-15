@@ -93,14 +93,14 @@
             </shiro:hasPermission>
 
             <shiro:hasPermission name="navigation-delete">
-                <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+                <a href="#" class="easyui-linkbutton" iconCls="icon-mini_publish" plain="true"
                    onclick="doPublish()">发布上线</a>
             </shiro:hasPermission>
             <shiro:hasPermission name="navigation-delete">
                 <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true"
                    onclick="doUnPublish()">发布下线</a>
             </shiro:hasPermission>
-            <a href="#" class="easyui-linkbutton" iconCls="icon-reload" plain="true" onclick="reload('tt','treegrid')">刷新</a>
+            <a href="#" class="easyui-linkbutton" iconCls="icon-reload" plain="true" onclick="reload('tt')">刷新</a>
         </div>
 
     </div>

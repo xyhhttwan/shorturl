@@ -13,6 +13,7 @@
 package com.platform.soft.domain.backstage;
 
 import com.platform.soft.common.domain.BaseDomain;
+import com.platform.soft.common.domain.CreateBaseDomain;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -20,7 +21,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.util.Date;
 
-public class DynamicOrder extends BaseDomain<Long> {
+public class DynamicOrder extends CreateBaseDomain<Long> {
     private String orderId;
     private String arrivePosition;
     private Date arriveTime;

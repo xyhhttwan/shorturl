@@ -142,7 +142,7 @@
     </filter>
     <filter-mapping>
         <filter-name>exceptionHandlerFilter</filter-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/backstage/*</url-pattern>
     </filter-mapping>
 
     <servlet-mapping>

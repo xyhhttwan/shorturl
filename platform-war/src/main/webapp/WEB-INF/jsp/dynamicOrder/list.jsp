@@ -8,7 +8,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-    <title>前端导航列表</title>
+    <title>订单列表</title>
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="cache-control" content="no-cache">
     <meta http-equiv="expires" content="0">
@@ -18,18 +18,13 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
     -->
     <jsp:include page="/WEB-INF/jsp/common/common.jsp"></jsp:include>
-
-
-
     <script type="text/javascript">
-
-
         /*
          *按条件查询
          * */
         function doSearch(){
             $("#tt").datagrid("load",{
-                isLink:$("#isLink").combobox('getValue')
+                status:$("#status").combobox('getValue')
             });
         }
 
@@ -38,10 +33,10 @@
             oprateUser
             (
                     "客户订单处理",
-                    "<%=basePath%>backstage/onlineOrder/navigationManage/addView",
+                    "<%=basePath%>backstage/order/orderManage/addView",
                     0,
                     "add_user",
-                    "<%=basePath%>backstage/onlineOrder/navigationManage/add",
+                    "<%=basePath%>backstage/order/orderManage/add",
                     500,
                     "tt",
                     ""
@@ -51,10 +46,10 @@
             oprateUser
             (
                     "处理在线订单",
-                    "<%=basePath%>backstage/onlineOrder/onlineOrderManage/updateView",
+                    "<%=basePath%>backstage/order/orderManage/updateView",
                     1,
                     "add_user",
-                    "<%=basePath%>backstage/onlineOrder/onlineOrderManage/handleOrder",
+                    "<%=basePath%>backstage/order/orderManage/update",
                     500,
                     "tt",
                     ""
@@ -66,25 +61,19 @@
          *删除用户
          */
         function destroyItem() {
-            del("tt", "<%=basePath%>backstage/onlineOrder/onlineOrderManage/delete");
+            del("tt", "<%=basePath%>backstage/order/orderManage/delete");
 
         }
 
         function statuStr(value,row) {
             if(value=="0"){
-                return "<span style='color:red'>未处理</span>";
+                return "<span style='color:red'>正在运输</span>";
             }
-           else return "<span style='color:green'>已处理</span>";
+           else return "<span style='color:green'>已完毕</span>";
 
         }
-        //上线
-        function doPublish() {
-            doPost("tt","<%=basePath%>backstage/onlineOrder/onlineOrderManage/setPublishOrUnPublish","","status=1");
-        }
-        //下线
-        function doUnPublish() {
-            doPost("tt","<%=basePath%>backstage/onlineOrder/onlineOrderManage/setPublishOrUnPublish","","status=0");
-        }
+
+
     </script>
 
 </head>
@@ -95,7 +84,7 @@
 
         <div style="border-bottom: 1px solid #95B8E7; margin: 5px;  backstage: #F4F4F4" >
             <p>查询条件  &nbsp;
-                <select class="easyui-combobox" style="width:150px" name="isLink" id="isLink">
+                <select class="easyui-combobox" style="width:150px" name="status" id="status">
                     <option value="0">未处理</option>
                     <option value="1">已处理</option>
                 </select>
@@ -104,9 +93,20 @@
         </div>
         <div style="margin: 5px;backstage: #F4F4F4">
             <shiro:hasPermission name="onlineOrder-update">
-                <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true"
-                   onclick="editItem()">处理</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true"
+                   onclick="newItem()">新增订单</a>
             </shiro:hasPermission>
+
+            <shiro:hasPermission name="onlineOrder-update">
+                <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true"
+                   onclick="editItem()">修改订单</a>
+            </shiro:hasPermission>
+            <shiro:hasPermission name="onlineOrder-update">
+                <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+                   onclick="editItem()">更新订单</a>
+            </shiro:hasPermission>
+
+
             <shiro:hasPermission name="onlineOrder-delete">
                 <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true"
                    onclick="destroyItem()">删除</a>
@@ -117,24 +117,22 @@
 
 
     <table id="tt" class="easyui-datagrid" height="450px"
-           url="<%=basePath%>backstage/onlineOrder/onlineOrderManage/list"
-           title="客户在线订单列表"
+           url="<%=basePath%>backstage/order/orderManage/list"
+           title="客户订单列表"
            border="true"
            toolbar="#toolbar"
            rownumbers="true" pagination="true">
         <thead>
         <tr>
             <th field="id" checkbox="true" width="2%">id</th>
-            <th field="createDate" formatter="formatterDate" width="12%">下单时间</th>
-            <th field="isLink" formatter="statuStr" width="6%">是否已处理</th>
-            <th field="linkResult" width="10%">处理结果</th>
-            <th field="linkMan" width="6%">联系人</th>
-            <th field="phoneNum" width="8%">联系电话</th>
-            <th field="mfrom" width="12%"> 起始地</th>
-            <th field="mto" width="12%">目的地</th>
-            <th field="content" width="20%">发货内容</th>
-            <th field="remark" width="11%">备注</th>
-
+            <th field="orderTime" formatter="formatterDate" width="12%">下单时间</th>
+            <th field="orderId"  width="12%">订单号</th>
+            <th field="isLink" formatter="statuStr" width="6%">状态</th>
+            <th field="mfrom" width="10%">发货地</th>
+            <th field="mto" width="10%">目的地</th>
+            <th field="carrier" width="8%"> 承运人</th>
+            <th field="linkPhone" width="8%">联系电话</th>
+            <th field="content" width="25%">发货内容</th>
         </tr>
         </thead>
     </table>

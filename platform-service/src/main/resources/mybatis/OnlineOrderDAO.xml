@@ -27,7 +27,7 @@ selectList
         id,
         mFrom,
         mTo,
-        linKMan,
+        linkMan,
         phoneNum,
         remark,
         content,
@@ -39,7 +39,7 @@ selectList
         INSERT INTO tbl_online_order (
         mFrom,
         mTo,
-        linKMan,
+        linkMan,
         phoneNum,
         remark,
         content,
@@ -49,7 +49,7 @@ selectList
         ) VALUES (
         #{mfrom},
         #{mto},
-        #{linKman},
+        #{linkMan},
         #{phoneNum},
         #{remark},
         #{content},
@@ -72,8 +72,8 @@ selectList
             <if test="mto!=null">
                 mTo = #{mto},
             </if>
-            <if test="linKman!=null">
-                linKMan = #{linKman},
+            <if test="linkMan!=null">
+                linkMan = #{linkMan},
             </if>
             <if test="phoneNum!=null">
                 phoneNum = #{phoneNum},
@@ -107,8 +107,8 @@ selectList
             <if test="map.mto!=null">
                 mTo = #{map.mto},
             </if>
-            <if test="map.linKman!=null">
-                linKMan = #{map.linKman},
+            <if test="map.linkMan!=null">
+                linkMan = #{map.linkMan},
             </if>
             <if test="map.phoneNum!=null">
                 phoneNum = #{map.phoneNum},
@@ -142,8 +142,8 @@ selectList
             <if test="update.mto!=null">
                 mTo = #{update.mto},
             </if>
-            <if test="update.linKman!=null">
-                linKMan = #{update.linKman},
+            <if test="update.linkMan!=null">
+                linkMan = #{update.linkMan},
             </if>
             <if test="update.phoneNum!=null">
                 phoneNum = #{update.phoneNum},
@@ -175,8 +175,8 @@ selectList
             <if test="condition.mto!=null">
                 AND mTo = #{condition.mto}
             </if>
-            <if test="condition.linKman!=null">
-                AND linKMan = #{condition.linKman}
+            <if test="condition.linkMan!=null">
+                AND linkMan = #{condition.linkMan}
             </if>
             <if test="condition.phoneNum!=null">
                 AND phoneNum = #{condition.phoneNum}
@@ -203,7 +203,7 @@ selectList
         INSERT INTO tbl_online_order (
                 mFrom,
                 mTo,
-                linKMan,
+                linkMan,
                 phoneNum,
                 remark,
                 content,
@@ -213,7 +213,7 @@ selectList
         ) VALUES (
                     #{map.mfrom},
                     #{map.mto},
-                    #{map.linKman},
+                    #{map.linkMan},
                     #{map.phoneNum},
                     #{map.remark},
                     #{map.content},
@@ -229,7 +229,7 @@ selectList
         <trim prefix="SET" suffixOverrides=",">
             mFrom = #{mfrom},
             mTo = #{mto},
-            linKMan = #{linKman},
+            linkMan = #{linkMan},
             phoneNum = #{phoneNum},
             remark = #{remark},
             content = #{content},
@@ -262,8 +262,8 @@ selectList
             <if test="mto!=null">
                 AND mTo = #{mto}
             </if>
-            <if test="linKman!=null">
-                AND linKMan = #{linKman}
+            <if test="linkMan!=null">
+                AND linkMan = #{linkMan}
             </if>
             <if test="phoneNum!=null">
                 AND phoneNum = #{phoneNum}
@@ -352,8 +352,8 @@ selectList
             <if test="condition.mto!=null">
                 ${condition.groupOp}   mTo  ${condition.mTo.op}  #{condition.mTo.data}
             </if>
-            <if test="condition.linKman!=null">
-                ${condition.groupOp}   linKMan  ${condition.linKMan.op}  #{condition.linKMan.data}
+            <if test="condition.linkMan!=null">
+                ${condition.groupOp}   linkMan  ${condition.linkMan.op}  #{condition.linkMan.data}
             </if>
             <if test="condition.phoneNum!=null">
                 ${condition.groupOp}   phoneNum  ${condition.phoneNum.op}  #{condition.phoneNum.data}
@@ -399,8 +399,8 @@ selectList
             <if test="mto!=null">
                 AND mTo like CONCAT('%', #{mto} , '%')
             </if>
-            <if test="linKman!=null">
-                AND linKMan like CONCAT('%', #{linKman} , '%')
+            <if test="linkMan!=null">
+                AND linkMan like CONCAT('%', #{linkMan} , '%')
             </if>
             <if test="phoneNum!=null">
                 AND phoneNum like CONCAT('%', #{phoneNum} , '%')
@@ -441,8 +441,8 @@ selectList
             <if test="condition.mto!=null">
                 AND mTo = #{condition.mto}
             </if>
-            <if test="condition.linKman!=null">
-                AND linKMan = #{condition.linKman}
+            <if test="condition.linkMan!=null">
+                AND linkMan = #{condition.linkMan}
             </if>
             <if test="condition.phoneNum!=null">
                 AND phoneNum = #{condition.phoneNum}
@@ -482,8 +482,8 @@ selectList
             <if test="condition.mto!=null">
                 AND mTo = #{condition.mto}
             </if>
-            <if test="condition.linKman!=null">
-                AND linKMan = #{condition.linKman}
+            <if test="condition.linkMan!=null">
+                AND linkMan = #{condition.linkMan}
             </if>
             <if test="condition.phoneNum!=null">
                 AND phoneNum = #{condition.phoneNum}
@@ -522,8 +522,8 @@ selectList
            <if test="mto!=null">
                ${groupOp} mTo ${mTo.op}  #{mTo.data}
            </if>
-           <if test="linKman!=null">
-               ${groupOp} linKMan ${linKMan.op}  #{linKMan.data}
+           <if test="linkMan!=null">
+               ${groupOp} linkMan ${linkMan.op}  #{linkMan.data}
            </if>
            <if test="phoneNum!=null">
                ${groupOp} phoneNum ${phoneNum.op}  #{phoneNum.data}

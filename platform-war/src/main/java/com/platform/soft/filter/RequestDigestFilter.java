@@ -25,7 +25,7 @@ import java.io.IOException;
  */
 public class RequestDigestFilter extends RequestContextFilter {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger("CICADA-DIGEST");
+	private static final Logger LOGGER = LoggerFactory.getLogger("PLATFORM-DIGEST");
 
 	/**
 	 * @see RequestContextFilter#doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain)
@@ -33,6 +33,8 @@ public class RequestDigestFilter extends RequestContextFilter {
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
 	                                FilterChain filterChain) throws ServletException, IOException {
+
+		HttpServletRequest req = (HttpServletRequest) request;
 
 		boolean hasError = false;
 		StringBuffer serviceMessage = new StringBuffer();
@@ -46,6 +48,7 @@ public class RequestDigestFilter extends RequestContextFilter {
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage(),e);
 			hasError = true;
+			throw e;
 		} finally {
 			if (LOGGER.isInfoEnabled()) {
 				if (hasError) {

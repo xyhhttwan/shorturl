@@ -2,7 +2,6 @@ package com.platform.soft.wx;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import sun.plugin2.ipc.Event;
 import weixin.popular.bean.message.EventMessage;
 import weixin.popular.bean.message.message.NewsMessage;
 import weixin.popular.bean.xmlmessage.XMLMessage;

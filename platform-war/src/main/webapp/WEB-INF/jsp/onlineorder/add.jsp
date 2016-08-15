@@ -13,16 +13,11 @@
 			<input type="hidden" name="id" value="${onlineOrder.id}" id="id">
 
 		</c:if>
-		<table>
+		<table  style="margin-top: 10px">
 			<tr>
-				<td><label> 导航名称: </label></td>
-				<td><input name="name" id="name"  validtype="length[0,16]" maxlength="16"  value="${navigation.name}" class="easyui-validatebox" required="true" /></td>
-
-			</tr>
-
-			<tr>
-				<td><label> 连接地址: </label></td>
-				<td><input name="url" value="${navigation.url}" style="width: 400px;" type="text" validtype="length[1,255]" invalidMessage="有效长度1-255" id="url" required="true" class="easyui-validatebox" /></td>
+				<td><label> 处理结果: </label></td>
+				<td>
+					<input name="linkResult" id="linkResult"  validtype="length[0,32]" maxlength="32"    style="height:35px;width: 400px;" class="easyui-validatebox"/></td>
 			</tr>
 
 		</table>

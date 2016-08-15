@@ -24,6 +24,7 @@ import java.util.*;
 
 public class Order extends CreateBaseDomain<Long> {
     private String orderId;
+    private java.util.Date orderTime;
     private String mfrom;
     private String mto;
     private String content;
@@ -31,14 +32,22 @@ public class Order extends CreateBaseDomain<Long> {
     private String carrier;
     private String linkPhone;
 
-	public Order(){
-	}
+    public Order(){
+    }
     public void setOrderId(String value) {
         this.orderId = value;
     }
 
     public String getOrderId() {
         return this.orderId;
+    }
+
+    public void setOrderTime(java.util.Date value) {
+        this.orderTime = value;
+    }
+
+    public java.util.Date getOrderTime() {
+        return this.orderTime;
     }
     public void setMfrom(String value) {
         this.mfrom = value;
@@ -83,32 +92,36 @@ public class Order extends CreateBaseDomain<Long> {
         return this.linkPhone;
     }
 
-	public String toString() {
-		return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
-			.append("Id",getId())
-			.append("OrderId",getOrderId())
-			.append("Mfrom",getMfrom())
-			.append("Mto",getMto())
-			.append("Content",getContent())
-			.append("Price",getPrice())
-			.append("Carrier",getCarrier())
-			.append("LinkPhone",getLinkPhone())
-			.toString();
-	}
-	
-	public int hashCode() {
-		return new HashCodeBuilder()
-			.append(getId())
-			.toHashCode();
-	}
-	
-	public boolean equals(Object obj) {
-		if(obj instanceof Order == false) return false;
-		if(this == obj) return true;
-		Order other = (Order)obj;
-		return new EqualsBuilder()
-			.append(getId(),other.getId())
-			.isEquals();
-	}
+    public String toString() {
+        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
+                .append("Id",getId())
+                .append("OrderId",getOrderId())
+                .append("OrderTime",getOrderTime())
+                .append("Mfrom",getMfrom())
+                .append("Mto",getMto())
+                .append("Content",getContent())
+                .append("Price",getPrice())
+                .append("Carrier",getCarrier())
+                .append("LinkPhone",getLinkPhone())
+                .append("Status",getStatus())
+                .append("CreateDate",getCreateDate())
+                .append("LastModDate",getLastModDate())
+                .toString();
+    }
+
+    public int hashCode() {
+        return new HashCodeBuilder()
+                .append(getId())
+                .toHashCode();
+    }
+
+    public boolean equals(Object obj) {
+        if(obj instanceof Order == false) return false;
+        if(this == obj) return true;
+        Order other = (Order)obj;
+        return new EqualsBuilder()
+                .append(getId(),other.getId())
+                .isEquals();
+    }
 }
 

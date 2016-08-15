@@ -68,6 +68,49 @@
 	background:url('icons/more.png') no-repeat center center;
 }
 
+<!---->
+.icon-menu{
+	background:url('icons/menu.png') no-repeat center center;
+}
+
+.icon-navigation{
+	background:url('icons/navigation.png') no-repeat center center;
+}
+
+.icon-news{
+	background:url('icons/news.png') no-repeat center center;
+}
+
+.icon-order{
+	background:url('icons/order.png') no-repeat center center;
+}
+
+.icon-shipping_freight{
+	background:url('icons/shipping_freight.png') no-repeat center center;
+}
+
+.icon-news_small{
+	background:url('icons/news_small.png') no-repeat center center;
+}
+.icon-order_online{
+	background:url('icons/order_online.png') no-repeat center center;
+}
+
+.icon-order_small{
+	background:url('icons/order_small.png') no-repeat center center;
+}
+
+.icon-view{
+	background:url('icons/view.png') no-repeat center center;
+}
+.icon-common{
+	background:url('icons/common.png') no-repeat center center;
+}
+
+
+.icon-mini_publish{
+	background:url('icons/publish.png') no-repeat center center;
+}
 
 .icon-mini-add{
 	background:url('icons/mini_add.png') no-repeat center center;
