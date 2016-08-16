@@ -59,7 +59,7 @@
     <select id="getAllRoles" resultMap="roleMap">
          SELECT id,roleName ,status
           from
-          role
+          sys_role
     </select>
     <!--分页查询角色信息-->
     <select id="getRolePageList" resultMap="roleMap">

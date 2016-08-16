@@ -50,10 +50,8 @@ public class ShiroHandAuthorizationException implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
 
-
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
-        System.out.println("path:"+req.getServletPath());
         Subject subject = SecurityUtils.getSubject();
         if (subject.getPrincipal() == null && req.getServletPath().contains("/backstage/")) {
             if (WebUtils.isAjax(req)) {
@@ -94,7 +92,7 @@ public class ShiroHandAuthorizationException implements Filter {
                     resp.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
                     return;
                 } else {
-                    LOGGER.error("您没有权限访问,原因:{}",e.getMessage());
+                    LOGGER.error("您没有权限访问,原因:{}", e.getMessage());
                     throw new ServletException(e.getMessage());
                 }
             }

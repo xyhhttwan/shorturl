@@ -161,6 +161,7 @@ public class RoleServiceImpl implements IRoleService {
     public int addRolePermission(int roleId, int[] permissionIds) throws SQLException {
 
         int counts = 0;
+        roleDao.delRolePermissionByRoleId(roleId);
         if(null!=permissionIds && permissionIds.length>0){
             for (int i : permissionIds) {
                 Map<String, Object> map = new HashMap<String, Object>();

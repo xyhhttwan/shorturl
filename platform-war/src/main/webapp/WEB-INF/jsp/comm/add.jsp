@@ -40,13 +40,18 @@
 							return false;
 						},
 						success: function (data) {
+							close_process();
+							try{
+								var data = eval('(' + data + ')');
+								if (data.result == "true") {
+									$.messager.show({title: 'Success', msg: "<br/>" + data.message});
+								} else {
+									$.messager.alert('Error', "<br/>" + data.message, 'Error');
+								}
+							}catch (exception){
 
-							var data = eval('(' + data + ')');
-							if (data.result == "true") {
-								$.messager.show({title: 'Success', msg: "<br/>" + data.message});
-							} else {
-								$.messager.alert('Error', "<br/>" + data.message, 'Error');
 							}
+
 						}
 
 					});
@@ -71,33 +76,33 @@
 			<tr>
 				<td><label> 联系电话: </label></td>
 				<td>
-					<input name="phoneNum" id="phoneNum"  validtype="length[11,11]" maxlength="11"    style="height:35px;width: 400px;" REQUIRED class="easyui-validatebox"/></td>
+					<input name="phoneNum" id="phoneNum" value="${common.phoneNum}" validtype="length[11,11]" maxlength="11"    style="height:35px;width: 400px;" REQUIRED class="easyui-validatebox"/></td>
 			</tr>
 			<tr>
 				<td><label> 固话: </label></td>
 				<td>
-					<input name="telPhone" id="telPhone"  validtype="length[1,20]" maxlength="20"    style="height:35px;width: 400px;" class="easyui-validatebox"/></td>
+					<input name="telPhone" id="telPhone" value="${common.telPhone}" validtype="length[1,20]" maxlength="20"    style="height:35px;width: 400px;" class="easyui-validatebox"/></td>
 			</tr>
 			<tr>
 				<td><label> 投诉电话: </label></td>
 				<td>
-					<input name="complaintsNum" id="complaintsNum"  validtype="length[1,20]" maxlength="20"    style="height:35px;width: 400px;" class="easyui-validatebox"/></td>
+					<input name="complaintsNum" id="complaintsNum" value="${common.complaintsNum}" validtype="length[1,20]" maxlength="20"    style="height:35px;width: 400px;" class="easyui-validatebox"/></td>
 			</tr>
 			<tr>
 				<td><label> 公司地址: </label></td>
 				<td>
-					<input name="address" id="address" REQUIRED validtype="length[1,32]" maxlength="32"    style="height:35px;width: 400px;" class="easyui-validatebox"/></td>
+					<input name="address" id="address" value="${common.address}" REQUIRED validtype="length[1,32]" maxlength="32"    style="height:35px;width: 400px;" class="easyui-validatebox"/></td>
 			</tr>
 			<tr>
 				<td><label> 关于我们: </label></td>
 				<td>
-					<textarea name="aboutUs" id="aboutUs" cols="63" rows="5" class="textareaeasyui-validatebox"></textarea>
+					<textarea name="aboutUs" id="aboutUs" cols="63" rows="5" class="textareaeasyui-validatebox">${common.aboutUs}</textarea>
 			</tr>
 
 			<tr>
 				<td><label> 公司介绍: </label></td>
 				<td>
-					<textarea name="companyDes" id="companyDes" cols="63" rows="5" class="textareaeasyui-validatebox"></textarea>
+					<textarea name="companyDes" id="companyDes" cols="63" rows="5" class="textareaeasyui-validatebox">${common.companyDes}</textarea>
 			</tr>
 
 			<tr style="margin: 50px">

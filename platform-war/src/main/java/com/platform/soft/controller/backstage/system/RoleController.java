@@ -3,16 +3,23 @@ package com.platform.soft.controller.backstage.system;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.platform.soft.api.backstage.ex.IPermissionService;
 import com.platform.soft.api.backstage.ex.IRoleService;
 import com.platform.soft.base.domain.ResponseMessage;
 import com.platform.soft.base.enums.MessageCode;
 import com.platform.soft.base.springmvc.BackStageController;
+import com.platform.soft.domain.backstage.ex.Permission;
 import com.platform.soft.domain.backstage.ex.Role;
+import com.platform.soft.utils.WebUtils;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -36,6 +43,9 @@ public class RoleController extends BackStageController {
     @Autowired
     private IRoleService roleService;
 
+    @Autowired
+    private IPermissionService permissionService;
+
     @RequestMapping("/index")
     public String index() {
         return "role/list";
@@ -49,7 +59,7 @@ public class RoleController extends BackStageController {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("roleName", roleName);
         List<Role> roleList = roleService.getRolePageList(map);
-        PageInfo<List<Map<String, Object>>> pageList = new PageInfo(roleList);
+        PageInfo<List<Role>> pageList = new PageInfo(roleList);
         map.clear();
         map.put("total", pageList.getTotal());
         map.put("rows", pageList.getList());
@@ -228,6 +238,7 @@ public class RoleController extends BackStageController {
         ResponseMessage rsgMsg = new ResponseMessage();
         try {
             roleService.addRolePermission(roleId, permissionIds);
+            saveSessionRolePermission();
             rsgMsg.setIsSuccess(true);
             rsgMsg.setMsgCode(MessageCode.DEFAULT_SUCCESS);
         } catch (SQLException e) {
@@ -236,6 +247,18 @@ public class RoleController extends BackStageController {
             rsgMsg.setMsgCode(MessageCode.PERMISSION_SETTING_FAILED);
         }
         return rsgMsg;
+    }
+
+    @Async
+    private void  saveSessionRolePermission(){
+        List<Permission> permissionList = permissionService.getPermissionByUserId(WebUtils.getUserId(request));
+        Subject currentUser = SecurityUtils.getSubject();
+        if(null != currentUser){
+            Session session = currentUser.getSession();
+            if(null != session){
+                session.setAttribute("permissionList", permissionList);
+            }
+        }
     }
 }
 

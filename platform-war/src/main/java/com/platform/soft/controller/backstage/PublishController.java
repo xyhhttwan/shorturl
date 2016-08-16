@@ -49,10 +49,8 @@ public class PublishController extends BackStageController {
     }
 
 
-
     @RequestMapping("/update")
     @ResponseBody
-    @RequiresPermissions("DD")
     public ResponseMessage update(Common common) {
         ResponseMessage rsgMsg = new ResponseMessage();
         try {
