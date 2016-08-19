@@ -215,6 +215,7 @@ function doPost(dataId, url, datatype, data) {
                     cache: false,
                     dataType: 'json',
                     success: function (data) {
+                        close_process();
                         if (data.result == "true") {
                             debugger;
                             $.messager.show({title: 'Success', msg: data.message});

@@ -63,7 +63,7 @@ public class RoleServiceImpl implements IRoleService {
                 roleDao.delRole(Integer.valueOf(id));
             }
         }
-        return 0;
+        return 1;
     }
 
     /**
@@ -124,6 +124,7 @@ public class RoleServiceImpl implements IRoleService {
     @Transactional
     public int addRoleMenu(int roleId, int[] menuIds) throws SQLException {
 
+        delRoleMenuByRoleId(roleId);
         int counts = 0;
         if(null!=menuIds && menuIds.length>0){
             for (int i : menuIds) {
@@ -161,7 +162,7 @@ public class RoleServiceImpl implements IRoleService {
     public int addRolePermission(int roleId, int[] permissionIds) throws SQLException {
 
         int counts = 0;
-        roleDao.delRolePermissionByRoleId(roleId);
+        delRolePermissionByRoleId(roleId);
         if(null!=permissionIds && permissionIds.length>0){
             for (int i : permissionIds) {
                 Map<String, Object> map = new HashMap<String, Object>();

@@ -92,11 +92,11 @@
                    onclick="destroyItem()">删除导航</a>
             </shiro:hasPermission>
 
-            <shiro:hasPermission name="navigation-delete">
+            <shiro:hasPermission name="navigation-update">
                 <a href="#" class="easyui-linkbutton" iconCls="icon-mini_publish" plain="true"
                    onclick="doPublish()">发布上线</a>
             </shiro:hasPermission>
-            <shiro:hasPermission name="navigation-delete">
+            <shiro:hasPermission name="navigation-update">
                 <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true"
                    onclick="doUnPublish()">发布下线</a>
             </shiro:hasPermission>

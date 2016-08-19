@@ -113,7 +113,7 @@
     <!--根据角色id删除角色菜单-->
     <delete id="delRoleMenuByRoleId" parameterType="int">
         DELETE FROM sys_role_menu
-        WHERE  roleId=#{roelId}
+        WHERE  roleId=#{roleId}
     </delete>
     <!--新增角色菜单-->
     <insert id="addRoleMenu" parameterType="map">

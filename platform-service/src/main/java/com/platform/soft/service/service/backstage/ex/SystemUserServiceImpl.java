@@ -84,10 +84,12 @@ public class SystemUserServiceImpl implements ISystemUserService {
      */
     @Override
     public int delUser(String ids) throws SQLException {
+
         String ids_[] = ids.split(",");
         int counts = 0;
         for(String id_:ids_){
             int id = Integer.parseInt(id_);
+            delUserRole(id);
             counts+=systemUserLoginDao.delUser(id);
         }
         return counts ;
@@ -140,7 +142,7 @@ public class SystemUserServiceImpl implements ISystemUserService {
      */
     @Override
     public int addUserRole(int userId, int[] roleId) throws SQLException {
-
+        delUserRole(userId);
         int counts=0;
         if(null!=roleId && roleId.length>0){
             if(roleId.length>0){

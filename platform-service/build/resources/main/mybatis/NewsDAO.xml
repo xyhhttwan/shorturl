@@ -31,7 +31,11 @@ selectList
         creator,
         lastModifier,
         lastModDate,
-        status
+        status,
+        newsType,
+        pic,
+        postTime,
+        updateTime
     </sql>
     <insert id="insert" parameterType="News">
         INSERT INTO tbl_news (
@@ -41,7 +45,11 @@ selectList
         creator,
         lastModifier,
         lastModDate,
-        status
+        status,
+        newsType,
+        pic,
+        postTime,
+        updateTime
         ) VALUES (
         #{title},
         #{content},
@@ -49,10 +57,14 @@ selectList
         #{creator},
         #{lastModifier},
         #{lastModDate},
-        #{status}
+        #{status},
+        #{newsType},
+        #{pic},
+        #{postTime},
+        #{updateTime}
         )
         <selectKey resultType="java.lang.Long" keyProperty="id">
-        SELECT LAST_INSERT_ID() AS ID
+            SELECT LAST_INSERT_ID() AS ID
         </selectKey>
     </insert>
 
@@ -80,6 +92,18 @@ selectList
             </if>
             <if test="status!=null">
                 status = #{status},
+            </if>
+            <if test="newsType!=null">
+                newsType = #{newsType},
+            </if>
+            <if test="pic!=null">
+                pic = #{pic},
+            </if>
+            <if test="postTime!=null">
+                postTime = #{postTime},
+            </if>
+            <if test="updateTime!=null">
+                updateTime = #{updateTime},
             </if>
         </trim>
         WHERE
@@ -110,6 +134,18 @@ selectList
             <if test="map.status!=null">
                 status = #{map.status},
             </if>
+            <if test="map.newsType!=null">
+                newsType = #{map.newsType},
+            </if>
+            <if test="map.pic!=null">
+                pic = #{map.pic},
+            </if>
+            <if test="map.postTime!=null">
+                postTime = #{map.postTime},
+            </if>
+            <if test="map.updateTime!=null">
+                updateTime = #{map.updateTime},
+            </if>
         </trim>
         WHERE
         id = #{map.id}
@@ -139,6 +175,18 @@ selectList
             <if test="update.status!=null">
                 status = #{update.status},
             </if>
+            <if test="update.newsType!=null">
+                newsType = #{update.newsType},
+            </if>
+            <if test="update.pic!=null">
+                pic = #{update.pic},
+            </if>
+            <if test="update.postTime!=null">
+                postTime = #{update.postTime},
+            </if>
+            <if test="update.updateTime!=null">
+                updateTime = #{update.updateTime},
+            </if>
         </trim>
 
         <trim prefix="WHERE" prefixOverrides="AND | OR">
@@ -166,26 +214,46 @@ selectList
             <if test="condition.status!=null">
                 AND status = #{condition.status}
             </if>
+            <if test="condition.newsType!=null">
+                AND newsType = #{condition.newsType}
+            </if>
+            <if test="condition.pic!=null">
+                AND pic = #{condition.pic}
+            </if>
+            <if test="condition.postTime!=null">
+                AND postTime = #{condition.postTime}
+            </if>
+            <if test="condition.updateTime!=null">
+                AND updateTime = #{condition.updateTime}
+            </if>
         </trim>
     </update>
 
     <insert id="insertMap" >
         INSERT INTO tbl_news (
-                title,
-                content,
-                createDate,
-                creator,
-                lastModifier,
-                lastModDate,
-                status
+        title,
+        content,
+        createDate,
+        creator,
+        lastModifier,
+        lastModDate,
+        status,
+        newsType,
+        pic,
+        postTime,
+        updateTime
         ) VALUES (
-                    #{map.title},
-                    #{map.content},
-                    #{map.createDate},
-                    #{map.creator},
-                    #{map.lastModifier},
-                    #{map.lastModDate},
-                    #{map.status}
+        #{map.title},
+        #{map.content},
+        #{map.createDate},
+        #{map.creator},
+        #{map.lastModifier},
+        #{map.lastModDate},
+        #{map.status},
+        #{map.newsType},
+        #{map.pic},
+        #{map.postTime},
+        #{map.updateTime}
         )
     </insert>
 
@@ -200,9 +268,13 @@ selectList
             lastModifier = #{lastModifier},
             lastModDate = #{lastModDate},
             status = #{status},
+            newsType = #{newsType},
+            pic = #{pic},
+            postTime = #{postTime},
+            updateTime = #{updateTime},
         </trim>
         WHERE
-        id = #{id} 
+        id = #{id}
     </update>
 
     <!-- 按Id删除 -->
@@ -241,6 +313,18 @@ selectList
             <if test="status!=null">
                 AND status = #{status}
             </if>
+            <if test="newsType!=null">
+                AND newsType = #{newsType}
+            </if>
+            <if test="pic!=null">
+                AND pic = #{pic}
+            </if>
+            <if test="postTime!=null">
+                AND postTime = #{postTime}
+            </if>
+            <if test="updateTime!=null">
+                AND updateTime = #{updateTime}
+            </if>
         </trim>
     </delete>
 
@@ -257,7 +341,7 @@ selectList
             AND id = #{id}
         </trim>
         <if test="orderBy!=null">
-        ORDER BY ${orderBy} ${sortBy}
+            ORDER BY ${orderBy} ${sortBy}
         </if>
     </select>
 
@@ -325,12 +409,24 @@ selectList
             <if test="condition.status!=null">
                 ${condition.groupOp}   status  ${condition.status.op}  #{condition.status.data}
             </if>
+            <if test="condition.newsType!=null">
+                ${condition.groupOp}   newsType  ${condition.newsType.op}  #{condition.newsType.data}
+            </if>
+            <if test="condition.pic!=null">
+                ${condition.groupOp}   pic  ${condition.pic.op}  #{condition.pic.data}
+            </if>
+            <if test="condition.postTime!=null">
+                ${condition.groupOp}   postTime  ${condition.postTime.op}  #{condition.postTime.data}
+            </if>
+            <if test="condition.updateTime!=null">
+                ${condition.groupOp}   updateTime  ${condition.updateTime.op}  #{condition.updateTime.data}
+            </if>
 
 
-    </where>
+        </where>
 
         <if test="orderBy!=null">
-        ORDER BY ${orderBy} ${sortBy}
+            ORDER BY ${orderBy} ${sortBy}
         </if>
         <if test="offset != null">
             limit ${offset}, ${rows}
@@ -366,9 +462,21 @@ selectList
             <if test="status!=null">
                 AND status like CONCAT('%', #{status} , '%')
             </if>
+            <if test="newsType!=null">
+                AND newsType like CONCAT('%', #{newsType} , '%')
+            </if>
+            <if test="pic!=null">
+                AND pic like CONCAT('%', #{pic} , '%')
+            </if>
+            <if test="postTime!=null">
+                AND postTime like CONCAT('%', #{postTime} , '%')
+            </if>
+            <if test="updateTime!=null">
+                AND updateTime like CONCAT('%', #{updateTime} , '%')
+            </if>
         </trim>
         <if test="orderBy!=null">
-        ORDER BY ${orderBy} ${sortBy}
+            ORDER BY ${orderBy} ${sortBy}
         </if>
     </select>
 
@@ -402,9 +510,21 @@ selectList
             <if test="condition.status!=null">
                 AND status = #{condition.status}
             </if>
+            <if test="condition.newsType!=null">
+                AND newsType = #{condition.newsType}
+            </if>
+            <if test="condition.pic!=null">
+                AND pic = #{condition.pic}
+            </if>
+            <if test="condition.postTime!=null">
+                AND postTime = #{condition.postTime}
+            </if>
+            <if test="condition.updateTime!=null">
+                AND updateTime = #{condition.updateTime}
+            </if>
         </trim>
         <if test="orderBy!=null">
-        ORDER BY ${orderBy} ${sortBy}
+            ORDER BY ${orderBy} ${sortBy}
         </if>
     </select>
 
@@ -437,45 +557,69 @@ selectList
             <if test="condition.status!=null">
                 AND status = #{condition.status}
             </if>
+            <if test="condition.newsType!=null">
+                AND newsType = #{condition.newsType}
+            </if>
+            <if test="condition.pic!=null">
+                AND pic = #{condition.pic}
+            </if>
+            <if test="condition.postTime!=null">
+                AND postTime = #{condition.postTime}
+            </if>
+            <if test="condition.updateTime!=null">
+                AND updateTime = #{condition.updateTime}
+            </if>
         </trim>
         <if test="orderBy!=null">
-        ORDER BY ${orderBy} ${sortBy}
+            ORDER BY ${orderBy} ${sortBy}
         </if>
         limit 0,1
     </select>
 
     <select id="count" resultType="java.lang.Integer">
         SELECT count(id) FROM tbl_news
-       <where>
-           <if test="id!=null">
-               ${groupOp} id ${id.op}  #{id.data}
-           </if>
-           <if test="title!=null">
-               ${groupOp} title ${title.op}  #{title.data}
-           </if>
-           <if test="content!=null">
-               ${groupOp} content ${content.op}  #{content.data}
-           </if>
-           <if test="createDate!=null">
-               ${groupOp} createDate ${createDate.op}  #{createDate.data}
-           </if>
-           <if test="creator!=null">
-               ${groupOp} creator ${creator.op}  #{creator.data}
-           </if>
-           <if test="lastModifier!=null">
-               ${groupOp} lastModifier ${lastModifier.op}  #{lastModifier.data}
-           </if>
-           <if test="lastModDate!=null">
-               ${groupOp} lastModDate ${lastModDate.op}  #{lastModDate.data}
-           </if>
-           <if test="status!=null">
-               ${groupOp} status ${status.op}  #{status.data}
-           </if>
+        <where>
+            <if test="id!=null">
+                ${groupOp} id ${id.op}  #{id.data}
+            </if>
+            <if test="title!=null">
+                ${groupOp} title ${title.op}  #{title.data}
+            </if>
+            <if test="content!=null">
+                ${groupOp} content ${content.op}  #{content.data}
+            </if>
+            <if test="createDate!=null">
+                ${groupOp} createDate ${createDate.op}  #{createDate.data}
+            </if>
+            <if test="creator!=null">
+                ${groupOp} creator ${creator.op}  #{creator.data}
+            </if>
+            <if test="lastModifier!=null">
+                ${groupOp} lastModifier ${lastModifier.op}  #{lastModifier.data}
+            </if>
+            <if test="lastModDate!=null">
+                ${groupOp} lastModDate ${lastModDate.op}  #{lastModDate.data}
+            </if>
+            <if test="status!=null">
+                ${groupOp} status ${status.op}  #{status.data}
+            </if>
+            <if test="newsType!=null">
+                ${groupOp} newsType ${newsType.op}  #{newsType.data}
+            </if>
+            <if test="pic!=null">
+                ${groupOp} pic ${pic.op}  #{pic.data}
+            </if>
+            <if test="postTime!=null">
+                ${groupOp} postTime ${postTime.op}  #{postTime.data}
+            </if>
+            <if test="updateTime!=null">
+                ${groupOp} updateTime ${updateTime.op}  #{updateTime.data}
+            </if>
 
-       </where>
-    <if test="orderBy!=null">
-        ORDER BY ${orderBy} ${sortBy}
-    </if>
+        </where>
+        <if test="orderBy!=null">
+            ORDER BY ${orderBy} ${sortBy}
+        </if>
     </select>
 
     <select id="selectMaxId" resultType="java.lang.Long">

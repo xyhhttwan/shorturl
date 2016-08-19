@@ -41,7 +41,7 @@
 		top: 50%;
 		width: 11px;
 		height: 11px;
-		background: url(http://hovertree.com/texiao/css/25/img/order-icons.png) -21px -72px no-repeat;
+		background: url(<%=basePath2%>images/order-icons.png) -21px -72px no-repeat;
 	}
 
 	.hovertree-tracklist li.first .node-icon {
