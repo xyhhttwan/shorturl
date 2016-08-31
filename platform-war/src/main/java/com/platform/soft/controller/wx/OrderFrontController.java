@@ -1,4 +1,4 @@
-package com.platform.soft.controller.front;
+package com.platform.soft.controller.wx;
 
 import com.platform.soft.api.backstage.IDynamicOrderService;
 import com.platform.soft.api.backstage.IOrderService;
@@ -36,6 +36,7 @@ public class OrderFrontController extends BackStageController{
 
     @RequestMapping(value = "/{orderId}",method = RequestMethod.GET)
     public String searchOrder(@PathVariable String orderId){
+
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("orderId",orderId);
         Order order = (Order) orderService.queryOne(map);

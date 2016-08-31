@@ -74,17 +74,17 @@
 		<table  style="margin-top: 10px">
 
 			<tr>
-				<td><label> 联系电话: </label></td>
+				<td><label> 发货热线: </label></td>
 				<td>
 					<input name="phoneNum" id="phoneNum" value="${common.phoneNum}" validtype="length[11,11]" maxlength="11"    style="height:35px;width: 400px;" REQUIRED class="easyui-validatebox"/></td>
 			</tr>
 			<tr>
-				<td><label> 固话: </label></td>
+				<td><label> 查货热线: </label></td>
 				<td>
 					<input name="telPhone" id="telPhone" value="${common.telPhone}" validtype="length[1,20]" maxlength="20"    style="height:35px;width: 400px;" class="easyui-validatebox"/></td>
 			</tr>
 			<tr>
-				<td><label> 投诉电话: </label></td>
+				<td><label> 客服热线: </label></td>
 				<td>
 					<input name="complaintsNum" id="complaintsNum" value="${common.complaintsNum}" validtype="length[1,20]" maxlength="20"    style="height:35px;width: 400px;" class="easyui-validatebox"/></td>
 			</tr>

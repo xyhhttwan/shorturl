@@ -49,7 +49,7 @@ public class SystemVerifyController {
 
     }
 
-    @RequestMapping("/inquiryVerifyCode")
+    @RequestMapping("/onlineOrderVerifyCode")
     public void inquirVerifyCode(HttpServletRequest request, HttpServletResponse response)
     {
         try {

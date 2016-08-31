@@ -93,6 +93,7 @@ public class NavigationController extends BackStageController {
             rsgMsg.setMsgCode(MessageCode.ADD_FAILED);
         }
         return rsgMsg;
+
     }
 
 
@@ -106,8 +107,8 @@ public class NavigationController extends BackStageController {
     @RequiresPermissions("navigation-update")
     public String updateNavigationView(Integer id) {
         Map<String, Object> map = new HashMap<String, Object>();
-        Navigation navigation = (Navigation) navigationService.queryOne(map);
         map.put("id", id);
+        Navigation navigation = (Navigation) navigationService.queryOne(map);
         request.setAttribute("navigation", navigation);
         return "navigation/add";
     }

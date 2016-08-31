@@ -9,7 +9,7 @@
 <div id="tbsUserDlg">
     <form id="dataform" method="post">
 
-        <c:if test="${not empty newsTitle}">
+        <c:if test="${not empty news}">
             <input type="hidden" name="id" value="${news.id}" id="id">
             <input type="hidden" name="status" value="${news.status}" id="status">
 
@@ -17,8 +17,8 @@
         <table>
             <tr>
                 <td><label> 标题: </label></td>
-                <td><input name="title" id="title" style="height:35px;width: 400px;" validtype="length[0,16]"
-                           maxlength="16" value="${news.title}" class="easyui-validatebox" required="true"/></td>
+                <td><input name="title" id="title" style="height:35px;width: 400px;" validtype="length[0,64]"
+                           maxlength="64" value="${news.title}" class="easyui-validatebox" required="true"/></td>
 
             </tr>
 
