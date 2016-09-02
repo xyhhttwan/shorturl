@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * 微信菜单的管理
  */
-@Controller("menuButton")
+@Controller
 @RequestMapping("wx/menuButton")
 public class MenuButtonController {
 
@@ -43,12 +43,13 @@ public class MenuButtonController {
 //        subbt1_1.setType("view");
 //        subbt1_1.setUrl("http://www.esyto.com/wei/ysf_phone.html");
 //        subbt1.add(subbt1_1);
-       // Token token = TokenAPI.token("wx8cb69a303edc18a0", "7fb51d2466240e7a50d746ac2f2b712b");
-        //String accessToken = token.getAccess_token();
+         Token token = TokenAPI.token("wxcc6562f9601acaf4", "7fb51d2466240e7a50d746ac2f2b712b");
+         String accessToken = token.getAccess_token();
 
+        System.out.println("accessToken:"+accessToken);
         menuButtons.setButton(new Button[]{bt1});
-        BaseResult result = MenuAPI.menuCreate("f32g_8liNqVehWRdvJXknMAvZdj9ptjr3epbPGCoNcT_JK4yU1TcvnnbZGgwflyP6NVKjH4E6e5VePPY9PsGdqV0BVLOn53Fi2wJ2zQFnCIAOwwUBmpKG5z-tqLVcIUqPXTbAJADLH", menuButtons);
-        System.out.print(result.getErrmsg());
+        //BaseResult result = MenuAPI.menuCreate("f32g_8liNqVehWRdvJXknMAvZdj9ptjr3epbPGCoNcT_JK4yU1TcvnnbZGgwflyP6NVKjH4E6e5VePPY9PsGdqV0BVLOn53Fi2wJ2zQFnCIAOwwUBmpKG5z-tqLVcIUqPXTbAJADLH", menuButtons);
+       // System.out.print(result.getErrmsg());
 
 
     }

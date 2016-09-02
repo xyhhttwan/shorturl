@@ -64,6 +64,8 @@
                         $("#pageList").html(data);
                         kkpager.total = $("#totalPage").val();
                         kkpager.totalRecords = $("#totalRecords").val();
+                        kkpager.generPageHtml(kkpager._config,true);
+
                         return false;
                     }
                 })

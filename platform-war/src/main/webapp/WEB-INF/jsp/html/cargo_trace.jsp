@@ -25,7 +25,7 @@
         <div class="position">物流跟踪 <span>/ Logistics Tracking</span></div>
         <div class="log-search">
             <p class="log-search-tit">物流信息管理</p>
-            <textarea class="log-text" id="orderId" name="orderId" placeholder="请输入您要查询的订单号">${orderId}</textarea>
+            <textarea class="log-text" id="orderId" name="orderId" placeholder="请输入您要查询的14位订单号">${orderId}</textarea>
             <p>
                 <button class="log-btn" id="search">查询</button>
             </p>

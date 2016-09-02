@@ -9,7 +9,7 @@
 %>
 <c:forEach var="list" items="${page.list}">
     <div class="news-list" >
-        <a href="<%=basePath%>html/news/${list.id}" target="_blank">
+        <a href="<%=basePath%>html/news/${list.id}.html" target="_blank">
             <p class="news-tit">${list.title}</p>
             <div class="news-text">
                 <c:if test="${not empty list.pic}">

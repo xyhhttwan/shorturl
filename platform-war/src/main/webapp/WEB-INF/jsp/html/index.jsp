@@ -41,13 +41,13 @@
     </div>
     <div class="main-box w1200">
         <div class="index-search">
-            <textarea id="orderId" name="orderId" class="index-text" placeholder="请输入您要查询的订单号"></textarea>
+            <textarea id="orderId" name="orderId" class="index-text" placeholder="请输入您要查询的14位订单号"></textarea>
             <button class="index-btn">查询</button>
         </div>
         <div class="m-box w34">
             <div class="m-box-tit">最新资讯 <span>/&nbsp;&nbsp;Latest News</span></div>
             <div class="m-box-container">
-                <a href="#">
+                <a href="<%=basePath%>html/news/${newsPic.id}.html">
                     <p class="news-tit">${newsPic.title}</p>
                     <div class="news-text">
                         <c:if test="${newsPic.newsType==0}">
