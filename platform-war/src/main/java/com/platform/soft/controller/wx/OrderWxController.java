@@ -22,10 +22,10 @@ import java.util.Map;
  * Created by baixiaobin on 16/8/15.
  */
 @Controller
-@RequestMapping("/html/order/")
-public class OrderFrontController extends BackStageController{
+@RequestMapping("/html/wx/order/")
+public class OrderWxController extends BackStageController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(OrderFrontController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(OrderWxController.class);
 
 
     @Autowired
@@ -34,21 +34,31 @@ public class OrderFrontController extends BackStageController{
     @Autowired
     private IOrderService orderService;
 
-    @RequestMapping(value = "/{orderId}",method = RequestMethod.GET)
-    public String searchOrder(@PathVariable String orderId){
-
+    //微信订单查查
+    @RequestMapping(value = "/{orderId}", method = RequestMethod.GET)
+    public String searchOrder(@PathVariable String orderId) {
+        LOGGER.debug("订单查询开始:{}", orderId);
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("orderId",orderId);
+        map.put("orderId", orderId);
         Order order = (Order) orderService.queryOne(map);
-        if(order !=null){
+        if (order != null) {
             map.clear();
-            map.put("orderId",order.getOrderId());
-            List<DynamicOrder> list = dynamicOrderService.queryList(map,"arriveTime","desc",null);
-            request.setAttribute("orderCloseDate",new Date(order.getLastModDate()));
-            request.setAttribute("list",list);
+            map.put("orderId", order.getOrderId());
+            List<DynamicOrder> list = dynamicOrderService.queryList(map, "arriveTime", "desc", null);
+            request.setAttribute("orderCloseDate", new Date(order.getLastModDate()));
+            request.setAttribute("list", list);
         }
         request.setAttribute("order", order);
+        LOGGER.debug("订单查询结束");
 
-        return "html/order";
+        return "html/wx/order_result";
     }
+
+    //微信页面跳转
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    public String index() {
+        return "html/wx/order";
+    }
+
+
 }

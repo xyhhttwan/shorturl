@@ -1,0 +1,58 @@
+/*reset*/
+html,body, div, dl, dt, dd, ol, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {
+    padding: 0;  margin: 0;  font-family: "Microsoft YaHei", Arial, sans-serif;
+    font-size:14px;  color:#777;  line-height: 26px;  }
+a{  text-decoration: none;  -webkit-tap-highlight-color: rgba(0,0,0,0);  outline: none;  color:#333;  }
+img{border: 0;}
+input,textarea,button{outline: none; font-family: "Microsoft YaHei", Arial, sans-serif; padding:0; margin:0;}
+input:focus,textarea:focus{  outline: none;  -webkit-tap-highlight-color: rgba(0,0,0,0);  -webkit-user-modify: read-write-plaintext-only;  }
+ul {list-style: none; margin: 0; padding: 0;}
+h1, h2, h3, h4, h5, h6{ font-weight: normal;}
+html{height:100%;}
+body{max-width: 640px; margin:0 auto; background-color: #fff; min-width:320px; height:100%; }
+body.bg01{background: url("../../images/wx/bg04.jpg") no-repeat center top;}
+.o-logo{height:80px;  margin:0 10px 20px; padding-top:50px; text-align: center; font-size: 26px; color:#fff;}
+.o-logo span{display: block; background-color: rgba(255,255,255,.1); padding:30px 20px; border-radius: 3px;}
+.layout{min-height:100%; margin:0 auto -50px;}
+.footer,.push{ height:50px;}
+.bg-f6 .footer{ background-color: rgba(255,255,255,.1); color:#fff;}
+.footer{ text-align: center; line-height: 50px; background-color: rgba(0,0,0,.1); color:#fff;}
+.o-search{ height:40px; margin:0; padding:30px 80px 30px 10px; position: relative; border-radius: 2px;}
+.o-input{ height:45px; width:100%; padding:5px; background:url("../../images/wx/search.png") no-repeat 3px 50% #fff; border-radius: 2px 0 0 2px; box-sizing: border-box;
+    border:solid 1px #ddd; text-indent: 1.5em;}
+.o-input:focus{ border-color:#fa8014; box-shadow: 0 0 5px #f8c292;}
+.o-btn{ background-color: #fa8014; width:70px; height:45px; position: absolute; right:10px; top:30px; border:0; color:#fff; font-size: 16px;border-radius: 0 2px 2px 0;}
+.o-title{ background-color: #25bdf6; font-size: 16px; text-align: center;
+    height:50px; line-height: 50px; color:#fff; position: fixed; width:100%; left:0; top:0; z-index: 999;}
+.order-list{ position: relative; padding-top:50px; padding-bottom: 50px;}
+.yh-order{ overflow: hidden; padding-top:20px;}
+.yh-order li{ padding-bottom: 15px; position: relative; padding-left:100px; padding-right:20px; overflow: hidden;}
+.yh-order li .txt{ left:10px; top:5px; position: absolute; color:#666; text-align: right; width:80px;}
+.text-1{ box-sizing: border-box; width:100%; height:35px; border:solid 1px #d9d9d9; box-shadow: 0 0 7px #eee inset; border-radius: 2px; padding:0 5px;}
+.text-1:focus{ border-color:#52c8f1; box-shadow: 0 0 5px #4cbde4;}
+.text-2{box-sizing: border-box;  width:100%; height:70px; border:solid 1px #d9d9d9; box-shadow: 0 0 7px #eee inset; border-radius: 2px; padding:0 5px; float: left; overflow: hidden;}
+.text-2:focus{ border-color:#52c8f1; box-shadow: 0 0 5px #4cbde4;}
+.text-1.w200{width:50%;}
+.order-btn{border:0; height:40px; line-height: 40px; color:#fff; font-size: 16px; width:100%; border-radius: 2px; background-color: #f8a715; cursor: pointer;}
+.yh-code-img{ display: inline-block; vertical-align: middle; margin-left:24px; position: relative; top:4px;}
+.yh-code-img img{width:90px; height:36px;}
+@media (min-width:480px) {  .yh-code-img img{width:135px; }  }
+.about-box{ padding:20px 10px; overflow: hidden;}
+.about-ul{overflow: hidden}
+.about-ul li{ padding:5px 0;}
+.about-tit{ font-size: 16px; background-color: #f8a715; border-radius:17px; color:#fff; height:35px; line-height: 35px; display: inline-block; padding:0 20px;}
+.about-tit1{ border-bottom: solid 1px #eee; height:40px; line-height: 40px; color:#333;}
+.about-ul,.about-container{ margin-top:15px;}
+.kd-list{position: relative;  margin-left:15px; margin-right:10px; margin-top:20px; border-left:solid 1px #f4f4f4; padding-left:10px; }
+.kd-list li{z-index: 999; border-bottom:solid 1px #eee; padding:10px; position: relative;  }
+.kd-ico,.kd-ico1{position: absolute; left:-18px; top:-8px; width:15px; height:15px;}
+.kd-ico{ background: url("../../images/wx/wl-ico2.png") no-repeat 0 0; }
+.kd-list li.cur .kd-ico{ background: url("../../images/wx/wl-ico1.png") no-repeat 0 0; }
+.kd-ico2{ background: url("../../images/wx/wl-ico2.png") no-repeat 0 0; position: absolute; left:-18px; bottom:-8px; width:15px; height:15px; }
+.kd-list li .tel{ color:#3796ca; text-decoration: underline;}
+.kd-list li p{color:#999;}
+
+.input{
+    border-color:#FF0000;
+    border-style:solid ;
+}

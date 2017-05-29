@@ -33,7 +33,8 @@ selectList
         content,
         createDate,
         isLink,
-        linkResult
+        linkResult,
+        customer
     </sql>
     <insert id="insert" parameterType="OnlineOrder">
         INSERT INTO tbl_online_order (
@@ -45,7 +46,8 @@ selectList
         content,
         createDate,
         isLink,
-        linkResult
+        linkResult,
+        customer
         ) VALUES (
         #{mfrom},
         #{mto},
@@ -55,7 +57,8 @@ selectList
         #{content},
         #{createDate},
         #{isLink},
-        #{linkResult}
+        #{linkResult},
+        #{customer}
         )
         <selectKey resultType="java.lang.Long" keyProperty="id">
         SELECT LAST_INSERT_ID() AS ID
@@ -93,6 +96,10 @@ selectList
             <if test="linkResult!=null">
                 linkResult = #{linkResult},
             </if>
+            <if test="customer!=null">
+                customer = #{customer},
+            </if>
+
         </trim>
         WHERE
         id = #{id}
@@ -127,6 +134,9 @@ selectList
             </if>
             <if test="map.linkResult!=null">
                 linkResult = #{map.linkResult},
+            </if>
+            <if test="map.customer!=null">
+                customer = #{map.customer},
             </if>
         </trim>
         WHERE
@@ -163,6 +173,9 @@ selectList
             <if test="update.linkResult!=null">
                 linkResult = #{update.linkResult},
             </if>
+            <if test="update.customer!=null">
+                customer = #{update.customer},
+            </if>
         </trim>
 
         <trim prefix="WHERE" prefixOverrides="AND | OR">
@@ -196,6 +209,9 @@ selectList
             <if test="condition.linkResult!=null">
                 AND linkResult = #{condition.linkResult}
             </if>
+            <if test="condition.customer!=null">
+                AND customer = #{condition.customer},
+            </if>
         </trim>
     </update>
 
@@ -209,7 +225,8 @@ selectList
                 content,
                 createDate,
                 isLink,
-                linkResult
+                linkResult,
+                customer
         ) VALUES (
                     #{map.mfrom},
                     #{map.mto},
@@ -219,7 +236,8 @@ selectList
                     #{map.content},
                     #{map.createDate},
                     #{map.isLink},
-                    #{map.linkResult}
+                    #{map.linkResult},
+                    #{map.customer}
         )
     </insert>
 
@@ -236,6 +254,7 @@ selectList
             createDate = #{createDate},
             isLink = #{isLink},
             linkResult = #{linkResult},
+            customer = #{customer},
         </trim>
         WHERE
         id = #{id} 
@@ -283,6 +302,10 @@ selectList
             <if test="linkResult!=null">
                 AND linkResult = #{linkResult}
             </if>
+            <if test="customer!=null">
+                AND customer = #{customer}
+            </if>
+
         </trim>
     </delete>
 
@@ -462,6 +485,10 @@ selectList
             <if test="condition.linkResult!=null">
                 AND linkResult = #{condition.linkResult}
             </if>
+            <if test="condition.customer!=null">
+                AND customer = #{condition.customer}
+            </if>
+
         </trim>
         <if test="orderBy!=null">
         ORDER BY ${orderBy} ${sortBy}
@@ -502,6 +529,9 @@ selectList
             </if>
             <if test="condition.linkResult!=null">
                 AND linkResult = #{condition.linkResult}
+            </if>
+            <if test="condition.customer!=null">
+                AND customer = #{condition.customer}
             </if>
         </trim>
         <if test="orderBy!=null">

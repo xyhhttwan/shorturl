@@ -38,7 +38,6 @@ public class MainController {
     }
 
 
-    @ResponseBody
     @RequestMapping("/update")
     @ApiOperation(value = "修改省份", notes = "修改省份", httpMethod = "POST",response=Users.class)
     public Users update(){

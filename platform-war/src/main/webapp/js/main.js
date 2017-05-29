@@ -34,6 +34,14 @@ $(function () {
         var content = $("#content").val();
         var remark = $("#remark").val();
         var code = $("#code").val();
+        var customer = $("#customer").val();
+        if (customer == "") {
+            $("#customer").addClass("input");
+            $("#customer").focus();
+            return;
+        } else {
+            $("#customer").removeClass("input");
+        }
         if (linkMan == "") {
             $("#linkMan").addClass("input");
             $("#linkMan").focus();
@@ -116,7 +124,8 @@ $(function () {
                 mto: mTo,
                 content: content,
                 remark: remark,
-                code: code
+                code: code,
+                customer:customer
             },
             cache: false,
             success: function (data) {
@@ -132,6 +141,8 @@ $(function () {
                     $("#content").val("");
                     $("#remark").val("");
                     $("#code").val("");
+                    $("#customer").val("");
+
                     var url = '../onlineOrderVerifyCode.do?t=' + Math.random();
                     $('#verify_img_code').attr('src', url);
                 }

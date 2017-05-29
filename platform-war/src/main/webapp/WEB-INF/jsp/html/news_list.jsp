@@ -11,7 +11,9 @@
 <html>
 <head>
     <title>越海物流-新闻列表</title>
-    <link rel="stylesheet" type="text/css" href="<%=basePath%>css/splitPage/kkpager_green.css"/>
+    <meta name="Keywords" content="越海物流,越海,物流,快递,绍兴越海物流有限公司,绍兴越海,绍兴物流" />
+    <meta name="Description" content="绍兴越海物流有限公司、绍兴越海物流配送、绍兴物流" />
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>css/splitPage/kkpager_blue.css"/>
 
     <link rel="stylesheet" href="<%=basePath%>css/css.css"/>
     <script src="<%=basePath%>js/jquery-1.9.1.min.js"></script>

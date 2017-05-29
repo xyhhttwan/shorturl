@@ -70,9 +70,9 @@ subprojects {
     }
 
     /** 有时候会报错，但需要执行 */
-//    task createREADME(){
-//        file("README.md").createNewFile()
-//    }
+    task createREADME(){
+       file("README.md").createNewFile()
+   }
 
 
     configurations {
@@ -88,7 +88,7 @@ subprojects {
     }
 
     dependencies {
-        compile 'joda-time:joda-time:2.9.4'
+        compile 'joda-time:joda-time:2.9.9'
         //一个工具类
         compile 'com.xiaoleilu:hutool:2.15.5'
 

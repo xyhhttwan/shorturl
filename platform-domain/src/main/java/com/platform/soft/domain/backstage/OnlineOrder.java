@@ -30,8 +30,17 @@ public class OnlineOrder extends CreateBaseDomain<Long> {
     private String content;
     private Integer isLink;
     private String linkResult;
+    private String customer;
 
-	public OnlineOrder(){
+    public String getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(String customer) {
+        this.customer = customer;
+    }
+
+    public OnlineOrder(){
 	}
     public void setMfrom(String value) {
         this.mfrom = value;
