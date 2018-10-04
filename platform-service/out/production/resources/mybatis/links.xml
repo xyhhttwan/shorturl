@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.platform.soft.service.dao.LinksDAO">
+
+    <insert id="updateId" keyProperty="id" parameterType="com.platform.soft.domain.IdBuilder">
+        REPLACE INTO id_builder(step,biz) VALUES (#{step},#{biz})
+        <selectKey resultType="java.lang.Long" keyProperty="id">
+            SELECT LAST_INSERT_ID() AS ID
+        </selectKey>
+    </insert>
+
+    <insert id="addLinks">
+      INSERT INTO links (url,shortUrl,keyword,type,createTime,updateTime)VALUES (
+      #{url},#{shortUrl},#{key},#{type},#{createTime},#{updateTime}
+      )
+    </insert>
+
+    <select id="findByKey" resultType="com.platform.soft.domain.Links">
+
+        SELECT  id,shortUrl,url,keyword,type ,createTime,updateTime from links
+        where keyword =#{key}
+    </select>
+</mapper>

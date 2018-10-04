@@ -9,23 +9,23 @@
 
     <context:component-scan base-package="com.platform.soft"/>
     <!-- 引入jdbc配置文件 -->
-    <context:property-placeholder location="classpath*:config/jdbc.properties"/>
-    <import resource="classpath:springme.xml"/>
-    <import resource="classpath:spring-shiro.xml"/>
+    <context:property-placeholder location="classpath*:config/*.properties" ignore-unresolvable="true"/>
 
-    <bean id="freemarkerConfig"
-          class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
-        <property name="templateLoaderPath" value="/WEB-INF/view/"/>
-        <property name="freemarkerSettings">
-            <props>
-                <prop key="template_update_delay">0</prop>
-                <prop key="default_encoding">UTF-8</prop>
-                <prop key="number_format">0.##########</prop>
-                <prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
-                <prop key="classic_compatible">true</prop>
-                <prop key="template_exception_handler">ignore</prop>
-            </props>
-        </property>
-    </bean>
+    <import resource="classpath:springme.xml"/>
+    <import resource="classpath:spring-redis.xml"/>
+    <!--<bean id="freemarkerConfig"-->
+          <!--class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">-->
+        <!--<property name="templateLoaderPath" value="/WEB-INF/view/"/>-->
+        <!--<property name="freemarkerSettings">-->
+            <!--<props>-->
+                <!--<prop key="template_update_delay">0</prop>-->
+                <!--<prop key="default_encoding">UTF-8</prop>-->
+                <!--<prop key="number_format">0.##########</prop>-->
+                <!--<prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>-->
+                <!--<prop key="classic_compatible">true</prop>-->
+                <!--<prop key="template_exception_handler">ignore</prop>-->
+            <!--</props>-->
+        <!--</property>-->
+    <!--</bean>-->
 
 </beans>

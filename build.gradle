@@ -3,15 +3,51 @@ version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
 
-repositories {
-    mavenCentral()
+
+
+
+buildscript {
+    repositories { maven { url 'http://repo.qtonecloud.cn/content/groups/public/' } }
+
+    dependencies {
+        classpath 'com.bmuschko:gradle-nexus-plugin:2.3.1+'
+        classpath 'org.hibernate.build.gradle:gradle-maven-publish-auth:2.0.1+'
+
+
+    }
+
 }
+allprojects {
+    sourceCompatibility = JavaVersion.VERSION_1_7
+    targetCompatibility = JavaVersion.VERSION_1_7
 
-dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    group = 'com.platform.soft'
+    version = '0.1.0-SNAPSHOT'
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    apply plugin: 'eclipse'
+    apply plugin: 'maven-publish'
+    apply plugin: 'maven-publish-auth'
 
+    repositories {
+        mavenLocal()
+        repositories { maven { url 'http://repo.qtonecloud.cn/content/groups/public/' } }
+        mavenCentral()
+        jcenter()
+    }
 
+    publishing {
+        publications {
+            mavenJava(MavenPublication) { from components.java }
+        }
 
+        repositories {
+            maven {
+                name = 'xiaobin'
+                url "http://localhost:9999/repository/maven-public/${project.version.endsWith('-SNAPSHOT') ? 'snapshots' : 'releases'}"
+            }
+        }
+    }
 }
 
 tasks.withType(JavaCompile) {
@@ -89,8 +125,7 @@ subprojects {
 
     dependencies {
         compile 'joda-time:joda-time:2.9.9'
-        //一个工具类
-        compile 'com.xiaoleilu:hutool:2.15.5'
+
 
     }
 

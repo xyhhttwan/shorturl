@@ -1,5 +1,4 @@
 apply plugin: 'war'
-apply plugin: 'jetty'
 
 repositories {
     mavenCentral()
@@ -28,10 +27,6 @@ dependencies {
 
 
 
-    compile group: 'org.apache.shiro', name: 'shiro-core', version: '1.3.0'
-    compile group: 'org.apache.shiro', name: 'shiro-web', version: '1.3.0'
-    compile group: 'org.apache.shiro', name: 'shiro-ehcache', version: '1.3.0'
-    compile group: 'org.apache.shiro', name: 'shiro-spring', version: '1.3.0'
     compile 'org.apache.commons:commons-lang3:3.3.2'
     compile 'commons-collections:commons-collections:3.2.1'
     //<!--分页插件-->
